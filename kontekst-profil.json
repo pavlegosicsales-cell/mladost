@@ -1,0 +1,414 @@
+{
+  "verzija": "1.0",
+  "datum": "2026-08-21",
+  "jezik_komunikacije": "srpski (latinica)",
+  "svrha": "Kontekst profil za nastavak rada na sajtu Teniskog kluba Mladost. Sadrzi sve odluke, podatke i pravila da novi chat moze da nastavi bez gubitka konteksta.",
+
+  "projekat": {
+    "naziv": "Teniski Klub Mladost Banovo Brdo - izrada sajta",
+    "tip": "Izrada od nule, NIJE redizajn. Klijent nema postojeci sajt.",
+    "folder": "C:\\Users\\pavle\\Desktop\\Teniski Klub Mladost Website\\",
+    "jezik_sajta": "srpski (latinica)",
+    "faza": "Copy i struktura zavrseni i odobreni za pregled. Ceka se zeleno svetlo za build.",
+    "korisnik": {
+      "ime_u_sistemu": "pavle",
+      "email": "pavlegosic9@gmail.com",
+      "uloga": "Web developer koji pravi sajtove za klijente. Ima ~20 klijentskih foldera na Desktopu (A.G Paving, LJR Flooring, Community Transport Sussex itd). Radi po istom pipeline-u.",
+      "nacin_rada": "Prica srpski, salje screenshotove umesto linkova, ocekuje brzinu i konkretne rezultate. Ne voli da se pita previse. Voli da vidi sta je izvuceno iz izvora."
+    }
+  },
+
+  "sistem_od_tri_skila": {
+    "opis": "Korisnik je skinuo 3 skila koji cine pipeline za izradu klijentskih sajtova. Sva tri su instalirana u ~/.claude/skills/",
+    "skill_01": {
+      "ime": "client-info-gathering",
+      "uloga": "Intake. Prikuplja podatke o klijentu, skrejpuje postojeci sajt, pravi folder i context.md",
+      "status": "ZAVRSEN"
+    },
+    "skill_02": {
+      "ime": "website-build-rules",
+      "uloga": "Gradi ceo sajt u jednom prolazu: index.html, contact.html, privacy.html, styles.css, main.js",
+      "status": "SLEDECI NA REDU"
+    },
+    "skill_03": {
+      "ime": "form-backend-setup",
+      "uloga": "Google Apps Script backend za kontakt formu + brendirani mejl za notifikacije",
+      "status": "CEKA"
+    },
+    "dodatni_skill": {
+      "ime": "site-teardown",
+      "putanja": "C:\\Users\\pavle\\Desktop\\teniski klub mladost\\site-teardown-skill.md.md",
+      "uloga": "Reverse engineering sajta u build blueprint. Iskoriscen za paddlez.framer.website",
+      "status": "ZAVRSEN"
+    },
+    "napomena_o_folderu": "Folder 'C:\\Users\\pavle\\Desktop\\teniski klub mladost' (malim slovima) NIJE klijentski projekat, to su raspakovani ZIP-ovi skilova. Klijentski projekat je 'Teniski Klub Mladost Website'."
+  },
+
+  "klijent_podaci": {
+    "naziv_pun": "Tenis & Padel klub Mladost Banovo Brdo",
+    "naziv_za_sajt": "Teniski Klub Mladost",
+    "delatnost": "Teniski klub - iznajmljivanje terena, skola tenisa, turniri, kampovi",
+    "adresa": "Ljeska 82, Banovo Brdo, Cukarica, Beograd",
+    "telefon_glavni": "+381 61 500 50 51",
+    "telefon_glavni_format": "061 500 50 51",
+    "telefon_trener": "+381 60 023 8450 (Rade Poleksic, skola tenisa i kampovi)",
+    "email": "mladost.tenis@gmail.com",
+    "email_status": "NIJE POTVRDJEN - preuzet sa flajera skole tenisa",
+    "osnovan": 2024,
+    "radno_vreme": "Otvara se u 08:00 (Google). Termini se prodaju do 23:00. Pun raspored nije potvrdjen.",
+    "postojeci_sajt": "NE POSTOJI",
+    "whatsapp_viber": "381615005051"
+  },
+
+  "online_prisustvo": {
+    "instagram": "@teniskiklub.mladost - 89 objava, 873 pratioca, 1299 pracenja",
+    "instagram_padel": "@padelklub.mladost (odvojeno, NE ide na ovaj sajt)",
+    "facebook": "https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/",
+    "google_business": "Tenis & Padel klub Mladost Banovo Brdo - ocena 4.9",
+    "google_broj_recenzija": "NEPOZNAT - nije bio vidljiv na screenshotu",
+    "booking_sistem": "https://dikidi.net/profile/mladost_teniski_klub_1892616/ - ocena 5.0 iz 17 ocena, 0 pisanih recenzija",
+    "partner": "@tk_fairplay (letnji kamp)"
+  },
+
+  "kljucne_odluke": [
+    {
+      "odluka": "SAJT JE SAMO ZA TENIS",
+      "detalji": "Klijent je eksplicitno rekao: 'i da znas sajt pravimo samo za teniski klub'. Padel se NE pominje nigde. Svi padel tereni, cene i usluge su izbaceni iz context.md.",
+      "posledica": "Klub ima 3 sljakasta terena na sajtu, ne 5. Padel #1 i Padel #2 su izbrisani."
+    },
+    {
+      "odluka": "CENOVNIK - verzija iz Instagram highlight-a",
+      "detalji": "Postojale su TRI razlicite verzije cenovnika. Klijent je potvrdio onu iz IG highlight-a 'Cenovnik'. dikidi cene i cene iz feed objave se IGNORISU.",
+      "vrednosti": {
+        "radnim_danom": {
+          "08:00-17:00": "1.000 RSD",
+          "17:00-20:00": "1.200 RSD",
+          "20:00-23:00": "1.400 RSD"
+        },
+        "vikendom": {
+          "07:00-20:00": "1.200 RSD",
+          "20:00-23:00": "1.400 RSD"
+        },
+        "napomena": "Cena je za teren po satu, ne po igracu."
+      }
+    },
+    {
+      "odluka": "Glavni cilj sajta je RAVNOPRAVNO",
+      "detalji": "Upis dece u skolu tenisa I rezervacije terena imaju jednaku tezinu. Dva ravnopravna CTA-a na pocetnoj strani, bez favorizovanja jedne konverzije."
+    },
+    {
+      "odluka": "Dizajn se preuzima sa paddlez.framer.website",
+      "detalji": "Klijent je nalepio kompletan HTML + inline CSS tog sajta. Trazio je da se preuzme SVE design-wise: paleta, dugmad, tipografija, fontovi, spacing, margine, nav dizajn, kartice, animacije, ikonice.",
+      "sloboda": "Klijent je dao slobodu za paletu: 'jedino ako imas bolju ideju napravi ti paletu, meni sve jedno'."
+    },
+    {
+      "odluka": "Paleta - paddlez PRINCIP, Mladost BOJE",
+      "detalji": "Paddlez stoji na jednoj jakoj boji preko vrlo svetle hladne pozadine, sa karticama u svetlijem tonu iste boje. Isti princip primenjen sa tirkizom iz logoa umesto plave."
+    },
+    {
+      "odluka": "Font: Plus Jakarta Sans umesto Satoshi",
+      "detalji": "Paddlez koristi Satoshi (Fontshare). Satoshi nema pouzdanu podrsku za Latin Extended-A (c c z s dj). Plus Jakarta Sans je geometrijski sans najblizi Satoshi po proporcijama, sa punom srpskom latinicom. Tezine 400/500/700/800.",
+      "napomena": "Ovo namerno odstupa od pravila skila 02 'pick two weights' jer referentni dizajn zavisi od raspona tezina."
+    },
+    {
+      "odluka": "BEZ IZMISLJENIH RECENZIJA",
+      "detalji": "Paddlez ima carousel sa testimonijalima. Mladost nema NIJEDNU pisanu recenziju - Google ima ocenu 4.9, dikidi 5.0 iz 17 ocena, ali tekst recenzije ne postoji nigde. Umesto carousel-a ide prava ocena 4.9 sa linkom ka Google-u plus pravi citat klijenta o radu sa decom.",
+      "buducnost": "Kad klijent skupi 3-5 pravih recenzija, tu se ubacuje pravi slajder."
+    },
+    {
+      "odluka": "Clanarine se zamenjuju cenovnikom",
+      "detalji": "Paddlez ima 3 kartice sa clanarinama ($99/$149/$299). Mladost radi po satu, pa taj slot postaje pravi cenovnik sa dve tabele (radnim danom / vikendom)."
+    },
+    {
+      "odluka": "Politika privatnosti po SRPSKOM zakonu",
+      "detalji": "Skill 02 trazi australijsku politiku privatnosti. To ne vazi. Pise se po Zakonu o zastiti podataka o licnosti Republike Srbije."
+    },
+    {
+      "odluka": "Cena skole tenisa se NE prikazuje",
+      "detalji": "Klijent ne zna cenu. Umesto cene stoji poziv na kontakt."
+    }
+  ],
+
+  "paleta": {
+    "princip": "Jedna jaka boja (tirkiz) preko vrlo svetle hladne pozadine. Lime je SAMO akcenat, nikad CTA.",
+    "tokeni": {
+      "--brand": {"vrednost": "#004050", "uloga": "Primarna. Dugmad, eyebrow crtica, aktivna stanja. JEDINA CTA boja.", "izvor": "slovo M i tekst u logou"},
+      "--brand-hover": {"vrednost": "#00596E", "uloga": "Hover na dugmadima"},
+      "--lime": {"vrednost": "#B6E11F", "uloga": "Akcenat. Kvacice, aktivan tab, sitni naglasci. NIKAD CTA.", "izvor": "spoljni prsten logoa"},
+      "--bg": {"vrednost": "#F4FAFA", "uloga": "Pozadina stranice"},
+      "--card": {"vrednost": "#E4F1F2", "uloga": "Pozadina kartica"},
+      "--ink": {"vrednost": "#04252C", "uloga": "Naslovi"},
+      "--ink-2": {"vrednost": "#4E5F5F", "uloga": "Body tekst"},
+      "--ink-3": {"vrednost": "rgba(4,37,44,.42)", "uloga": "Neaktivan tekst"},
+      "--line": {"vrednost": "rgba(0,64,80,.16)", "uloga": "Ivice sekcija - mreza kroz ceo sajt"},
+      "--dark": {"vrednost": "#012129", "uloga": "Footer"}
+    },
+    "ostale_boje_iz_logoa": {
+      "loptica": "#DCEE3A - zuto-zelena, koristiti stedljivo",
+      "terakota_sljaka": "#C25A2E - boja njegovih grafika. NE koristi se kao UI boja, vec postoji na fotografijama sljake."
+    },
+    "logo": {
+      "opis": "Kruzni badge - 'TENISKI KLUB MLADOST BANOVO BRDO', slovo M sa teniskom lopticom, EST 2024, lime prsten na beloj podlozi",
+      "imamo": "JPG 777x777 na beloj podlozi (images/reference/logo-profilna.jpg)",
+      "treba": "SVG ili PNG sa providnom pozadinom - klijent dostavlja"
+    }
+  },
+
+  "inspo_sajt": {
+    "naziv": "Paddle Z",
+    "url": "https://paddlez.framer.website/",
+    "platforma": "Framer (generator c9b3949, objavljeno 10.08.2026)",
+    "zasto": "Klijent je trazio da se ceo dizajn preuzme sa ovog sajta: paleta, dugmad, tipografija, fontovi, spacing, margine, nav dizajn, kartice, animacije, ikonice. SVE design-wise.",
+    "sacuvano_lokalno": "C:\\Users\\pavle\\Desktop\\Teniski Klub Mladost Website\\inspo\\paddlez\\",
+    "sadrzaj_foldera": {
+      "index.html": "862 KB - kompletan HTML pocetne strane sa svim inline <style> blokovima i SVG template-ima",
+      "styles-inline.css": "206 KB - sav CSS izvucen iz 6 <style> blokova u jedan fajl",
+      "assets/": "1.4 MB - svih 11 JS modula (motion, framer, react, script_main, shared-lib, rolldown-runtime, 2 chunk-a, 3 text style preseta)",
+      "README.md": "Objasnjenje sta je gde i kako ponovo skinuti"
+    },
+    "kako_ponovo_skinuti": "Framer CDN framerusercontent.com ODBIJA zahteve bez Referer headera. Komanda: curl -sfL -A \"Mozilla/5.0\" -e \"https://paddlez.framer.website/\" \"<url>\" -o \"<fajl>\"",
+    "zamka": "Python io.open('w') na Windowsu pretvara \\n u \\r\\n. Ako se lista URL-ova pise u fajl pa cita u bash loop-u, trailing \\r kvari URL. Resenje: tr -d '\\r'",
+    "napomena": "Ovo je referenca za dizajn, ne kod koji se kopira. Sajt Mladosti se pravi vanilla HTML/CSS/JS bez Framera, React-a i Motion-a. Framer badge iz footera se NE preuzima."
+  },
+
+  "design_system_paddlez": {
+    "izvor": "Kompletan HTML + inline CSS. Prvo nalepljen od korisnika, zatim skinut sa live sajta i sacuvan u inspo/paddlez/. SVE JE POTVRDJENO IZ IZVORA, nista nije procenjeno.",
+    "platforma": "Framer (generator c9b3949), Framer Motion, Lenis smooth scroll",
+    "originalne_boje": {
+      "pozadina": "#f7fbff",
+      "primarna_cta": "#0e5ccd",
+      "svetla_plava": "#70b4e8",
+      "tamna_mornarska": "#001632",
+      "skoro_crna": "#050703",
+      "kartica": "#ebf6ff",
+      "ivica_sekcije": "#b4dcfa80",
+      "body_tekst": "#454745",
+      "footer": "#000000"
+    },
+    "tipografija_skala": {
+      "h1": "700, 54px desktop / 42px tablet / 36px mobile, letter-spacing -0.03em, line-height 1.2em",
+      "hero_h1": "400, 60px, letter-spacing -0.2px, line-height 105%",
+      "h2": "400, 30px, line-height 1.2em",
+      "h3": "700, 24px / 18px mobile, line-height 1.2em",
+      "h4": "500, 18px, line-height 20px",
+      "h6": "900, 14px / 12px, line-height 20px",
+      "body": "400, 16px / 12px mobile, line-height 150%",
+      "dugme": "400, 12px, letter-spacing -0.02em, line-height 1.6em",
+      "eyebrow": "400, 12px, UPPERCASE, letter-spacing 0.7px, line-height 20px",
+      "div_wordmark": "900, ~214px, letter-spacing -0.06em, line-height 0.9em, opacity 0.2"
+    },
+    "spacing": {
+      "max_sirina": "1200px, unutrasnji sadrzaj 1128px / 1072px / 1160px",
+      "padding_sekcije": "100px 40px desktop, 100px 20px tablet i mobile",
+      "lakse_sekcije": "80px 40px, 40px 16px mobile",
+      "gap_naslov_sadrzaj": "64px",
+      "grid_gap": "20px, 24px, 40px, 60px",
+      "radius_skala": "30px velike kartice, 24, 20, 18, 16, 14, 12, 11, 8px",
+      "dugme": "visina 44px, padding 10px 16px, radius 40px pilula"
+    },
+    "breakpoints": {
+      "desktop": "min-width: 1200px",
+      "tablet": "810px - 1199.98px",
+      "mobile": "max-width: 809.98px"
+    },
+    "potpisi_dizajna_obavezno_preneti": [
+      "ROLL-UP DUGMAD: dva identicna teksta u koloni, overflow hidden, na hover tekst klizne gore. Framer koristi justify-content, mi koristimo transform: translateY(calc(-50% - 2px)) sa transition .35s cubic-bezier(.2,.7,.3,1)",
+      "MREZA TANKIH IVICA: 1px solid var(--line) preko sve cetiri strane kontejnera svake sekcije. Ivice susednih sekcija se dodiruju i prave kontinuiranu mrezu niz stranicu. BEZ OVOGA SAJT GUBI KARAKTER.",
+      "EYEBROW BADGE: flex row gap 8px, crtica 2x12px radius 1px u brand boji, pa 12px uppercase tekst sa letter-spacing 0.7px",
+      "NASLOVI SLOVO PO SLOVO: svako slovo u span sa opacity 0.001 i translateY(10px), stagger ~18ms. Reci se wrapuju u span sa white-space:nowrap da se rec ne lomi.",
+      "BODY TEKST BLUR-IN: svako slovo opacity 0.001, filter blur(10px), translateY(20px), stagger",
+      "SCROLL REVEAL: opacity 0, translateY(64px) preko IntersectionObserver. U gridovima stagger 64/72/80/88/96/104px.",
+      "NOISE OVERLAY: fixed div, opacity 0.2, tekstura 153.5px repeat. Moze SVG feTurbulence bez slike.",
+      "HERO: height 100vh, sadrzaj poravnat na DNO (place-content center flex-end), padding 80px 40px 64px. Slojevi: bg slika, gradient overlay linear-gradient(rgba(0,0,0,0) 42%, rgba(0,0,0,0.7) 100%), noise, sadrzaj.",
+      "OVERLAY NA KARTICI SA SLIKOM: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.9) 83%)",
+      "DIV WORDMARK U FOOTERU: ogroman natpis, opacity 0.2, mask linear-gradient(0deg, transparent 0%, black 51%)",
+      "NAV: fixed, 88px, transparentan preko heroja, border-bottom 1px",
+      "GLASSMORPHISM PANEL: backdrop-filter blur(16px), background rgba(111,180,232,0.2), radius 18px",
+      "STACK AVATARA: preklopljeni krugovi margin-right -16px, 2px bela ivica"
+    ],
+    "animacije_load": {
+      "nav_slide_down": "opacity 0.001 do 1, translateY(-150px) do 0, spring damping 30 stiffness 175 mass 1",
+      "hero_bg_scale": "scale(1.05) do 1, delay 1s, duration 2s, cubic-bezier(0.12,0.23,0.5,1)",
+      "hero_cta_fade_up": "translateY(24px) do 0, delay 0.4s, duration 1.5s, cubic-bezier(0.12,0.23,0.17,0.99)"
+    },
+    "kljucni_uvid": "Sve animacije su suptilne. Fade + 64px pomeraj navise je 90% efekata. Ono sto sajt cini skupim je KONZISTENTNOST I PROSTOR, ne slozenost animacija. Disciplina u paleti (jedna boja) je razlog zasto deluje profesionalno."
+    },
+
+  "struktura_sajta": {
+    "stranice": ["index.html", "kontakt.html", "politika-privatnosti.html", "styles.css", "main.js"],
+    "sekcije_index": [
+      {"br": 1, "ime": "Navigacija", "opis": "Fiksna 88px, providna preko heroja, logo + Mladost, linkovi, telefon 061 500 50 51 na desktopu, CTA dugme Rezervisi teren"},
+      {"br": 2, "ime": "Hero", "opis": "100vh, foto terena, H1 'Tenis u srcu Banovog Brda.', dva CTA: Rezervisi teren + Upisi dete u skolu"},
+      {"br": 3, "ime": "O klubu", "opis": "Veliki paragraf sa istaknutim recima + 3 brojaca: 3 terena / 4.9 ocena / 2024 osnovan"},
+      {"br": 4, "ime": "Zasto Mladost", "opis": "Bento grid asimetrican, 5 kartica: Sljaka pod nogama, Zimi se ne staje, Treneri koji objasne pa pokazu, Termini do 23h, Ekipa ne samo trening"},
+      {"br": 5, "ime": "Usluge", "opis": "Tabovi levo slika desno: Iznajmljivanje terena, Skola tenisa, Skolica za osnovce, Turniri i kampovi"},
+      {"br": 6, "ime": "Sta dobijas", "opis": "6 polja grid 3x2: Sljakasti tereni, Reflektori do 23h, Balon zimi, Strucni treneri, Rezervacija za minut, Ekipa koja te ceka"},
+      {"br": 7, "ime": "Cenovnik", "opis": "Dve kartice: Radnim danom i Vikendom (istaknuta). Zamenjuje paddlez clanarine."},
+      {"br": 8, "ime": "U klubu", "opis": "Foto grid masonry 2 kolone, 4 fotografije"},
+      {"br": 9, "ime": "Kako do termina", "opis": "Horizontalni akordeon 4 koraka: Javi se, Biramo termin, Dodji na Ljesku 82, Igraj"},
+      {"br": 10, "ime": "Skola tenisa", "opis": "Velika sekcija, levo tekst desno slika sa staklenim panelom. Tri stvari: Tehnika, Motorika i koordinacija, Igra."},
+      {"br": 11, "ime": "Ocena i utisci", "opis": "Ocena 4.9 + link ka Google-u + pravi citat. NE testimonial carousel."},
+      {"br": 12, "ime": "Cesta pitanja", "opis": "Akordeon, 5 pitanja"},
+      {"br": 13, "ime": "CTA banner", "opis": "Foto, naslov 'Vidimo se na terenu.', div wordmark MLADOST"},
+      {"br": 14, "ime": "Footer", "opis": "Crn, logo + opis + socials + 2 kolone linkova + kontakt blok + copyright"}
+    ],
+    "kontakt_carobnjak": {
+      "opis": "4 koraka. Prva tri su dugmad, kuca se samo na kraju. Progres tackice gore, dugme Nazad na svakom koraku posle prvog. Posle slanja poruka na istoj stranici bez redirekta.",
+      "korak_1": "Sta te zanima? - Rezervacija termina / Upis u skolu tenisa / Skolica za osnovce / Turnir ili grupa",
+      "korak_2": "Za koga? - Za sebe / Za dete / Za grupu ili firmu",
+      "korak_3": "Kada? - Ove nedelje / Ovog meseca / Samo se raspitujem",
+      "korak_4": "Tvoji podaci - Ime i prezime, Telefon, Email, Poruka (opciono)",
+      "endpoint": "const ENDPOINT = '' na vrhu main.js, prazan, sa komentarom da se popuni posle Skila 03"
+    }
+  },
+
+  "autentican_copy_klijenta": {
+    "napomena": "Ovo su NJEGOVE reci sa Instagrama. Koristiti ih na sajtu, to je ono sto prodaje roditelju.",
+    "citati": [
+      "Tenis i padel u srcu Banovog Brda",
+      "Tenis u srcu Banovog Brda (adaptirano, bez padela)",
+      "Cilj treninga nije da dete bude savrseno iz prvog pokusaja, vec da svakog treninga izadje malo bolje nego sto je uslo.",
+      "Greska nije problem. Problem je kada iz nje nista ne naucimo. Na pocetku vezba nije izvedena kako treba. Onda dolazi korekcija trenera, objasnjenje i pokazivanje pravilnog pokreta. A onda jos jedan pokusaj. Isti igrac, ista vezba, ali potpuno drugacija izvedba. Upravo tako izgleda rad na terenu: primeti, objasni, ispravi, ponovi.",
+      "Gradimo teniski klub, radimo na motorici i koordinaciji, a uz sve to se i dobro zabavljamo! Dodji i ti, postani deo nase ekipe.",
+      "Priliku da vasa deca budu u zdravoj okolini, u krugu strucnih i iskusnih trenera! Kroz treninge i druzenje da jos vise zavole sport kojim se bave.",
+      "Upis u skolu tenisa je u toku. Cekamo vas!",
+      "Rezervacije termina na broj +381 61 500 50 51. Cekamo vas."
+    ],
+    "hashtagovi": "#tenisnabrdu #banovobrdo #tennis #teamwork #drills",
+    "ton": "Topao, porodican, sportski, pedagoski. NIJE prodajni ni korporativan."
+  },
+
+  "usluge": {
+    "iznajmljivanje_terena": "3 sljakasta terena, reflektori, termini 08-23",
+    "skola_tenisa": "Za sve uzraste, upis u toku, trener Rade Poleksic, cena NEPOZNATA",
+    "skolica_za_osnovce": "Poseban program za decu skolskog uzrasta, rad na tehnici motorici i koordinaciji",
+    "turniri": "Interni turniri skolice tokom sezone",
+    "letnji_kamp": "Teniski klub Zlatibor Springs, Zlatibor. Termin 25.06 - 01.07. Ukljuceno: obroci, smestaj, dva teniska treninga i jedan kondicioni dnevno, jutarnje trcanje i setnje. Partner @tk_fairplay. Cena nepoznata.",
+    "balon": "Zimi se tereni pokrivaju balonom, igra se cele godine"
+  },
+
+  "pravila_iz_skila_02": {
+    "zabranjeno_u_dizajnu": [
+      "Grid od tri ili cetiri identicne kartice sa zaobljenim ivicama i senkom kao glavni blok",
+      "Features red od ikonica + naslov + dve recenice ponovljen tri puta",
+      "Zasto nas sekcija sa bullet grid-om i kvacicama",
+      "Hero sa plutajucom karticom preko",
+      "Testimonials carousel sa zvezdicama i sivim avatarima"
+    ],
+    "zabranjeno_u_copy": [
+      "Em-crtice (koristi zarez, dvotacku ili tacku)",
+      "Fraze: delve into, tapestry, harnessing, leverage, seamlessly, game-changing, revolutionize, cutting-edge, at the end of the day, look no further, unlock your potential",
+      "Learn more ili Click here kao CTA (koristi glagol akcije)",
+      "Alt tekst koji opisuje stock foto koncept",
+      "Tvrdnje o najnizoj ceni"
+    ],
+    "obavezno": [
+      "Semanticki HTML5",
+      "CSS custom properties za sve tokene u :root",
+      "Jedan styles.css, jedan main.js, bez frameworka i biblioteka",
+      "Relativne putanje slika, placeholder src sa jasnim komentarom",
+      "Body 16-17px minimum, line-height 1.55-1.65",
+      "clamp() za skalu naslova",
+      "Sekcije minimum padding 80px 0 na desktopu",
+      "Max sirina min(1120px, 90%), ne preko 1200px",
+      "Mobile-first, desktop override u @media (min-width: 768px)",
+      "Hamburger meni koji stvarno radi",
+      "Tap targeti minimum 44px na mobilnom",
+      "Unikatan title po stranici, ispod 60 karaktera",
+      "Unikatan meta description, 140-155 karaktera",
+      "Jedan h1 po stranici, bez preskakanja nivoa",
+      "alt na svakoj slici",
+      "canonical link na svakoj stranici",
+      "Privacy stranica linkovana u svakom footeru"
+    ],
+    "napomena_lang": "Skill trazi <html lang=\"en\">. Ovde ide <html lang=\"sr\">."
+  },
+
+  "uradjeno": [
+    {
+      "korak": "Skill 01 - intake",
+      "detalji": "Kreiran folder, napisan context.md na srpskom (168+ linija), skinute reference slike"
+    },
+    {
+      "korak": "Pokusaj skrejpa",
+      "detalji": "Firecrawl HARD BLOKIRA Instagram i Facebook ('we do not support this site'). Nije stvar login zida nego njihove politike. Screenshotovi su dali vise nego linkovi.",
+      "vazna_lekcija": "Za Meta platforme NE gubiti vreme na Firecrawl. Traziti screenshotove odmah."
+    },
+    {
+      "korak": "Alternativni izvori",
+      "detalji": "Preko firecrawl search pronadjen dikidi.net booking profil (zivi sistem, dao 5 terena, 8 usluga, sve cene, ocene) i actu-padel direktorijum. Sa Google knowledge panela (screenshot) uzeta ocena 4.9."
+    },
+    {
+      "korak": "Brend boje",
+      "detalji": "Skinut logo 777x777 sa dikidi CDN-a, izvucen histogram dominantnih boja preko PowerShell System.Drawing. Dobijeni #004050 i #B6E11F kao stvarne vrednosti, ne procene."
+    },
+    {
+      "korak": "Site teardown",
+      "detalji": "Kompletan teardown paddlez.framer.website iz nalepljenog HTML+CSS. Sve boje, tipografija, spacing, breakpointi, 23 efekta sa implementacijom."
+    },
+    {
+      "korak": "Copy i struktura",
+      "detalji": "Napisan copy-i-struktura.md - svaka sekcija, sav tekst na srpskom, 14 sekcija + kontakt carobnjak + politika privatnosti"
+    }
+  ],
+
+  "fajlovi_u_projektu": {
+    "context.md": "Kontekst klijenta na srpskom. AZURIRAN: padel izbacen, cenovnik zamenjen potvrdjenim.",
+    "copy-i-struktura.md": "Ceo copy i struktura sajta. Svaka recenica koja ide na sajt.",
+    "research/2026-08-21-paddlez-teardown.md": "Kompletan design system paddlez-a. Sve potvrdjeno iz izvora.",
+    "inspo/paddlez/index.html": "Skinut HTML inspo sajta, 862 KB",
+    "inspo/paddlez/styles-inline.css": "Sav CSS inspo sajta izvucen u jedan fajl, 206 KB",
+    "inspo/paddlez/assets/": "11 JS modula inspo sajta, 1.4 MB",
+    "inspo/paddlez/README.md": "Objasnjenje inspo foldera i kako ponovo skinuti",
+    "kontekst-profil.json": "Ovaj fajl.",
+    "images/reference/logo-profilna.jpg": "Logo 777x777 na beloj podlozi",
+    "images/reference/teren-sljaka.jpg": "Foto sljakastog terena sa dikidi-ja",
+    "images/reference/teren-padel.jpg": "Foto padel terena - VISE SE NE KORISTI, sajt je samo tenis",
+    "images/reference/ - KLIJENTOVE SLIKE": "Korisnik je 21.08. ubacio 17 pravih fajlova sa Instagrama: fotografije zimske sezone i balona, 5 varijanti 'Tenis i padel u srcu Banovog Brda', upis u skolu tenisa, kafic posle treninga, 3 video snimka terena. IMENA FAJLOVA IMAJU RAZMAKE, EMOJI I SRPSKA SLOVA - moraju se preimenovati u clean lowercase bez razmaka pre build-a (npr. hero-teren.jpg, balon-zima.jpg, skola-tenisa.jpg).",
+    "scrape/dikidi.md": "Sirov skrejp booking profila",
+    "scrape/dikidi-services.md": "Sirov skrejp svih usluga",
+    "scrape/padel-dir.md": "Sirov skrejp padel direktorijuma"
+  },
+
+  "sledeci_prioriteti": [
+    {
+      "prioritet": 1,
+      "zadatak": "BUILD SAJTA - Skill 02",
+      "detalji": "Napraviti index.html, kontakt.html, politika-privatnosti.html, styles.css, main.js u jednom prolazu. Bez pisanja jednog fajla pa pitanja za feedback.",
+      "status": "Ceka zeleno svetlo od korisnika. Korisnik je trazio da prvo vidi copy i strukturu, sto je isporuceno."
+    },
+    {
+      "prioritet": 2,
+      "zadatak": "Preimenovati klijentove slike",
+      "detalji": "17 fajlova je stiglo u images/reference/ ali imena imaju razmake, emoji i srpska slova. Skill 02 trazi clean lowercase bez razmaka. Preimenovati u images/ kao hero-teren.jpg, balon-zima.jpg, skola-tenisa.jpg itd. Tri .mp4 snimka terena se mogu iskoristiti kao video u bento gridu."
+    },
+    {
+      "prioritet": 3,
+      "zadatak": "Skill 03 - form backend",
+      "detalji": "Google Apps Script + brendirani mejl. Popuniti ENDPOINT u main.js."
+    }
+  ],
+
+  "otvorena_pitanja": [
+    {"pitanje": "Da li je mladost.tenis@gmail.com pravi mejl za upite sa sajta?", "blokira": false, "resenje": "Koristi se uz napomenu"},
+    {"pitanje": "Logo u SVG ili PNG sa providnom pozadinom", "blokira": false, "resenje": "Privremeno JPG"},
+    {"pitanje": "Fotografije u punoj rezoluciji", "blokira": false, "resenje": "Placeholderi sa komentarom"},
+    {"pitanje": "Cena skole tenisa", "blokira": false, "resenje": "Sajt kaze 'javi se za raspored i cenu'"},
+    {"pitanje": "Tacan broj Google recenzija", "blokira": false, "resenje": "Prikazuje se samo '4.9 na Google-u' bez broja"},
+    {"pitanje": "Pun raspored radnog vremena", "blokira": false, "resenje": "Koristi se 'svaki dan od 8 do 23'"},
+    {"pitanje": "Da li stvarno postoje sauna, teretana i bar na lokaciji?", "blokira": false, "resenje": "Iz padel direktorijuma, nepouzdan izvor. NE STAVLJATI NA SAJT dok se ne potvrdi."}
+  ],
+
+  "kako_da_se_ponasas": {
+    "jezik": "Srpski, latinica. Korisnik pise srpski.",
+    "stil": "Direktno, bez uvoda. Prvo rezultat, pa objasnjenje. Navesti sta je potvrdjeno iz izvora a sta je pretpostavka.",
+    "sta_korisnik_ceni": "Brzinu, konkretne podatke izvucene iz pravih izvora, i da mu se kaze kad nesto ne moze umesto da se izmislja.",
+    "sta_ne_raditi": [
+      "Ne izmisljati recenzije, brojeve ili podatke kojih nema",
+      "Ne pitati previse pitanja odjednom, grupisati po dva-tri",
+      "Ne gubiti vreme na Firecrawl za Instagram i Facebook, blokirani su",
+      "Ne koristiti em-crtice u copy-ju za sajt",
+      "Ne stavljati padel nigde na sajt"
+    ]
+  }
+}

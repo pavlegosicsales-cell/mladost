@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kontakt i rezervacije | Teniski Klub Mladost</title>
+<meta name="description" content="Rezerviši teren ili upiši dete u školu tenisa. Pozovi 061 500 50 51 ili pošalji upit preko forme. Lješka 82, Banovo Brdo, Beograd.">
+<!-- TODO: zameniti domenom klijenta kada se registruje -->
+<link rel="canonical" href="https://teniskiklubmladost.rs/kontakt.html">
+<link rel="icon" href="images/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#glavni">Preskoči na sadržaj</a>
+
+<header class="nav nav--static" id="nav">
+  <div class="nav__inner">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo">
+      <span>Mladost</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Glavna navigacija">
+      <a href="index.html#o-klubu">O klubu</a>
+      <a href="index.html#skola">Škola tenisa</a>
+      <a href="index.html#usluge">Tereni</a>
+      <a href="index.html#cenovnik">Cenovnik</a>
+      <a href="kontakt.html">Kontakt</a>
+    </nav>
+
+    <div class="nav__right">
+      <a class="nav__tel" href="tel:+381615005051">061 500 50 51</a>
+      <a class="btn" href="tel:+381615005051">
+        <span class="btn__roll"><span>Pozovi klub</span><span>Pozovi klub</span></span>
+      </a>
+      <button class="burger" id="burger" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="index.html#o-klubu">O klubu</a>
+  <a href="index.html#skola">Škola tenisa</a>
+  <a href="index.html#usluge">Tereni</a>
+  <a href="index.html#cenovnik">Cenovnik</a>
+  <a href="index.html#pitanja">Česta pitanja</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a class="mobile-tel" href="tel:+381615005051">061 500 50 51</a>
+</div>
+
+<main id="glavni">
+
+  <section class="page-head">
+    <div class="page-head__in">
+      <p class="eyebrow">Kontakt</p>
+      <h1>Javi se i termin je tvoj.</h1>
+      <p class="lead">Popuni upit ispod ili pozovi 061 500 50 51. Odgovaramo isti dan, najčešće u roku od par sati.</p>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section__inner">
+      <div class="contact-grid">
+
+        <!-- ============ ČAROBNJAK ============ -->
+        <form class="wizard" id="wizard" novalidate>
+          <div class="wizard__dots" aria-hidden="true">
+            <span class="is-done"></span><span></span><span></span><span></span>
+          </div>
+
+          <!-- Korak 1 -->
+          <div class="step-panel is-active" data-step="0">
+            <h2>Šta te zanima?</h2>
+            <p>Izaberi jednu stavku, prelazimo dalje automatski.</p>
+            <div class="choices">
+              <button type="button" class="choice" data-field="usluga" data-value="Rezervacija termina">Rezervacija termina</button>
+              <button type="button" class="choice" data-field="usluga" data-value="Upis u školu tenisa">Upis u školu tenisa</button>
+              <button type="button" class="choice" data-field="usluga" data-value="Školica za osnovce">Školica za osnovce</button>
+              <button type="button" class="choice" data-field="usluga" data-value="Turnir ili grupa">Turnir ili grupa</button>
+            </div>
+          </div>
+
+          <!-- Korak 2 -->
+          <div class="step-panel" data-step="1">
+            <h2>Za koga je termin?</h2>
+            <p>Da znamo kako da složimo grupu ili teren.</p>
+            <div class="choices">
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za sebe">Za sebe</button>
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za dete">Za dete</button>
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za grupu ili firmu">Za grupu ili firmu</button>
+            </div>
+            <div class="wizard__nav">
+              <button type="button" class="btn-back" data-back>Nazad</button>
+            </div>
+          </div>
+
+          <!-- Korak 3 -->
+          <div class="step-panel" data-step="2">
+            <h2>Kada bi počeo?</h2>
+            <p>Okvirno je sasvim dovoljno.</p>
+            <div class="choices">
+              <button type="button" class="choice" data-field="kada" data-value="Ove nedelje">Ove nedelje</button>
+              <button type="button" class="choice" data-field="kada" data-value="Ovog meseca">Ovog meseca</button>
+              <button type="button" class="choice" data-field="kada" data-value="Samo se raspitujem">Samo se raspitujem</button>
+            </div>
+            <div class="wizard__nav">
+              <button type="button" class="btn-back" data-back>Nazad</button>
+            </div>
+          </div>
+
+          <!-- Korak 4 -->
+          <div class="step-panel" data-step="3">
+            <h2>Tvoji podaci</h2>
+            <p>Ostavi broj telefona i javljamo se sa slobodnim terminima.</p>
+
+            <div class="field">
+              <label for="ime">Ime i prezime</label>
+              <input type="text" id="ime" name="ime" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="telefon">Telefon</label>
+              <input type="tel" id="telefon" name="telefon" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="poruka">Poruka (opciono)</label>
+              <textarea id="poruka" name="poruka"></textarea>
+            </div>
+
+            <div class="wizard__nav">
+              <button type="button" class="btn-back" data-back>Nazad</button>
+              <button type="submit" class="btn" id="submit-btn">
+                <span class="btn__roll"><span>Pošalji upit</span><span>Pošalji upit</span></span>
+              </button>
+            </div>
+
+            <p class="privacy-note">Slanjem upita prihvataš da te kontaktiramo povodom termina. Podaci se ne prosleđuju trećim licima. Detaljnije u <a href="politika-privatnosti.html">politici privatnosti</a>.</p>
+          </div>
+
+          <div class="form-msg" id="form-msg" role="status" aria-live="polite"></div>
+        </form>
+
+        <!-- ============ INFO ============ -->
+        <aside>
+          <div class="info">
+            <div class="info__row">
+              <span>Adresa</span>
+              <b>Lješka 82, Banovo Brdo, Beograd</b>
+            </div>
+            <div class="info__row">
+              <span>Rezervacije</span>
+              <a href="tel:+381615005051">061 500 50 51</a>
+            </div>
+            <div class="info__row">
+              <span>Škola tenisa i kampovi</span>
+              <a href="tel:+381600238450">060 023 8450, Rade Poleksić</a>
+            </div>
+            <div class="info__row">
+              <span>Email</span>
+              <!-- TODO: klijent da potvrdi da je ovo pravi mejl za upite -->
+              <a href="mailto:mladost.tenis@gmail.com">mladost.tenis@gmail.com</a>
+            </div>
+            <div class="info__row">
+              <span>Radno vreme</span>
+              <b>Svakog dana, termini od 8 do 23</b>
+            </div>
+            <div class="info__row">
+              <span>WhatsApp i Viber</span>
+              <a href="https://wa.me/381615005051" target="_blank" rel="noopener">Piši nam na WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="map">
+            <iframe
+              title="Mapa lokacije Teniskog kluba Mladost, Lješka 82, Banovo Brdo"
+              src="https://www.google.com/maps?q=Lje%C5%A1ka%2082,%20Banovo%20Brdo,%20Beograd&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__in">
+    <div class="footer__top">
+      <div>
+        <a class="brand" href="index.html">
+          <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo">
+          <span>Teniski Klub Mladost</span>
+        </a>
+        <p class="footer__about">Tenis na Banovom Brdu od 2024. Tri šljakasta terena i škola tenisa za sve uzraste.</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/teniskiklub.mladost/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a href="https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/" target="_blank" rel="noopener" aria-label="Facebook">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Sajt</h4>
+        <ul>
+          <li><a href="index.html#o-klubu">O klubu</a></li>
+          <li><a href="index.html#skola">Škola tenisa</a></li>
+          <li><a href="index.html#cenovnik">Cenovnik</a></li>
+          <li><a href="index.html#pitanja">Česta pitanja</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Klub</h4>
+        <ul>
+          <li><a href="kontakt.html">Kontakt</a></li>
+          <li><a href="politika-privatnosti.html">Politika privatnosti</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Kontakt</h4>
+        <address>
+          Lješka 82, Banovo Brdo<br>
+          11030 Beograd<br>
+          <a href="tel:+381615005051">061 500 50 51</a><br>
+          <a href="mailto:mladost.tenis@gmail.com">mladost.tenis@gmail.com</a>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; 2026 Teniski Klub Mladost. Sva prava zadržana.</span>
+      <a href="politika-privatnosti.html">Politika privatnosti</a>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

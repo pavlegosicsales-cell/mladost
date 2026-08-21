@@ -1,0 +1,13 @@
+# Skrejpovana kopija tudjeg sajta, sluzi samo kao lokalna referenca
+inspo/
+
+# Sirovi materijal sa Instagrama (originali sa emoji imenima, ~10MB)
+images/reference/
+
+# Sistemsko
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Zalutala slika u rootu
+Tenis+i+padel*
