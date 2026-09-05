@@ -460,8 +460,16 @@ a { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
+/* Na dodiru nema hovera, pa se lime pali kad kartica dodje na sredinu ekrana.
+   Na misu vazi hover, kao i ranije. */
 .svc__card.is-mid::before,
 .svc__card:focus-within::before { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) {
+  .svc__card.is-mid::before { opacity: 0; }
+  .svc__card:hover::before,
+  .svc__card:focus-within::before { opacity: 1; }
+}
 
 /* sadrzaj iznad sloja sa hover grafikom */
 .svc__top,
