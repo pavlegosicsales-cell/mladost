@@ -11,3 +11,11 @@ desktop.ini
 
 # Zalutala slika u rootu
 Tenis+i+padel*
+
+# Sirovi materijal, originali fotki i videa (~31MB), u repo idu samo obradjene kopije u v2/images
+images + videos/
+
+# Originalne grafike iz Figme, koriscene kopije su u v2/images
+card usluge.png
+form background.png
+gradient-480x320-*.png
