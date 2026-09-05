@@ -1,601 +1,533 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teniski Klub Mladost | Tenis na Banovom Brdu</title>
-<meta name="description" content="Tri šljakasta terena, škola tenisa za sve uzraste i termini do 23h. Teniski klub Mladost, Lješka 82, Banovo Brdo. Rezervacije na 061 500 50 51.">
-<!-- TODO: zameniti domenom klijenta kada se registruje -->
-<link rel="canonical" href="https://teniskiklubmladost.rs/">
+<meta name="description" content="Tri šljakasta terena, škola tenisa za sve uzraste i individualni treninzi. Teniski klub Mladost, Lješka 82, Banovo Brdo. Rezervacije na 061 500 50 51.">
 <link rel="icon" href="images/logo.png" type="image/png">
-<meta property="og:title" content="Teniski Klub Mladost | Tenis na Banovom Brdu">
-<meta property="og:description" content="Tri šljakasta terena, škola tenisa za sve uzraste i termini do 23h. Lješka 82, Banovo Brdo.">
-<meta property="og:image" content="images/hero-teren-noc.webp">
-<meta property="og:type" content="website">
+
+<!-- Fontovi sa originala: Bebas Neue za naslove, Urbanist za tekst.
+     Oba imaju latin-ext subset, dakle č ć ž š đ rade. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Lenis smooth scroll, ista biblioteka i iste postavke kao na tennislove.webflow.io.
+     Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
+<link rel="stylesheet" href="vendor/lenis.css">
+
+<link rel="stylesheet" href="styles.css?v=18">
 </head>
 <body>
 
-<a class="skip" href="#glavni">Preskoči na sadržaj</a>
-
-<!-- ================= NAVIGACIJA ================= -->
-<header class="nav" id="nav">
-  <div class="nav__inner">
-    <a class="brand" href="index.html">
-      <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo">
-      <span>Mladost</span>
-    </a>
-
-    <nav class="nav__links" aria-label="Glavna navigacija">
-      <a href="#o-klubu">O klubu</a>
-      <a href="#skola">Škola tenisa</a>
-      <a href="#usluge">Tereni</a>
-      <a href="#cenovnik">Cenovnik</a>
-      <a href="kontakt.html">Kontakt</a>
-    </nav>
-
-    <div class="nav__right">
-      <a class="nav__tel" href="tel:+381615005051">061 500 50 51</a>
-      <a class="btn" href="kontakt.html">
-        <span class="btn__roll"><span>Rezerviši teren</span><span>Rezerviši teren</span></span>
-      </a>
-      <button class="burger" id="burger" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-<div class="mobile-menu" id="mobile-menu">
-  <a href="#o-klubu">O klubu</a>
-  <a href="#skola">Škola tenisa</a>
-  <a href="#usluge">Tereni</a>
-  <a href="#cenovnik">Cenovnik</a>
-  <a href="#pitanja">Česta pitanja</a>
-  <a href="kontakt.html">Kontakt</a>
-  <a class="mobile-tel" href="tel:+381615005051">061 500 50 51</a>
-  <a class="btn btn--block" href="kontakt.html">
-    <span class="btn__roll"><span>Rezerviši teren</span><span>Rezerviši teren</span></span>
-  </a>
-</div>
-
-<main id="glavni">
+<main>
 
   <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="hero__bg"></div>
+  <section class="hero" data-name="Hero Sections">
+
+    <div class="hero__bg">
+      <video src="video/hero.mp4" poster="images/hero-poster.jpg"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="Snimak iz vazduha: šljakasti tereni Teniskog kluba Mladost"></video>
+    </div>
     <div class="hero__veil"></div>
-    <div class="noise"></div>
+    <div class="hero__grain"></div>
 
-    <div class="hero__content">
-      <div class="hero__box">
-        <p class="eyebrow eyebrow--light">Tenis na Banovom Brdu</p>
-        <h1 class="split">Tenis u srcu Banovog Brda.</h1>
-        <p class="hero__sub blurin">Tri šljakasta terena, škola tenisa za sve uzraste i ekipa koja te čeka. Lješka 82, svaki dan do 23h.</p>
-        <div class="hero__cta">
-          <a class="btn btn--lime" href="kontakt.html">
-            <span class="btn__roll"><span>Rezerviši teren</span><span>Rezerviši teren</span></span>
-          </a>
-          <a class="btn btn--outline-light" href="#skola">
-            <span class="btn__roll"><span>Upiši dete u školu</span><span>Upiši dete u školu</span></span>
-          </a>
+    <div class="hero__container" data-name="Container">
+      <div class="hero__col" data-name="Sections Title & Button">
+
+        <div class="hero__title-group" data-name="Sections Title">
+
+          <div class="tag t-tag" data-name="Tag">Upis u školu tenisa je u toku</div>
+
+          <div class="hero__title" data-name="Sections Title">
+            <h1 class="hero__h1 t-h1">
+              <span>Teniski klub</span>
+              <span>Mladost</span>
+            </h1>
+
+            <p class="hero__sub t-lead">Tri šljakasta terena, škola tenisa za sve uzraste i treninzi jedan na jedan. Lješka 82, Banovo Brdo, svakog dana od 8 do 23.</p>
+          </div>
         </div>
+
+        <a class="btn" href="tel:+381615005051" data-name="Primary">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon" data-name="Button">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+
       </div>
     </div>
   </section>
 
-  <!-- ================= O KLUBU ================= -->
-  <section id="o-klubu" class="wrap">
-    <div class="section__inner">
-      <p class="eyebrow reveal">O klubu</p>
-      <p class="intro__text reveal" style="--d:1">
-        Teniski klub Mladost okuplja <b>rekreativce</b>, <b>decu</b> i <b>porodice</b> sa Banovog Brda na tri šljakasta terena, uz <b>školu tenisa</b> koju vode treneri koji rade sa decom svakog dana.
-      </p>
+  <!-- ================= USLUGE =================
+       Kartica: dizajn sa arcclub.framer.website, sekcija World-Class Facilities.
+       Scroll: sticky stack sa tennislove.webflow.io, sekcija sticky-features.
+       Bez belih dekorativnih sara sa originala. -->
+  <section class="services" id="usluge">
+    <div class="services__inner">
 
-      <div class="stats reveal" style="--d:2">
-        <div class="stat">
-          <div class="stat__n" data-count="3">3</div>
-          <div class="stat__l">Šljakasta terena</div>
+
+      <div class="stack">
+
+        <!-- 01, kartica levo, slika desno -->
+        <div class="stack__item stack__item--1">
+          <article class="svc">
+            <div class="svc__card">
+              <div class="svc__top">
+                <p class="svc__num">01</p>
+                <p class="svc__kicker">Prvi reket u ruci</p>
+              </div>
+
+              <div class="svc__inner">
+                <div class="svc__text">
+                  <div class="svc__titlerow">
+                    <h3 class="svc__title">Školica tenisa</h3>
+                    <span class="svc__tag">Svi uzrasti</span>
+                  </div>
+                  <p class="svc__desc">Grupe po uzrastu i nivou, od prvih koraka do prvog turnira. Tehnika, motorika i igra na svakom treningu. Upis je u toku.</p>
+                </div>
+
+                <a class="btn" href="skola-tenisa.html">
+                  <span class="btn__label t-btn">Upiši dete</span>
+                  <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+
+            <div class="svc__media">
+              <img src="images/usluga-skolica.jpg" alt="Deca iz školice tenisa sa medaljama posle internog turnira" loading="lazy">
+              <div class="svc__label"><span>Škola tenisa</span></div>
+
+              <div class="svc__icons">
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.8"/><path d="M7 21l3-5 3 2 1 3M10 16l-1-4 4-2 3 3 3 .6"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+              </div>
+
+              <div class="svc__mini">
+                <h4 class="svc__mini-title">Grupe po uzrastu</h4>
+                <p class="svc__mini-text">Deca se dele po godinama i nivou, pa svako napreduje svojim tempom.</p>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="stat">
-          <div class="stat__n" data-count="4.9">4.9</div>
-          <div class="stat__l">Ocena na Google-u</div>
+
+        <!-- 02, kartica desno, slika levo -->
+        <div class="stack__item stack__item--2">
+          <article class="svc svc--flip">
+            <div class="svc__card">
+              <div class="svc__top">
+                <p class="svc__num">02</p>
+                <p class="svc__kicker">Tehnika koja se vidi</p>
+              </div>
+
+              <div class="svc__inner">
+                <div class="svc__text">
+                  <div class="svc__titlerow">
+                    <h3 class="svc__title">Individualni treninzi</h3>
+                    <span class="svc__tag">Jedan na jedan</span>
+                  </div>
+                  <p class="svc__desc">Sat vremena samo za tebe i trenera. Rad na servisu, udarcu i kretanju, tempom koji ti odgovara i sa korekcijom odmah.</p>
+                </div>
+
+                <a class="btn" href="individualni-treninzi.html">
+                  <span class="btn__label t-btn">Zakaži termin</span>
+                  <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+
+            <div class="svc__media">
+              <img src="images/usluga-individualni.jpg" alt="Linije servis polja na šljakastom terenu iz blizine" loading="lazy">
+              <div class="svc__label"><span>Individualni rad</span></div>
+
+              <div class="svc__icons">
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 16V9M12 16V5M17 16v-4"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="14.5" cy="9" rx="6" ry="7" transform="rotate(45 14.5 9)"/><path d="M10 13.5L4 20"/></svg></span>
+              </div>
+
+              <div class="svc__mini">
+                <h4 class="svc__mini-title">Sve počinje analizom</h4>
+                <p class="svc__mini-text">Prvi trening ide na snimanje udarca i dogovor šta se popravlja.</p>
+              </div>
+            </div>
+          </article>
         </div>
-        <div class="stat">
-          <div class="stat__n">2024</div>
-          <div class="stat__l">Godina osnivanja</div>
+
+        <!-- 03, kartica levo, slika desno -->
+        <div class="stack__item stack__item--3">
+          <article class="svc">
+            <div class="svc__card">
+              <div class="svc__top">
+                <p class="svc__num">03</p>
+                <p class="svc__kicker">Teren kad tebi odgovara</p>
+              </div>
+
+              <div class="svc__inner">
+                <div class="svc__text">
+                  <div class="svc__titlerow">
+                    <h3 class="svc__title">Rekreativci</h3>
+                    <span class="svc__tag">Bez članarine</span>
+                  </div>
+                  <p class="svc__desc">Rezervišeš teren, dolaziš i igraš. Tri šljakasta terena, reflektori i termini do 23h, od 1.000 dinara po satu.</p>
+                </div>
+
+                <a class="btn" href="tel:+381615005051">
+                  <span class="btn__label t-btn">Rezerviši teren</span>
+                  <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+                </a>
+              </div>
+            </div>
+
+            <div class="svc__media">
+              <img src="images/usluga-rekreativci.jpg" alt="Šljakasti teren kluba u sumrak, duga iznad terena" loading="lazy">
+              <div class="svc__label"><span>Iznajmljivanje terena</span></div>
+
+              <div class="svc__icons">
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+                <span class="svc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><path d="M4.6 8.5A7 7 0 0 1 12 12a7 7 0 0 1 7.4 3.5M4.6 15.5A7 7 0 0 0 12 12a7 7 0 0 0 7.4-3.5"/></svg></span>
+              </div>
+
+              <div class="svc__mini">
+                <h4 class="svc__mini-title">Reflektori do 23h</h4>
+                <p class="svc__mini-text">Stigneš sa posla u devet, teren je osvetljen i spreman.</p>
+              </div>
+            </div>
+          </article>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ================= ZAŠTO MLADOST ================= -->
-  <section class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Zašto Mladost</p>
-        <h2 class="reveal" style="--d:1">Klub u koji se vraćaš.</h2>
+
+  <!-- ================= GALERIJA =================
+       Traka slika koje se sire na hover. Na telefonu nema sirenja,
+       ide cetiri obicne slike jedna ispod druge. -->
+  <section class="gallery" id="galerija">
+    <div class="gallery__inner">
+
+      <div class="gallery__strip">
+        <figure class="gallery__item gallery__item--mob">
+          <img src="images/galerija-1.webp" alt="Šljakasti teren kluba pod reflektorima uveče" loading="lazy">
+        </figure>
+        <figure class="gallery__item">
+          <img src="images/galerija-2.webp" alt="Dvoje dece na treningu na šljaci po sunčanom danu" loading="lazy">
+        </figure>
+        <figure class="gallery__item gallery__item--mob">
+          <img src="images/galerija-3.jpg" alt="Tereni kluba snimljeni dronom iz vazduha" loading="lazy">
+        </figure>
+        <figure class="gallery__item">
+          <img src="images/galerija-4.webp" alt="Trener sa grupom dece uz mrežu na treningu" loading="lazy">
+        </figure>
+        <figure class="gallery__item gallery__item--mob">
+          <img src="images/galerija-5.jpg" alt="Duga iznad šljakastog terena u sumrak" loading="lazy">
+        </figure>
+        <figure class="gallery__item">
+          <img src="images/galerija-6.jpg" alt="Šljakasti tereni pod balonom tokom zimske sezone" loading="lazy">
+        </figure>
+        <figure class="gallery__item">
+          <img src="images/galerija-7.jpg" alt="Linije servis polja na šljaci iz blizine" loading="lazy">
+        </figure>
+        <figure class="gallery__item">
+          <img src="images/galerija-8.jpg" alt="Svlačionica kluba sa klupama i policama" loading="lazy">
+        </figure>
+        <figure class="gallery__item gallery__item--mob">
+          <img src="images/galerija-9.jpg" alt="Bašta kluba sa ležaljkama i zelenilom" loading="lazy">
+        </figure>
       </div>
 
-      <div class="bento">
-        <article class="tile tile--photo bento__a reveal">
-          <video class="tile__video" src="images/tereni-dron.mp4" poster="images/tereni-dron-poster.jpg"
-                 autoplay muted loop playsinline preload="metadata"
-                 aria-label="Snimak iz vazduha: tri šljakasta terena kluba Mladost"></video>
-          <h3>Šljaka pod nogama</h3>
-          <p>Tri terena od prave šljake. Mekše za kolena, sporija lopta, duži poeni.</p>
-        </article>
-
-        <article class="tile bento__b reveal" style="--d:1">
-          <h3>Zimi se ne staje</h3>
-          <p>Teren ide pod balon i igra se cele godine. Bez pauze od novembra do marta.</p>
-        </article>
-
-        <article class="tile tile--accent bento__c reveal" style="--d:2">
-          <p class="tile__quote">„Greška nije problem. Problem je kada iz nje ništa ne naučimo."</p>
-          <h3>Treneri koji objasne, pa pokažu</h3>
-          <p>Rad na terenu izgleda ovako: primeti, objasni, ispravi, ponovi.</p>
-          <a class="btn btn--lime" href="#skola">
-            <span class="btn__roll"><span>Upiši dete u školu</span><span>Upiši dete u školu</span></span>
-          </a>
-        </article>
-
-        <article class="tile bento__d reveal" style="--d:1">
-          <h3>Termini do 23h</h3>
-          <p>Reflektori na svim terenima. Ako stižeš sa posla u devet uveče, teren te čeka.</p>
-        </article>
-
-        <article class="tile tile--photo tile--deca bento__e reveal" style="--d:2">
-          <h3>Ekipa, ne samo trening</h3>
-          <p>„Gradimo teniski klub, radimo na motorici i koordinaciji, a uz sve to se i dobro zabavljamo."</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= USLUGE (TABOVI) ================= -->
-  <section id="usluge" class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Šta nudimo</p>
-        <h2 class="reveal" style="--d:1">Sve što ti treba da izađeš na teren.</h2>
-      </div>
-
-      <div class="tabs">
-        <div class="tabs__list reveal">
-          <div class="tab is-active" data-tab="0">
-            <button class="tab__btn" aria-expanded="true">
-              Iznajmljivanje terena
-              <svg class="tab__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </button>
-            <div class="tab__body"><div><p>Rezervišeš teren, dođeš i igraš. Tri šljakasta terena, reflektori, termini od 8 do 23.</p></div></div>
-          </div>
-
-          <div class="tab" data-tab="1">
-            <button class="tab__btn" aria-expanded="false">
-              Škola tenisa
-              <svg class="tab__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </button>
-            <div class="tab__body"><div><p>Za sve uzraste, od prvih koraka do ozbiljnog treninga. Grupe se prave po uzrastu i nivou.</p></div></div>
-          </div>
-
-          <div class="tab" data-tab="2">
-            <button class="tab__btn" aria-expanded="false">
-              Školica za osnovce
-              <svg class="tab__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </button>
-            <div class="tab__body"><div><p>Poseban program za decu školskog uzrasta. Rad na tehnici, motorici i koordinaciji. Upis je u toku.</p></div></div>
-          </div>
-
-          <div class="tab" data-tab="3">
-            <button class="tab__btn" aria-expanded="false">
-              Turniri i kampovi
-              <svg class="tab__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-            </button>
-            <div class="tab__body"><div><p>Interni turniri školice tokom sezone i letnji kamp na Zlatiboru, sa smeštajem, obrocima i dva treninga dnevno.</p></div></div>
-          </div>
-        </div>
-
-        <div class="tabs__media reveal" style="--d:1">
-          <img class="is-active" data-media="0" src="images/hero-teren-noc.webp" alt="Šljakasti teren kluba Mladost pod reflektorima uveče">
-          <img data-media="1" src="images/skola-trening.webp" alt="Trener sa grupom dece na treningu škole tenisa">
-          <img data-media="2" src="images/deca-na-terenu.webp" alt="Deca školskog uzrasta na treningu na šljakastom terenu">
-          <img data-media="3" src="images/balon-unutra.jpg" alt="Natkriveni šljakasti tereni pod balonom">
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ŠTA DOBIJAŠ ================= -->
-  <section class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Šta dobijaš</p>
-        <h2 class="reveal" style="--d:1">Klub koji radi cele godine.</h2>
-      </div>
-
-      <div class="benefits reveal" style="--d:2">
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M4.4 7.2c3.9 1.2 5.6 4.1 5.2 9.3M19.6 7.2c-3.9 1.2-5.6 4.1-5.2 9.3"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Šljakasti tereni</h3>
-            <p>Tri terena od prave šljake, održavana svakog dana.</p>
-          </div>
-        </div>
-
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8l1.5 5.5h-11z"/><path d="M12 9.5V15"/><path d="M9.5 15h5l-.7 5h-3.6z"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Reflektori do 23h</h3>
-            <p>Igra se i posle mraka, cele nedelje.</p>
-          </div>
-        </div>
-
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 18.5a9 9 0 0 1 18 0"/><path d="M2 18.5h20"/><path d="M12 18.5V9.5"/><path d="M7 11.6a9 9 0 0 1 10 0"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Balon zimi</h3>
-            <p>Teren pod krovom kad padne temperatura.</p>
-          </div>
-        </div>
-
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9.5" cy="8" r="3"/><path d="M3.5 19.5a6 6 0 0 1 12 0"/><path d="M17 8.5h4.5"/><path d="M19.25 6.25v4.5"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Stručni treneri</h3>
-            <p>Rad sa decom, korekcija tehnike, jasno objašnjenje.</p>
-          </div>
-        </div>
-
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Rezervacija za minut</h3>
-            <p>Jedan poziv i termin je tvoj.</p>
-          </div>
-        </div>
-
-        <div class="benefit">
-          <div class="benefit__icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.5" cy="9" r="2.8"/><path d="M3 18.5a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="8" r="2.3"/><path d="M14.5 14.6a4.8 4.8 0 0 1 6.5 3.9"/></svg>
-          </div>
-          <div class="benefit__text">
-            <h3>Ekipa koja te čeka</h3>
-            <p>Turniri, druženja i ljudi koji igraju svake nedelje.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CENOVNIK ================= -->
-  <section id="cenovnik" class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Cenovnik</p>
-        <h2 class="reveal" style="--d:1">Termin od sat vremena.</h2>
-        <p class="lead reveal" style="--d:1">Bez članarine i bez paketa. Platiš teren koliko si igrao.</p>
-      </div>
-
-      <div class="prices">
-        <div class="price reveal">
-          <h3>Radnim danom</h3>
-          <div class="price__row"><span>08:00 do 17:00</span><b>1.000 RSD</b></div>
-          <div class="price__row"><span>17:00 do 20:00</span><b>1.200 RSD</b></div>
-          <div class="price__row"><span>20:00 do 23:00</span><b>1.400 RSD</b></div>
-        </div>
-
-        <div class="price price--hi reveal" style="--d:1">
-          <span class="price__tag">Subota i nedelja</span>
-          <h3>Vikendom</h3>
-          <div class="price__row"><span>07:00 do 20:00</span><b>1.200 RSD</b></div>
-          <div class="price__row"><span>20:00 do 23:00</span><b>1.400 RSD</b></div>
-        </div>
-      </div>
-
-      <div class="school-price reveal" style="--d:1">
-        <div>
-          <h3>Škola tenisa</h3>
-          <p>Grupe se prave po uzrastu i nivou. Javi se za raspored i cenu.</p>
-        </div>
-        <a class="btn btn--ghost" href="kontakt.html">
-          <span class="btn__roll"><span>Pitaj za školu</span><span>Pitaj za školu</span></span>
+      <div class="gallery__cta">
+        <a class="btn" href="galerija.html">
+          <span class="btn__label t-btn">Pogledaj galeriju</span>
+          <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
         </a>
       </div>
 
-      <div class="price__note reveal">
-        <p>Cena je za teren, ne po igraču. Rezervacije na 061 500 50 51 svakog dana.</p>
-        <a class="btn" href="tel:+381615005051">
-          <span class="btn__roll"><span>Pozovi i rezerviši</span><span>Pozovi i rezerviši</span></span>
+    </div>
+  </section>
+
+
+  <!-- ================= KONTAKT =================
+       Levo kartice sa podacima, desno wizard forma u cetiri koraka.
+       Pravila forme po Skilu 02: izbori dugmadima, tekst samo na kraju,
+       tackice napretka, Nazad na svakom koraku posle prvog, dugme se
+       zakljuca dok traje slanje, potvrda bez menjanja stranice. -->
+  <section class="kontakt" id="kontakt">
+    <div class="kontakt__inner">
+
+      <!-- leva strana, kartice -->
+      <div class="kontakt__info">
+        <div class="kontakt__head">
+          <p class="kontakt__eyebrow">Kontakt</p>
+          <h2 class="kontakt__title">Vidimo se na terenu</h2>
+          <p class="kontakt__lead">Pozovi, piši ili popuni upit sa desne strane. Javljamo se isti dan sa slobodnim terminima.</p>
+        </div>
+
+        <div class="info-cards">
+<a class="info-card" href="https://www.google.com/maps?q=Lje%C5%A1ka+82,+Banovo+Brdo,+Beograd" target="_blank" rel="noopener">
+          <span class="info-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+          <span class="info-card__body">
+            <span class="info-card__label">Lokacija</span>
+            <span class="info-card__value">Lješka 82, Banovo Brdo</span>
+            <span class="info-card__sub">11030 Beograd, parking ispred kluba</span>
+          </span>
+          <span class="info-card__glow" aria-hidden="true"></span>
         </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= ŽIVOT U KLUBU ================= -->
-  <section class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Život u klubu</p>
-        <h2 class="reveal" style="--d:1">Ovako izgleda kod nas.</h2>
-        <p class="reveal" style="--d:1">Teren, ekipa i loptice koje lete. Slike su sa treninga i turnira tokom sezone.</p>
-      </div>
-
-      <div class="gallery">
-        <figure class="reveal"><img src="images/deca-na-terenu.webp" alt="Dvoje dece na treningu na šljakastom terenu po sunčanom danu" loading="lazy"></figure>
-        <figure class="reveal" style="--d:1"><img src="images/skola-trening.webp" alt="Grupa dece stoji uz mrežu dok trener pokazuje udarac" loading="lazy"></figure>
-        <figure class="reveal" style="--d:1"><img src="images/balon-unutra.jpg" alt="Šljakasti tereni pod balonom tokom zimske sezone" loading="lazy"></figure>
-        <figure class="reveal" style="--d:2"><img src="images/sljaka-mreza.jpg" alt="Mreža i linija na šljakastom terenu iz blizine" loading="lazy"></figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= KAKO DO TERMINA ================= -->
-  <section class="wrap">
-    <div class="section__inner">
-      <div class="section__head">
-        <p class="eyebrow reveal">Kako do termina</p>
-        <h2 class="reveal" style="--d:1">Četiri koraka i na terenu si.</h2>
-      </div>
-
-      <div class="proc reveal" id="proc">
-        <div class="proc__item is-active" role="button" tabindex="0" data-step="0">
-          <span class="proc__rail"><i></i></span>
-          <span class="proc__head">
-            <span class="proc__n">01</span>
-            <h3>Javi se</h3>
+        <a class="info-card" href="tel:+381615005051">
+          <span class="info-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 3.5h3l1.5 4-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/></svg></span>
+          <span class="info-card__body">
+            <span class="info-card__label">Rezervacije</span>
+            <span class="info-card__value">061 500 50 51</span>
+            <span class="info-card__sub">Zovi ili piši na WhatsApp i Viber</span>
           </span>
-          <span class="proc__body">
-            <p>Pozovi 061 500 50 51 ili pošalji upit preko sajta.</p>
-            <span class="proc__img"><img src="images/sljaka-mreza.jpg" alt="Mreža na šljakastom terenu iz blizine" loading="lazy"></span>
+          <span class="info-card__glow" aria-hidden="true"></span>
+        </a>
+        <a class="info-card" href="mailto:mladost.tenis@gmail.com">
+          <span class="info-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m4 8 7.1 4.6a2 2 0 0 0 1.8 0L20 8"/></svg></span>
+          <span class="info-card__body">
+            <span class="info-card__label">Email</span>
+            <span class="info-card__value">mladost.tenis@gmail.com</span>
+            <span class="info-card__sub">Odgovaramo isti dan</span>
           </span>
-        </div>
-
-        <div class="proc__item" role="button" tabindex="0" data-step="1">
-          <span class="proc__rail"><i></i></span>
-          <span class="proc__head">
-            <span class="proc__n">02</span>
-            <h3>Biramo termin</h3>
-          </span>
-          <span class="proc__body">
-            <p>Kažeš kad ti odgovara, mi kažemo šta je slobodno.</p>
-            <span class="proc__img"><img src="images/hero-teren-noc.webp" alt="Šljakasti teren pod reflektorima uveče" loading="lazy"></span>
-          </span>
-        </div>
-
-        <div class="proc__item" role="button" tabindex="0" data-step="2">
-          <span class="proc__rail"><i></i></span>
-          <span class="proc__head">
-            <span class="proc__n">03</span>
-            <h3>Dođi na Lješku 82</h3>
-          </span>
-          <span class="proc__body">
-            <p>Banovo Brdo, ulaz sa ulice. Parking ispred.</p>
-            <span class="proc__img"><img src="images/balon-unutra.jpg" alt="Natkriveni šljakasti tereni pod balonom" loading="lazy"></span>
-          </span>
-        </div>
-
-        <div class="proc__item" role="button" tabindex="0" data-step="3">
-          <span class="proc__rail"><i></i></span>
-          <span class="proc__head">
-            <span class="proc__n">04</span>
-            <h3>Igraj</h3>
-          </span>
-          <span class="proc__body">
-            <p>Teren je spreman. Ti samo poneseš reket i patike.</p>
-            <span class="proc__img"><img src="images/deca-na-terenu.webp" alt="Deca na treningu na šljakastom terenu" loading="lazy"></span>
-          </span>
+          <span class="info-card__glow" aria-hidden="true"></span>
+        </a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- ================= ŠKOLA TENISA ================= -->
-  <section id="skola" class="wrap">
-    <div class="section__inner">
-      <div class="split-sec">
-        <div class="reveal">
-          <p class="eyebrow">Škola tenisa</p>
-          <h2>Dete izađe bolje nego što je ušlo.</h2>
-          <p class="split-sec__sub">„Cilj treninga nije da dete bude savršeno iz prvog pokušaja, već da svakog treninga izađe malo bolje nego što je ušlo."</p>
+      <!-- desna strana, forma -->
+      <form class="forma" id="forma" novalidate>
+        <div class="forma__veil" aria-hidden="true"></div>
+        <div class="forma__grain" aria-hidden="true"></div>
 
-          <div class="feature-list">
-            <div class="feature">
-              <div class="feature__chip feature__chip--teal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 20 4"/><path d="M14 4h6v6"/><path d="M4 14v6h6"/></svg>
-              </div>
-              <div>
-                <h4>Tehnika</h4>
-                <p>Postavka, zamah i kontakt sa lopticom. Korekcija odmah, ne posle mesec dana.</p>
-              </div>
-            </div>
+        <div class="forma__in">
+          <div class="forma__dots" aria-hidden="true">
+            <span class="is-done"></span><span></span><span></span><span></span>
+          </div>
 
-            <div class="feature">
-              <div class="feature__chip feature__chip--lime">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6M8 21l4-8 4 8M6 10h12"/></svg>
-              </div>
-              <div>
-                <h4>Motorika i koordinacija</h4>
-                <p>Rad nogu, ravnoteža i brzina. Osnova za sve ostalo.</p>
-              </div>
-            </div>
-
-            <div class="feature">
-              <div class="feature__chip feature__chip--ball">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M5 7c3.5 1 5 3.6 4.6 8.3M19 7c-3.5 1-5 3.6-4.6 8.3"/></svg>
-              </div>
-              <div>
-                <h4>Igra</h4>
-                <p>Poeni, mečevi i turniri. Dete uči kroz igru, ne kroz predavanje.</p>
-              </div>
+          <div class="korak is-active" data-step="0">
+            <p class="korak__num">Korak 1 od 4</p>
+            <h3 class="korak__q">Šta te zanima?</h3>
+            <div class="choices">
+              <button type="button" class="choice" data-field="usluga" data-value="Rezervacija termina">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+                <span class="choice__text">Rezervacija termina</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="usluga" data-value="Škola tenisa">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/></svg></span>
+                <span class="choice__text">Škola tenisa</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="usluga" data-value="Individualni trening">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="14.5" cy="9" rx="6" ry="7" transform="rotate(45 14.5 9)"/><path d="M10 13.5L4 20"/></svg></span>
+                <span class="choice__text">Individualni trening</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="usluga" data-value="Turnir ili grupa">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg></span>
+                <span class="choice__text">Turnir ili grupa</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
             </div>
           </div>
 
-          <a class="btn" href="kontakt.html">
-            <span class="btn__roll"><span>Prijavi dete</span><span>Prijavi dete</span></span>
-          </a>
-        </div>
-
-        <div class="media-card reveal" style="--d:1">
-          <img src="images/skola-trening.webp" alt="Trener škole tenisa Mladost sa decom na šljakastom terenu">
-          <div class="glass">
-            <div class="glass__rows">
-              <div><span>Upis</span><b>U toku</b></div>
-              <div><span>Uzrast</span><b>Svi</b></div>
-              <div><span>Trener</span><b>Rade Poleksić</b></div>
+          <div class="korak" data-step="1">
+            <p class="korak__num">Korak 2 od 4</p>
+            <h3 class="korak__q">Za koga je termin?</h3>
+            <div class="choices">
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za sebe">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/></svg></span>
+                <span class="choice__text">Za sebe</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za dete">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4" r="1.8"/><path d="M7 21l3-5 3 2 1 3M10 16l-1-4 4-2 3 3 3 .6"/></svg></span>
+                <span class="choice__text">Za dete</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="zaKoga" data-value="Za grupu ili firmu">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20v-1.5A4.5 4.5 0 0 1 7.5 14h3A4.5 4.5 0 0 1 15 18.5V20"/><path d="M16.5 5.6a3 3 0 0 1 0 5.8M18 14.2a4.5 4.5 0 0 1 3 4.3V20"/></svg></span>
+                <span class="choice__text">Za grupu ili firmu</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
             </div>
-            <a class="btn" href="kontakt.html">
-              <span class="btn__roll"><span>Upiši dete</span><span>Upiši dete</span></span>
-            </a>
+            <div class="forma__nav"><button type="button" class="btn-back" data-back>Nazad</button></div>
           </div>
+
+          <div class="korak" data-step="2">
+            <p class="korak__num">Korak 3 od 4</p>
+            <h3 class="korak__q">Kada bi počeo?</h3>
+            <div class="choices">
+              <button type="button" class="choice" data-field="kada" data-value="Ove nedelje">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+                <span class="choice__text">Ove nedelje</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="kada" data-value="Ovog meseca">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span>
+                <span class="choice__text">Ovog meseca</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+              <button type="button" class="choice" data-field="kada" data-value="Samo se raspitujem">
+                <span class="choice__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8.5"/><path d="M4.6 8.5A7 7 0 0 1 12 12a7 7 0 0 1 7.4 3.5M4.6 15.5A7 7 0 0 0 12 12a7 7 0 0 0 7.4-3.5"/></svg></span>
+                <span class="choice__text">Samo se raspitujem</span>
+                <span class="choice__ball" aria-hidden="true"><img src="images/loptica.png" alt="" width="20" height="20"></span>
+              </button>
+            </div>
+            <div class="forma__nav"><button type="button" class="btn-back" data-back>Nazad</button></div>
+          </div>
+
+          <div class="korak" data-step="3">
+            <p class="korak__num">Korak 4 od 4</p>
+            <h3 class="korak__q">Tvoji podaci</h3>
+
+            <div class="polja">
+              <div class="polje">
+                <label for="ime">Ime i prezime</label>
+                <input type="text" id="ime" name="ime" autocomplete="name" required>
+              </div>
+              <div class="polje">
+                <label for="telefon">Telefon</label>
+                <input type="tel" id="telefon" name="telefon" autocomplete="tel" required>
+              </div>
+              <div class="polje">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+              <div class="polje polje--puna">
+                <label for="poruka">Poruka (opciono)</label>
+                <textarea id="poruka" name="poruka" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="forma__nav">
+              <button type="button" class="btn-back" data-back>Nazad</button>
+              <button type="submit" class="btn" id="posalji">
+                <span class="btn__label t-btn">Pošalji upit</span>
+                <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+
+          <p class="forma__msg" id="forma-msg" role="status" aria-live="polite"></p>
         </div>
-      </div>
+      </form>
+
     </div>
   </section>
 
-  <!-- ================= OCENA ================= -->
-  <section class="wrap section--tight">
-    <div class="section__inner">
-      <div class="rating reveal">
-        <div class="noise"></div>
-        <div class="rating__in">
-          <p class="eyebrow eyebrow--light">Utisci</p>
-          <p class="rating__score">4.9</p>
-          <p class="rating__stars" aria-hidden="true">★★★★★</p>
-          <p class="rating__label">Ocena na Google-u</p>
-          <p class="rating__quote">„Priliku da vaša deca budu u zdravoj okolini, u krugu stručnih i iskusnih trenera. Kroz treninge i druženje da još više zavole sport kojim se bave."</p>
-          <!-- TODO: kada klijent dobije 3 do 5 pisanih recenzija, ovde ide pravi slajder -->
-          <a class="btn btn--light" href="https://www.google.com/search?q=Tenis+%26+Padel+klub+Mladost+Banovo+Brdo" target="_blank" rel="noopener">
-            <span class="btn__roll"><span>Pogledaj nas na Google-u</span><span>Pogledaj nas na Google-u</span></span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FAQ ================= -->
-  <section id="pitanja" class="wrap">
-    <div class="section__inner">
-      <div class="faq-grid">
-        <div class="faq__side reveal">
-          <p class="eyebrow">Pitanja</p>
-          <h2>Odgovori na najčešća pitanja.</h2>
-          <p>Nešto ti nije jasno? Piši nam ili pozovi, odgovaramo isti dan.</p>
-          <a class="btn btn--ghost" href="kontakt.html">
-            <span class="btn__roll"><span>Piši nam</span><span>Piši nam</span></span>
-          </a>
-        </div>
-
-        <div class="faq reveal" style="--d:1">
-          <div class="faq-item">
-            <button class="faq-item__q" aria-expanded="false">Da li moram da budem član da bih igrao?<span class="faq-item__icon" aria-hidden="true"></span></button>
-            <div class="faq-item__a"><div><p>Ne. Rezervišeš termin, platiš teren i igraš. Članstvo nije uslov.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-item__q" aria-expanded="false">Šta ako pada kiša?<span class="faq-item__icon" aria-hidden="true"></span></button>
-            <div class="faq-item__a"><div><p>Termin se prebacuje. Javi se na 061 500 50 51 i dogovorimo novi.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-item__q" aria-expanded="false">Od koliko godina dete može da krene?<span class="faq-item__icon" aria-hidden="true"></span></button>
-            <div class="faq-item__a"><div><p>Radimo sa svim uzrastima. Za najmlađe postoji školica, za osnovce poseban program. Javi se pa ćemo naći grupu po uzrastu i nivou.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-item__q" aria-expanded="false">Da li se igra zimi?<span class="faq-item__icon" aria-hidden="true"></span></button>
-            <div class="faq-item__a"><div><p>Da. Teren ide pod balon i sezona traje cele godine.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-item__q" aria-expanded="false">Koliko unapred treba rezervisati?<span class="faq-item__icon" aria-hidden="true"></span></button>
-            <div class="faq-item__a"><div><p>Popodnevni termini od 17h idu najbrže. Za njih zovi dan ili dva ranije. Prepodne se skoro uvek nađe mesto isti dan.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= CTA BANNER ================= -->
-  <section class="cta">
-    <div class="noise"></div>
-    <div class="cta__in reveal">
-      <h2>Vidimo se na terenu.</h2>
-      <p>Rezerviši termin ili upiši dete u školu tenisa. Jedan poziv je dovoljan.</p>
-      <a class="btn btn--lime" href="kontakt.html">
-        <span class="btn__roll"><span>Rezerviši teren</span><span>Rezerviši teren</span></span>
-      </a>
-    </div>
-    <p class="wordmark" aria-hidden="true">MLADOST</p>
-  </section>
 
 </main>
 
-<!-- ================= FOOTER ================= -->
+<!-- ================= FOOTER, raspored po teniskom terenu ================= -->
 <footer class="footer">
-  <div class="footer__in">
-    <div class="footer__top">
-      <div>
-        <a class="brand" href="index.html">
-          <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo">
-          <span>Teniski Klub Mladost</span>
-        </a>
-        <p class="footer__about">Tenis na Banovom Brdu od 2024. Tri šljakasta terena i škola tenisa za sve uzraste.</p>
-        <div class="socials">
-          <a href="https://www.instagram.com/teniskiklub.mladost/" target="_blank" rel="noopener" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-          </a>
-          <a href="https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/" target="_blank" rel="noopener" aria-label="Facebook">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8z"/></svg>
-          </a>
-        </div>
+  <div class="footer__inner">
+
+    <div class="court">
+
+      <!-- gornji koridor, levo -->
+      <div class="court__cell court__cell--contact-l">
+        <p class="court__label">Adresa</p>
+        <address class="court__text">Lješka 82, Banovo Brdo<br>11030 Beograd</address>
       </div>
 
-      <div>
-        <h4>Sajt</h4>
-        <ul>
-          <li><a href="#o-klubu">O klubu</a></li>
-          <li><a href="#skola">Škola tenisa</a></li>
-          <li><a href="#cenovnik">Cenovnik</a></li>
-          <li><a href="#pitanja">Česta pitanja</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Klub</h4>
-        <ul>
-          <li><a href="kontakt.html">Kontakt</a></li>
-          <li><a href="politika-privatnosti.html">Politika privatnosti</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Kontakt</h4>
-        <address>
-          Lješka 82, Banovo Brdo<br>
-          11030 Beograd<br>
+      <!-- gornji koridor, desno -->
+      <div class="court__cell court__cell--contact-r">
+        <p class="court__label">Kontakt</p>
+        <p class="court__text">
           <a href="tel:+381615005051">061 500 50 51</a><br>
           <a href="mailto:mladost.tenis@gmail.com">mladost.tenis@gmail.com</a>
-        </address>
+        </p>
       </div>
+
+      <!-- levo zadnje polje, logo -->
+      <div class="court__cell court__cell--logo">
+        <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo" width="190" height="190">
+      </div>
+
+      <!-- gornja servis polja, prazna po maketi -->
+      <div class="court__cell court__cell--void-a" aria-hidden="true"></div>
+      <div class="court__cell court__cell--void-b" aria-hidden="true"></div>
+
+      <!-- donja servis polja, dugmad -->
+      <div class="court__cell court__cell--btn-a">
+        <a class="btn" href="tel:+381615005051">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <div class="court__cell court__cell--btn-b">
+        <a class="btn btn--ghost" href="skola-tenisa.html">
+          <span class="btn__label t-btn">Upiši dete u školu</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <!-- desno zadnje polje, site map -->
+      <nav class="court__cell court__cell--sitemap" aria-label="Mapa sajta">
+        <p class="court__label">Mapa sajta</p>
+        <ul class="sitemap">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="o-klubu.html">O klubu</a></li>
+          <li><a href="skola-tenisa.html">Škola tenisa</a></li>
+          <li><a href="individualni-treninzi.html">Individualni treninzi</a></li>
+          <li><a href="rekreativci.html">Rekreativci</a></li>
+          <li><a href="treneri.html">Treneri</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <!-- donji koridor, levo -->
+      <div class="court__cell court__cell--copy">
+        <p class="court__text court__text--small">
+          &copy; 2026 Teniski Klub Mladost.
+          <span class="court__sep">·</span>
+          Izrada: <a href="https://www.patoadcreatives.com/sr" target="_blank" rel="noopener">PATO</a>
+        </p>
+      </div>
+
+      <!-- donji koridor, desno -->
+      <div class="court__cell court__cell--social">
+        <ul class="socials">
+          <li>
+            <a href="https://www.instagram.com/teniskiklub.mladost/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/381615005051" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 0 16 8 8 0 0 1-4.1-1.1l-.3-.2-2.6.7.7-2.5-.2-.3A8 8 0 0 1 12 4m-3.2 4c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.5 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.3-1.4-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
-    <div class="footer__bottom">
-      <span>&copy; 2026 Teniski Klub Mladost. Sva prava zadržana.</span>
-      <a href="politika-privatnosti.html">Politika privatnosti</a>
-    </div>
+    <!-- veliki natpis ispod terena, presecen dnom -->
+    <div class="footer__wordmark" aria-hidden="true"><span>MLADOST</span></div>
+
   </div>
 </footer>
 
-<script src="main.js"></script>
+<script src="vendor/lenis.min.js"></script>
+<script src="main.js?v=5"></script>
 </body>
 </html>

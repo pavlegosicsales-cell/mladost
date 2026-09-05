@@ -1,320 +1,259 @@
 /* ==========================================================================
-   Teniski Klub Mladost, main.js
-   Mobilni meni, reveal animacije, tabovi, FAQ, carobnjak forme
+   Teniski Klub Mladost, v2
+   Dugme: meri sirinu teksta i tamne pilule pa upisuje koliko svako od njih
+   treba da klizne da bi zamenili mesta na hover. Bez toga bi `order` skakao
+   bez animacije, a original to animira.
    ========================================================================== */
 
-/* Apps Script URL se lepi ovde posle Skila 03 (Form Backend Setup) */
+function izmeriDugmad() {
+  var GAP = 14; /* isti gap kao u CSS-u */
+
+  document.querySelectorAll('.btn').forEach(function (btn) {
+    var label = btn.querySelector('.btn__label');
+    var icon = btn.querySelector('.btn__icon');
+    if (!label || !icon) return;
+
+    /* mera se uzima u mirovanju, bez transforma */
+    btn.style.setProperty('--swap-label', '0px');
+    btn.style.setProperty('--swap-icon', '0px');
+
+    var labelW = label.getBoundingClientRect().width;
+    var iconW = icon.getBoundingClientRect().width;
+
+    /* tekst ide udesno za sirinu pilule plus gap,
+       pilula ide ulevo za sirinu teksta plus gap */
+    btn.style.setProperty('--swap-label', (iconW + GAP).toFixed(2) + 'px');
+    btn.style.setProperty('--swap-icon', (-(labelW + GAP)).toFixed(2) + 'px');
+  });
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  izmeriDugmad();
+
+  /* fontovi menjaju sirinu teksta, pa se meri ponovo kad se ucitaju */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(izmeriDugmad);
+  }
+
+  var t;
+  window.addEventListener('resize', function () {
+    clearTimeout(t);
+    t = setTimeout(izmeriDugmad, 150);
+  });
+});
+
+/* ==========================================================================
+   Sticky stack usluga: kartica koja je zaglavljena gore se smanjuje i bledi
+   dok je sledeca prekriva. Na tennislove ovo radi Webflow IX2 interakcija,
+   ovde je racunato iz pozicija na skrolu.
+   ========================================================================== */
+(function () {
+  var items = Array.prototype.slice.call(document.querySelectorAll('.stack__item'));
+  if (!items.length) return;
+
+  /* Na tennislove se zaglavljena kartica smanji jako, otprilike na dve trecine,
+     i pri tom NE bledi. Origin je gornja ivica, pa ostaje zalepljena za vrh. */
+  var MAX_SCALE_DOWN = 0.32;   /* 1 -> 0.68 */
+  var MAX_FADE = 0;            /* bez bledjenja */
+  var ticking = false;
+
+  function aktivno() {
+    return window.matchMedia('(min-width: 992px)').matches;
+  }
+
+  function reset() {
+    items.forEach(function (el) {
+      el.style.transform = '';
+      el.style.opacity = '';
+    });
+  }
+
+  function update() {
+    ticking = false;
+    if (!aktivno()) return;
+
+    for (var i = 0; i < items.length; i++) {
+      var el = items[i];
+      var next = items[i + 1];
+      var p = 0;
+
+      if (next) {
+        var r = el.getBoundingClientRect();
+        var nr = next.getBoundingClientRect();
+        var h = r.height || 1;
+        /* koliko je sledeca kartica presla preko donje ivice ove */
+        p = (r.bottom - nr.top) / h;
+        p = p < 0 ? 0 : p > 1 ? 1 : p;
+      }
+
+      el.style.transform = 'scale(' + (1 - MAX_SCALE_DOWN * p).toFixed(4) + ')';
+      if (MAX_FADE) el.style.opacity = (1 - MAX_FADE * p).toFixed(3);
+    }
+  }
+
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', function () {
+    if (!aktivno()) reset();
+    onScroll();
+  });
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  update();
+})();
+
+/* ==========================================================================
+   Smooth scroll, Lenis 1.3.4, iste postavke kao na tennislove.webflow.io:
+   smooth true, lerp 0.1, wheelMultiplier 1, infinite false.
+   Lenis skroluje prozor nativno, pa position sticky i scroll dogadjaji
+   iznad nastavljaju da rade normalno.
+   ========================================================================== */
+(function () {
+  if (typeof Lenis === 'undefined') return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var lenis = new Lenis({
+    smooth: true,
+    lerp: 0.1,
+    wheelMultiplier: 1,
+    infinite: false
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    window.requestAnimationFrame(raf);
+  }
+  window.requestAnimationFrame(raf);
+
+  /* linkovi na sidro idu kroz Lenis da bi i oni bili glatki */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      var cilj = document.querySelector(id);
+      if (!cilj) return;
+      e.preventDefault();
+      lenis.scrollTo(cilj, { offset: -20 });
+    });
+  });
+
+  window.lenis = lenis;
+})();
+
+/* ==========================================================================
+   WIZARD FORMA, pravila iz Skila 02
+   Koraci 1 do 3 su samo dugmad, kuca se tek na cetvrtom. Tackice napretka,
+   Nazad na svakom koraku posle prvog, dugme se zakljuca dok traje slanje,
+   potvrda se ispisuje na istom mestu bez menjanja stranice.
+   ========================================================================== */
+
+/* Ovde se lepi Apps Script URL posle Skila 03 (Form Backend Setup) */
 const ENDPOINT = '';
 
 document.addEventListener('DOMContentLoaded', function () {
+  var forma = document.getElementById('forma');
+  if (!forma) return;
 
-  /* ---------------------------------------------------------------------
-     1. Navigacija: pozadina na skrol + hamburger
-     --------------------------------------------------------------------- */
-  const nav = document.getElementById('nav');
-  const burger = document.getElementById('burger');
-  const menu = document.getElementById('mobile-menu');
+  var koraci = forma.querySelectorAll('.korak');
+  var tackice = forma.querySelectorAll('.forma__dots span');
+  var poruka = document.getElementById('forma-msg');
+  var dugme = document.getElementById('posalji');
+  var odgovori = {};
+  var trenutni = 0;
 
-  if (nav && !nav.classList.contains('nav--static')) {
-    const onScroll = function () {
-      nav.classList.toggle('is-solid', window.scrollY > 40);
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
+  function prikazi(i) {
+    trenutni = Math.max(0, Math.min(i, koraci.length - 1));
 
-  if (burger && menu) {
-    const closeMenu = function () {
-      menu.classList.remove('is-open');
-      burger.classList.remove('is-open');
-      burger.setAttribute('aria-expanded', 'false');
-      burger.setAttribute('aria-label', 'Otvori meni');
-    };
+    koraci.forEach(function (k, n) { k.classList.toggle('is-active', n === trenutni); });
+    tackice.forEach(function (t, n) { t.classList.toggle('is-done', n <= trenutni); });
 
-    burger.addEventListener('click', function () {
-      const open = menu.classList.toggle('is-open');
-      burger.classList.toggle('is-open', open);
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      burger.setAttribute('aria-label', open ? 'Zatvori meni' : 'Otvori meni');
-    });
-
-    menu.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', closeMenu);
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMenu();
-    });
-  }
-
-  /* ---------------------------------------------------------------------
-     2. Naslov slovo po slovo
-     --------------------------------------------------------------------- */
-  document.querySelectorAll('.split').forEach(function (el) {
-    const words = el.textContent.trim().split(/\s+/);
-    let i = 0;
-    el.innerHTML = words.map(function (word) {
-      const chars = Array.from(word).map(function (c) {
-        return '<span class="c" style="--i:' + (i++) + '">' + c + '</span>';
-      }).join('');
-      return '<span class="w">' + chars + '</span>';
-    }).join(' ');
-  });
-
-  /* ---------------------------------------------------------------------
-     3. Reveal na skrol
-     --------------------------------------------------------------------- */
-  const targets = document.querySelectorAll('.reveal, .split, .blurin');
-
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
-    targets.forEach(function (t) { io.observe(t); });
-
-    /* Sigurnosna mreza: sve sto je vec u prvom ekranu prikazi odmah,
-       da sadrzaj nikad ne ostane nevidljiv ako observer ne okine */
-    window.setTimeout(function () {
-      targets.forEach(function (t) {
-        if (t.classList.contains('is-in')) return;
-        const r = t.getBoundingClientRect();
-        if (r.top < window.innerHeight && r.bottom > 0) {
-          t.classList.add('is-in');
-          io.unobserve(t);
-        }
-      });
-    }, 900);
-  } else {
-    targets.forEach(function (t) { t.classList.add('is-in'); });
-  }
-
-  /* ---------------------------------------------------------------------
-     4. Brojaci u sekciji O klubu
-     --------------------------------------------------------------------- */
-  document.querySelectorAll('[data-count]').forEach(function (el) {
-    const target = parseFloat(el.dataset.count);
-    const decimals = (el.dataset.count.split('.')[1] || '').length;
-    let started = false;
-
-    const run = function () {
-      if (started) return;
-      started = true;
-      const dur = 1100;
-      const t0 = performance.now();
-      const tick = function (now) {
-        const p = Math.min((now - t0) / dur, 1);
-        const eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = (target * eased).toFixed(decimals);
-        if (p < 1) requestAnimationFrame(tick);
-      };
-      requestAnimationFrame(tick);
-    };
-
-    if ('IntersectionObserver' in window) {
-      const io2 = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) { run(); io2.disconnect(); } });
-      }, { threshold: 0.5 });
-      io2.observe(el);
-    }
-  });
-
-  /* ---------------------------------------------------------------------
-     5. Tabovi usluga
-     --------------------------------------------------------------------- */
-  const tabs = document.querySelectorAll('.tab');
-  const medias = document.querySelectorAll('.tabs__media img');
-
-  tabs.forEach(function (tab) {
-    const btn = tab.querySelector('.tab__btn');
-    btn.addEventListener('click', function () {
-      const idx = tab.dataset.tab;
-      tabs.forEach(function (t) {
-        const on = t === tab;
-        t.classList.toggle('is-active', on);
-        t.querySelector('.tab__btn').setAttribute('aria-expanded', on ? 'true' : 'false');
-      });
-      medias.forEach(function (img) {
-        img.classList.toggle('is-active', img.dataset.media === idx);
-      });
-    });
-  });
-
-  /* ---------------------------------------------------------------------
-     6. Horizontalni akordeon procesa
-     --------------------------------------------------------------------- */
-  const proc = document.getElementById('proc');
-  if (proc) {
-    const items = Array.prototype.slice.call(proc.querySelectorAll('.proc__item'));
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const CYCLE = 7000;
-    let current = 0;
-    let timer = null;
-
-    const setActive = function (index) {
-      current = (index + items.length) % items.length;
-      items.forEach(function (item, i) {
-        const on = i === current;
-        item.classList.toggle('is-active', on);
-        item.setAttribute('aria-expanded', on ? 'true' : 'false');
-        /* restart animacije trake */
-        const fill = item.querySelector('.proc__rail i');
-        if (fill) {
-          fill.style.animation = 'none';
-          void fill.offsetWidth;
-          fill.style.animation = '';
-        }
-      });
-    };
-
-    const play = function () {
-      if (reduced) return;
-      stop();
-      timer = window.setInterval(function () { setActive(current + 1); }, CYCLE);
-    };
-    const stop = function () {
-      if (timer) { window.clearInterval(timer); timer = null; }
-    };
-
-    items.forEach(function (item, i) {
-      item.addEventListener('click', function () { setActive(i); play(); });
-      item.addEventListener('focus', function () { setActive(i); stop(); });
-    });
-
-    proc.addEventListener('mouseenter', stop);
-    proc.addEventListener('mouseleave', play);
-
-    if ('IntersectionObserver' in window) {
-      const io3 = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { e.isIntersecting ? play() : stop(); });
-      }, { threshold: 0.3 });
-      io3.observe(proc);
-    } else {
-      play();
+    /* fokus na prvo polje ili prvu opciju, ali ne na ucitavanju */
+    if (i !== 0) {
+      var prvi = koraci[trenutni].querySelector('.choice, input, textarea');
+      if (prvi) prvi.focus({ preventScroll: true });
     }
   }
 
-  /* ---------------------------------------------------------------------
-     7. FAQ akordeon
-     --------------------------------------------------------------------- */
-  document.querySelectorAll('.faq-item').forEach(function (item) {
-    const q = item.querySelector('.faq-item__q');
-    q.addEventListener('click', function () {
-      const open = item.classList.contains('is-open');
-      document.querySelectorAll('.faq-item').forEach(function (other) {
-        other.classList.remove('is-open');
-        other.querySelector('.faq-item__q').setAttribute('aria-expanded', 'false');
+  /* izbor: loptica uskoci u dugme, pa se posle kratke pauze ide dalje */
+  forma.querySelectorAll('.choice').forEach(function (opcija) {
+    opcija.addEventListener('click', function () {
+      var polje = opcija.dataset.field;
+      odgovori[polje] = opcija.dataset.value;
+
+      opcija.closest('.choices').querySelectorAll('.choice').forEach(function (o) {
+        o.classList.toggle('is-picked', o === opcija);
       });
-      if (!open) {
-        item.classList.add('is-open');
-        q.setAttribute('aria-expanded', 'true');
-      }
+
+      window.setTimeout(function () { prikazi(trenutni + 1); }, 420);
     });
   });
 
-  /* ---------------------------------------------------------------------
-     8. Carobnjak kontakt forme
-     --------------------------------------------------------------------- */
-  const wizard = document.getElementById('wizard');
-  if (!wizard) return;
-
-  const panels = wizard.querySelectorAll('.step-panel');
-  const dots = wizard.querySelectorAll('.wizard__dots span');
-  const msg = document.getElementById('form-msg');
-  const submitBtn = document.getElementById('submit-btn');
-  const answers = {};
-  let current = 0;
-
-  const show = function (index) {
-    current = Math.max(0, Math.min(index, panels.length - 1));
-    panels.forEach(function (p, i) { p.classList.toggle('is-active', i === current); });
-    dots.forEach(function (d, i) { d.classList.toggle('is-done', i <= current); });
-    const active = panels[current];
-    const focusable = active.querySelector('.choice, input, textarea');
-    if (focusable && index !== 0) focusable.focus({ preventScroll: true });
-  };
-
-  wizard.querySelectorAll('.choice').forEach(function (choice) {
-    choice.addEventListener('click', function () {
-      const field = choice.dataset.field;
-      answers[field] = choice.dataset.value;
-
-      choice.closest('.choices').querySelectorAll('.choice').forEach(function (c) {
-        c.classList.toggle('is-picked', c === choice);
-      });
-
-      setTimeout(function () { show(current + 1); }, 180);
-    });
+  forma.querySelectorAll('[data-back]').forEach(function (b) {
+    b.addEventListener('click', function () { prikazi(trenutni - 1); });
   });
 
-  wizard.querySelectorAll('[data-back]').forEach(function (btn) {
-    btn.addEventListener('click', function () { show(current - 1); });
-  });
+  function poruku(tekst, ok) {
+    poruka.textContent = tekst;
+    poruka.classList.remove('is-ok', 'is-err');
+    poruka.classList.add(ok ? 'is-ok' : 'is-err');
+  }
 
-  const setMsg = function (text, ok) {
-    msg.textContent = text;
-    msg.classList.remove('is-ok', 'is-err');
-    msg.classList.add(ok ? 'is-ok' : 'is-err');
-  };
-
-  wizard.addEventListener('submit', function (e) {
+  forma.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const ime = wizard.querySelector('#ime');
-    const telefon = wizard.querySelector('#telefon');
-    const email = wizard.querySelector('#email');
+    var ime = forma.querySelector('#ime');
+    var telefon = forma.querySelector('#telefon');
+    var email = forma.querySelector('#email');
 
     if (!ime.value.trim() || !telefon.value.trim() || !email.value.trim()) {
-      setMsg('Popuni ime, telefon i email da bismo mogli da se javimo.', false);
+      poruku('Popuni ime, telefon i email da bismo mogli da se javimo.', false);
       return;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
-      setMsg('Email adresa nije ispravna. Proveri je pa probaj ponovo.', false);
+      poruku('Email adresa nije ispravna. Proveri je pa probaj ponovo.', false);
       return;
     }
 
-    const payload = {
-      usluga: answers.usluga || '',
-      zaKoga: answers.zaKoga || '',
-      kada: answers.kada || '',
+    var podaci = {
+      usluga: odgovori.usluga || '',
+      zaKoga: odgovori.zaKoga || '',
+      kada: odgovori.kada || '',
       ime: ime.value.trim(),
       telefon: telefon.value.trim(),
       email: email.value.trim(),
-      poruka: wizard.querySelector('#poruka').value.trim(),
+      poruka: forma.querySelector('#poruka').value.trim(),
       stranica: window.location.href
     };
 
     if (!ENDPOINT) {
-      setMsg('Forma još nije povezana sa serverom. Pozovi 061 500 50 51 i javljamo se odmah.', false);
+      poruku('Forma još nije povezana sa serverom. Pozovi 061 500 50 51 i javljamo se odmah.', false);
       console.warn('ENDPOINT je prazan. Pokreni Skill 03 i nalepi Apps Script URL u main.js.');
       return;
     }
 
-    submitBtn.disabled = true;
-    submitBtn.style.opacity = '0.6';
+    dugme.disabled = true;
 
     fetch(ENDPOINT, {
       method: 'POST',
-      body: JSON.stringify(payload),
+      body: JSON.stringify(podaci),
       headers: { 'Content-Type': 'text/plain;charset=utf-8' }
     })
       .then(function (r) {
         if (!r.ok) throw new Error('Neuspesno slanje');
-        wizard.querySelectorAll('.step-panel').forEach(function (p) { p.classList.remove('is-active'); });
-        dots.forEach(function (d) { d.classList.add('is-done'); });
-        setMsg('Hvala, upit je stigao. Javljamo se na telefon koji si ostavio, najčešće isti dan.', true);
+        koraci.forEach(function (k) { k.classList.remove('is-active'); });
+        tackice.forEach(function (t) { t.classList.add('is-done'); });
+        poruku('Hvala, upit je stigao. Javljamo se na telefon koji si ostavio, najčešće isti dan.', true);
       })
       .catch(function () {
-        setMsg('Slanje nije uspelo. Pozovi 061 500 50 51 ili piši na mladost.tenis@gmail.com.', false);
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
+        poruku('Slanje nije uspelo. Pozovi 061 500 50 51 ili piši na mladost.tenis@gmail.com.', false);
+        dugme.disabled = false;
       });
   });
 
-  show(0);
+  prikazi(0);
 });
