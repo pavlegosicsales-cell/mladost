@@ -460,7 +460,7 @@ a { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
-.svc__card:hover::before,
+.svc__card.is-mid::before,
 .svc__card:focus-within::before { opacity: 1; }
 
 /* sadrzaj iznad sloja sa hover grafikom */
@@ -1663,8 +1663,18 @@ a { text-decoration: none; color: inherit; }
 /* --------------------------------------------------------------------------
    Loptica na dugmadima je bila premala i na svetloj pilули
    -------------------------------------------------------------------------- */
-.btn__icon img { width: 22px; height: 22px; }
-.btn--ghost .btn__icon { background-color: rgba(0, 0, 0, 0.55); }
+.btn__icon img { width: 26px; height: 26px; }
+
+/* dugmad u footeru su iste sirine, bez obzira na duzinu teksta */
+.court__cell--btn-a .btn,
+.court__cell--btn-b .btn {
+  width: 100%;
+  max-width: 264px;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+.btn__icon { padding: 12px 20px; }
+.btn--ghost .btn__icon { background-color: var(--black); }
 .choice__ball img { width: 22px; height: 22px; }
 .choice__ball { width: 30px; height: 30px; }
 
@@ -1741,8 +1751,10 @@ a { text-decoration: none; color: inherit; }
   .court__cell--logo {
     grid-area: 2 / 2 / 3 / 3;
     position: relative;
-    z-index: 2;              /* logo sme preko linije */
-    border: 0;
+    z-index: 2;              /* logo sme preko srednje linije */
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
     padding: 24px 14px;
   }
   .court__cell--logo img { width: 132px; height: 132px; }
@@ -1754,12 +1766,17 @@ a { text-decoration: none; color: inherit; }
     border-bottom: 1px solid var(--line);
     padding: 22px 14px;
   }
+  /* instagram na 25%, facebook tacno na liniji, whatsapp na 75% */
   .court__cell--social .socials {
     width: 100%;
-    justify-content: flex-start;
+    justify-content: space-evenly;
+    gap: 0;
   }
-  /* dve ikonice levo od linije, treca desno */
-  .court__cell--social .socials li:nth-child(2) { margin-right: auto; }
+  .court__cell--social .socials li:nth-child(2) a {
+    position: relative;
+    z-index: 3;              /* facebook sedi preko linije, ne skriva je */
+    background-color: var(--forest);
+  }
 
   .court__cell--contact-l {
     grid-area: 4 / 2 / 5 / 3;
@@ -1806,8 +1823,6 @@ a { text-decoration: none; color: inherit; }
   }
 
   /* dugmad u footeru su na telefonu uza, da stanu jedno pored drugog */
-  .court__cell--btn-a .btn,
-  .court__cell--btn-b .btn { padding-left: 16px; }
   .court__cell--btn-a .btn__label,
   .court__cell--btn-b .btn__label { font-size: 14px; }
 }

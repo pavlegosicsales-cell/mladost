@@ -257,3 +257,37 @@ document.addEventListener('DOMContentLoaded', function () {
 
   prikazi(0);
 });
+
+/* ==========================================================================
+   Kartice usluga: lime podloga se pali kada kartica dodje na sredinu ekrana,
+   ne na hover. Prag je cetvrtina visine ekrana oko sredine.
+   ========================================================================== */
+(function () {
+  var kartice = Array.prototype.slice.call(document.querySelectorAll('.svc__card'));
+  if (!kartice.length) return;
+
+  var ceka = false;
+
+  function proveri() {
+    ceka = false;
+    var sredinaEkrana = window.innerHeight / 2;
+    var prag = window.innerHeight * 0.25;
+
+    kartice.forEach(function (k) {
+      var r = k.getBoundingClientRect();
+      var sredinaKartice = r.top + r.height / 2;
+      var uSredini = Math.abs(sredinaKartice - sredinaEkrana) < prag;
+      k.classList.toggle('is-mid', uSredini);
+    });
+  }
+
+  function naSkrol() {
+    if (ceka) return;
+    ceka = true;
+    window.requestAnimationFrame(proveri);
+  }
+
+  window.addEventListener('scroll', naSkrol, { passive: true });
+  window.addEventListener('resize', naSkrol);
+  proveri();
+})();
