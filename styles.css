@@ -1663,7 +1663,7 @@ a { text-decoration: none; color: inherit; }
 /* --------------------------------------------------------------------------
    Loptica na dugmadima je bila premala i na svetloj pilули
    -------------------------------------------------------------------------- */
-.btn__icon img { width: 26px; height: 26px; }
+.btn__icon img { width: 28px; height: 28px; }
 
 /* dugmad u footeru su iste sirine, bez obzira na duzinu teksta */
 .court__cell--btn-a .btn,
@@ -1673,10 +1673,19 @@ a { text-decoration: none; color: inherit; }
   justify-content: space-between;
   padding-left: 20px;
 }
-.btn__icon { padding: 12px 20px; }
+/* Original ArcClub ima ovalnu pilulu jer je unutra strelica. Kod nas je
+   loptica, okrugao oblik, pa se u ovalu gubio. Sada je pravi krug. */
+.btn__icon {
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  justify-content: center;
+}
 .btn--ghost .btn__icon { background-color: var(--black); }
-.choice__ball img { width: 22px; height: 22px; }
-.choice__ball { width: 30px; height: 30px; }
+
+.choice__ball { width: 34px; height: 34px; }
+.choice__ball img { width: 24px; height: 24px; }
 
 /* --------------------------------------------------------------------------
    Usluge na telefonu: mini kartica pola na slici, pola ispod nje
@@ -1830,7 +1839,41 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 599px) {
   .court__cell--logo img { width: 110px; height: 110px; }
   .court__cell--btn-a .btn__label,
-  .court__cell--btn-b .btn__label { font-size: 13px; }
+  .court__cell--btn-b .btn__label { font-size: 14px; }
   .court__cell--btn-a .btn,
   .court__cell--btn-b .btn { gap: 8px; padding: 4px 4px 4px 14px; }
+}
+
+/* --------------------------------------------------------------------------
+   Hero na telefonu, ojacano
+   Framer ostavlja `width: 1px; flex: 1 0 0` na kontejnerima. Na desktopu to
+   radi, ali je najkrhkiji deo layouta na mobilnim browserima, pa se ispod
+   992px vraca na obicnu punu sirinu. Tag gubi backdrop-filter, koji ume da
+   se lose renderuje na telefonima, i dobija punu tamnu podlogu.
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .hero { min-height: 420px; }
+
+  .hero__container,
+  .hero__col {
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .tag {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background-color: rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    /* Framer ostavlja width: min-content, sto na telefonu lomi tekst
+       u usku kolonu, pa ide auto sa gornjom granicom */
+    width: auto;
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .hero__h1,
+  .hero__sub { position: relative; z-index: 1; }
 }
