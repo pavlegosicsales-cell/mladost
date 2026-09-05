@@ -1594,3 +1594,228 @@ a { text-decoration: none; color: inherit; }
   .court__cell--copy { grid-column: 1; grid-row: 7; border-top: 0; }
   .court__cell--social { grid-column: 1; grid-row: 8; border-top: 0; }
 }
+
+/* ==========================================================================
+   DOPUNE: naslovi sekcija, razmaci, hero na telefonu, mobilni footer teren
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Naslov sekcije, isti na kompu i na telefonu
+   -------------------------------------------------------------------------- */
+.sekcija__naslov {
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto 32px;
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: -1.5px;
+  line-height: 110%;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+/* u kontaktu naslov stoji iznad cele mreze, pa prati bocne margine sekcije */
+.kontakt > .sekcija__naslov { margin-bottom: 28px; }
+
+/* naslov u kontaktu se ne ponavlja u levoj koloni */
+.kontakt__head .kontakt__eyebrow,
+.kontakt__head .kontakt__title { display: none; }
+.kontakt__head { margin-bottom: 0; }
+.kontakt__lead { margin-top: 0; margin-bottom: 24px; }
+
+/* --------------------------------------------------------------------------
+   Veci razmaci izmedju sekcija. Hero i usluge ostaju spojeni.
+   -------------------------------------------------------------------------- */
+.services { padding: 40px 90px 120px; }
+.gallery { padding: 0 90px 120px; }
+.kontakt { padding: 0 90px 120px; }
+
+@media (max-width: 1199px) {
+  .services { padding: 24px 40px 90px; }
+  .gallery { padding: 0 40px 90px; }
+  .kontakt { padding: 0 40px 90px; }
+}
+
+@media (max-width: 599px) {
+  .services { padding: 16px 20px 72px; }
+  .gallery { padding: 0 20px 72px; }
+  .kontakt { padding: 0 20px 72px; }
+  .sekcija__naslov { margin-bottom: 20px; }
+}
+
+/* --------------------------------------------------------------------------
+   Hero na telefonu: tekst je bio beo preko svetle sljake, veo je bio 12%
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .hero__veil {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.55) 0%,
+      rgba(0, 0, 0, 0.45) 35%,
+      rgba(0, 0, 0, 0.62) 72%,
+      rgba(0, 0, 0, 0.85) 100%
+    );
+  }
+  .hero__sub { color: var(--white); opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Loptica na dugmadima je bila premala i na svetloj pilули
+   -------------------------------------------------------------------------- */
+.btn__icon img { width: 22px; height: 22px; }
+.btn--ghost .btn__icon { background-color: rgba(0, 0, 0, 0.55); }
+.choice__ball img { width: 22px; height: 22px; }
+.choice__ball { width: 30px; height: 30px; }
+
+/* --------------------------------------------------------------------------
+   Usluge na telefonu: mini kartica pola na slici, pola ispod nje
+   -------------------------------------------------------------------------- */
+@media (max-width: 991px) {
+  .svc__media { overflow: visible; margin-bottom: 72px; }
+  .svc__media img { border-radius: 20px; }
+  .svc__mini {
+    bottom: 0;
+    left: 16px;
+    right: 16px;
+    width: auto;
+    margin: 0;
+    transform: translateY(50%);
+    box-shadow: 0 20px 40px -28px rgba(9, 32, 27, 0.9);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER NA TELEFONU: teren uspravno, po maketi footer telefon.png
+   Kolone: koridor, sredina, koridor.
+   Redovi: Site map, Logo, Social links, Kontakt (dva reda), pa dugmad i
+   copyright ispod terena. Logo je jedini element koji sme da prelazi liniju.
+   -------------------------------------------------------------------------- */
+.court__frame,
+.court__net,
+.court__center { display: none; }
+
+@media (max-width: 991px) {
+  .court {
+    grid-template-columns: 16% 68% 16%;
+    border: 0;
+    position: relative;
+  }
+
+  /* okvir terena, obuhvata samo redove 1 do 5 */
+  .court__frame {
+    display: block;
+    grid-area: 1 / 1 / 6 / 4;
+    border: 1px solid var(--line);
+    pointer-events: none;
+  }
+  /* mreza, puna sirina, na granici izmedju logoa i social linkova */
+  .court__net {
+    display: block;
+    grid-area: 3 / 1 / 3 / 4;
+    align-self: start;
+    height: 0;
+    border-top: 1px solid var(--line);
+    pointer-events: none;
+  }
+  /* uzduzna linija kroz servis polja */
+  .court__center {
+    display: block;
+    grid-area: 2 / 2 / 4 / 3;
+    justify-self: center;
+    width: 0;
+    border-left: 1px solid var(--line);
+    pointer-events: none;
+  }
+
+  .court__cell { padding: 18px 14px; }
+
+  .court__cell--sitemap {
+    grid-area: 1 / 2 / 2 / 3;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 14px;
+  }
+
+  .court__cell--logo {
+    grid-area: 2 / 2 / 3 / 3;
+    position: relative;
+    z-index: 2;              /* logo sme preko linije */
+    border: 0;
+    padding: 24px 14px;
+  }
+  .court__cell--logo img { width: 132px; height: 132px; }
+
+  .court__cell--social {
+    grid-area: 3 / 2 / 4 / 3;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 14px;
+  }
+  .court__cell--social .socials {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  /* dve ikonice levo od linije, treca desno */
+  .court__cell--social .socials li:nth-child(2) { margin-right: auto; }
+
+  .court__cell--contact-l {
+    grid-area: 4 / 2 / 5 / 3;
+    min-height: 0;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    padding: 22px 14px 6px;
+  }
+  .court__cell--contact-r {
+    grid-area: 5 / 2 / 6 / 3;
+    min-height: 0;
+    border-left: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+    border-bottom: 0;
+    padding: 6px 14px 22px;
+  }
+
+  /* prazna servis polja se ne koriste na telefonu */
+  .court__cell--void-a,
+  .court__cell--void-b { display: none; }
+
+  /* dugmad i copyright izlaze ispod terena */
+  /* dugmad jedno ispod drugog, na 375px dve pilule u redu su pretesne */
+  .court__cell--btn-a {
+    grid-area: 6 / 1 / 7 / 4;
+    align-items: center;
+    min-height: 0;
+    border: 0;
+    padding: 26px 8px 0;
+  }
+  .court__cell--btn-b {
+    grid-area: 7 / 1 / 8 / 4;
+    align-items: center;
+    min-height: 0;
+    border: 0;
+    padding: 10px 8px 0;
+  }
+  .court__cell--copy {
+    grid-area: 8 / 1 / 9 / 4;
+    min-height: 0;
+    border: 0;
+    padding: 18px 8px 0;
+  }
+
+  /* dugmad u footeru su na telefonu uza, da stanu jedno pored drugog */
+  .court__cell--btn-a .btn,
+  .court__cell--btn-b .btn { padding-left: 16px; }
+  .court__cell--btn-a .btn__label,
+  .court__cell--btn-b .btn__label { font-size: 14px; }
+}
+
+@media (max-width: 599px) {
+  .court__cell--logo img { width: 110px; height: 110px; }
+  .court__cell--btn-a .btn__label,
+  .court__cell--btn-b .btn__label { font-size: 13px; }
+  .court__cell--btn-a .btn,
+  .court__cell--btn-b .btn { gap: 8px; padding: 4px 4px 4px 14px; }
+}
