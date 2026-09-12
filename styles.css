@@ -256,21 +256,22 @@ a { text-decoration: none; color: inherit; }
    {type: spring, stiffness: 350, damping: 60, mass: 1}. To je preprigusen
    spring (zeta = 1.60), znaci bez odskoka: krene naglo pa se smiruje.
    Framer Motion to racuna po kadru, mi isto to dajemo kao linear() krivu
-   odmerenu iz analitickog resenja, pa je poklapanje 1:1.
+   odmerenu iz analitickog resenja. Rep je odsecen na 98.5% i kriva je
+   renormalizovana, jer je poslednjih par procenata trosilo pola vremena
+   dok tamna pilula jos stoji preko teksta.
    Fallback za starije browsere je expo-out cubic-bezier. */
 :root {
-  --btn-swap-dur: 0.83s;
+  --btn-swap-dur: 0.5s;
   --btn-swap-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @supports (transition-timing-function: linear(0, 1)) {
   :root {
     --btn-swap-ease: linear(
-      0, 0.1133 4.2%, 0.2789 8.3%, 0.4228 12.5%, 0.5394 16.7%, 0.6327 20.8%,
-      0.7071 25%, 0.7665 29.2%, 0.8138 33.3%, 0.8515 37.5%, 0.8816 41.7%,
-      0.9056 45.8%, 0.9247 50%, 0.94 54.2%, 0.9521 58.3%, 0.9618 62.5%,
-      0.9696 66.7%, 0.9757 70.8%, 0.9807 75%, 0.9846 79.2%, 0.9877 83.3%,
-      0.9902 87.5%, 0.9922 91.7%, 0.9938 95.8%, 1
+      0, 0.1078 5%, 0.2691 10%, 0.4118 15%, 0.5288 20%, 0.6235 25%, 0.6997 30%,
+      0.7612 35%, 0.8106 40%, 0.8505 45%, 0.8825 50%, 0.9084 55%, 0.9292 60%,
+      0.9459 65%, 0.9594 70%, 0.9703 75%, 0.979 80%, 0.9861 85%, 0.9918 90%,
+      0.9963 95%, 1
     );
   }
 }
