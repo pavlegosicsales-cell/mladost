@@ -2114,15 +2114,37 @@ a { text-decoration: none; color: inherit; }
   .nav { width: calc(100% - 80px); padding: 16px 24px; }
 }
 
+/* Linkovi stoje u sredini trake, ne uz logo. Da bi centar bio centar TRAKE
+   a ne razmaka izmedju loga i dugmeta (koji su razlicito siroki, 110 i 189px),
+   grupa linkova izlazi iz toka i sedne na 50%. Logo i dugme onda sami odu na
+   krajeve preko space-between. Samo od 1200px navise, ispod toga je hamburger
+   i linkovi su kolona. */
+@media (min-width: 1200px) {
+  .nav__inner { position: relative; }
+
+  .nav__links {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* --------------------------------------------------------------------------
-   Uzi desktop, 1200-1439: osam linkova stane tek kad se traka prosiri
-   (bocne margine 180 -> 80px) i stegnu razmaci. Izmereno: na 1200px traci
-   treba 1193px, sa ovim pravilima ima 1120px a treba joj 1059px.
+   Uzi desktop, 1200-1519: osam linkova stane tek kad se traka prosiri
+   (bocne margine 180 -> 80px) i stegnu razmaci.
+
+   Gornja granica je 1520, a ne 1440, zbog centriranih linkova. Sa punim
+   razmacima zazor do dugmeta je (sirina - 180) / 2 - 596px, pa je na 1440
+   samo 27px, a tek od 1520 predje 60px. Ispod toga vazi stegnuta varijanta.
    -------------------------------------------------------------------------- */
-@media (min-width: 1200px) and (max-width: 1439.98px) {
-  .nav { width: calc(100% - 80px); }
+@media (min-width: 1200px) and (max-width: 1519.98px) {
+  .nav { width: calc(100% - 80px); padding: 16px; }
   .nav__main { gap: 28px; }
-  .nav__links { gap: 18px; }
+  /* linkovi su centrirani, pa se svako skracenje deli na obe strane:
+     14px razmaka i uzi padding daju dovoljno vazduha do dugmeta */
+  .nav__links { gap: 14px; }
+  .nav__link { font-size: 15px; }
 }
 
 /* --------------------------------------------------------------------------
