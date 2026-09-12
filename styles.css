@@ -2112,14 +2112,29 @@ a { text-decoration: none; color: inherit; }
    -------------------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1199.98px) {
   .nav { width: calc(100% - 80px); padding: 16px 24px; }
-  .nav__main { gap: 46px; }
-  .nav__links { gap: 26px; }
 }
 
 /* --------------------------------------------------------------------------
-   Telefon: traka preko cele sirine uz vrh, meni se otvara na hamburger
+   Uzi desktop, 1200-1439: osam linkova stane tek kad se traka prosiri
+   (bocne margine 180 -> 80px) i stegnu razmaci. Izmereno: na 1200px traci
+   treba 1193px, sa ovim pravilima ima 1120px a treba joj 1059px.
    -------------------------------------------------------------------------- */
-@media (max-width: 767.98px) {
+@media (min-width: 1200px) and (max-width: 1439.98px) {
+  .nav { width: calc(100% - 80px); }
+  .nav__main { gap: 28px; }
+  .nav__links { gap: 18px; }
+}
+
+/* --------------------------------------------------------------------------
+   Telefon i tablet: meni se otvara na hamburger.
+
+   Prag je podignut sa 768 na 1200 jer osam linkova ne staje u jedan red.
+   Izmereno na 1024px: traci treba 1149px, a ima 944px, manjak 205px. Ni sa
+   razmacima od 12px se to ne nadoknadi, pa ispod 1200px ide hamburger.
+   Na telefonu traka ide preko cele sirine uz vrh, na tabletu ostaje
+   plutajuca, to vraca blok odmah ispod ovog.
+   -------------------------------------------------------------------------- */
+@media (max-width: 1199.98px) {
   .nav {
     top: 0;
     left: 0;
@@ -2184,8 +2199,9 @@ a { text-decoration: none; color: inherit; }
 
   .nav__cta { width: 100%; max-width: 350px; }
 
+  /* 8 linkova: 8 redova po 19px i 7 razmaka po 16px = 264px, plus rezerva */
   .nav.is-open .nav__links {
-    max-height: 220px;
+    max-height: 320px;
     margin-top: 20px;
     opacity: 1;
     transform: none;
@@ -2205,6 +2221,24 @@ a { text-decoration: none; color: inherit; }
     width: 100%;
     justify-content: space-between;
   }
+}
+
+/* Tablet: hamburger da, ali traka ostaje plutajuca kao na desktopu.
+   Vraca sve sto je blok iznad postavio za telefon. */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .nav {
+    top: 24px;
+    left: 50%;
+    width: calc(100% - 80px);
+    max-width: 1720px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    transform: translateX(-50%);
+    /* translateX(-50%) mora nazad u kadrove, zato opet nav-ulaz */
+    animation-name: nav-ulaz;
+  }
+
+  .nav__cta { max-width: 320px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
