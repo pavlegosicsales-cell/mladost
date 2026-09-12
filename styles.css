@@ -251,6 +251,30 @@ a { text-decoration: none; color: inherit; }
    pilula zamene mesta, a Motion to interpolira. U CSS-u `order` skace bez
    animacije, pa se ista stvar radi transformima. Rastojanja meri main.js i
    upisuje ih u --swap-label i --swap-icon. */
+/* Kriva pomeraja loptice, preuzeta sa arcclub.framer.website.
+   U njihovom bundle-u (modul Pb7K6DHcC, komponenta framer-iM9JK) stoji
+   {type: spring, stiffness: 350, damping: 60, mass: 1}. To je preprigusen
+   spring (zeta = 1.60), znaci bez odskoka: krene naglo pa se smiruje.
+   Framer Motion to racuna po kadru, mi isto to dajemo kao linear() krivu
+   odmerenu iz analitickog resenja, pa je poklapanje 1:1.
+   Fallback za starije browsere je expo-out cubic-bezier. */
+:root {
+  --btn-swap-dur: 0.83s;
+  --btn-swap-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@supports (transition-timing-function: linear(0, 1)) {
+  :root {
+    --btn-swap-ease: linear(
+      0, 0.1133 4.2%, 0.2789 8.3%, 0.4228 12.5%, 0.5394 16.7%, 0.6327 20.8%,
+      0.7071 25%, 0.7665 29.2%, 0.8138 33.3%, 0.8515 37.5%, 0.8816 41.7%,
+      0.9056 45.8%, 0.9247 50%, 0.94 54.2%, 0.9521 58.3%, 0.9618 62.5%,
+      0.9696 66.7%, 0.9757 70.8%, 0.9807 75%, 0.9846 79.2%, 0.9877 83.3%,
+      0.9902 87.5%, 0.9922 91.7%, 0.9938 95.8%, 1
+    );
+  }
+}
+
 .btn {
   position: relative;
   display: flex;
@@ -265,7 +289,7 @@ a { text-decoration: none; color: inherit; }
   background-color: var(--lime);
   cursor: pointer;
   overflow: visible;
-  transition: padding 0.45s cubic-bezier(0.44, 0, 0.56, 1);
+  transition: padding var(--btn-swap-dur) var(--btn-swap-ease);
 }
 
 .btn__label {
@@ -275,7 +299,7 @@ a { text-decoration: none; color: inherit; }
   white-space: pre;
   color: var(--ink);
   transform: translateX(0);
-  transition: transform 0.45s cubic-bezier(0.44, 0, 0.56, 1);
+  transition: transform var(--btn-swap-dur) var(--btn-swap-ease);
 }
 
 /* .framer-1a93qnx, tamna pilula sa ikonicom */
@@ -292,7 +316,7 @@ a { text-decoration: none; color: inherit; }
   border-radius: var(--radius-inner-pill);
   background-color: var(--ink);
   transform: translateX(0);
-  transition: transform 0.45s cubic-bezier(0.44, 0, 0.56, 1);
+  transition: transform var(--btn-swap-dur) var(--btn-swap-ease);
 }
 
 /* na originalu strelica 16x10, kod nas loptica */
