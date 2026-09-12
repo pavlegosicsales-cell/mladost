@@ -1,0 +1,200 @@
+{
+  "verzija": "2.0",
+  "datum": "2026-09-12",
+  "jezik_komunikacije": "srpski (latinica)",
+  "svrha": "Kontekst profil za nastavak rada na sajtu Teniskog kluba Mladost, v2. Zamenjuje kontekst-profil.json koji opisuje v1.",
+
+  "projekat": {
+    "naziv": "Teniski Klub Mladost Banovo Brdo, sajt v2",
+    "folder": "C:\\Users\\pavle\\Desktop\\Teniski Klub Mladost Website\\",
+    "stanje": "Pocetna strana je zavrsena i objavljena. Hero, usluge, galerija, kontakt sa formom i footer rade. Ostale strane ne postoje.",
+    "jezik_sajta": "srpski (latinica)",
+    "obim": "SAMO TENIS. Padel se ne pominje nigde, ni u tekstu ni na fotografijama. Fotke sa vidljivim plavim padel terenom se ne koriste.",
+    "korisnik": {
+      "ime": "pavle",
+      "email": "plavitommy@gmail.com",
+      "git_user": "pavlegosic",
+      "uloga": "Web developer, pravi sajtove za klijente po pipeline-u od tri skila",
+      "nacin_rada": "Prica srpski, salje screenshotove umesto linkova, ocekuje brzinu. Trazi izmene u serijama, cesto posalje vise poruka jednu za drugom dok traje rad. Ne voli suvisna pitanja, voli da vidi izmerene brojke kao dokaz da je nesto proverno. Kad nesto ne radi, kaze direktno i grubo, to je normalno."
+    }
+  },
+
+  "klijent_podaci": {
+    "naziv_za_sajt": "Teniski Klub Mladost",
+    "adresa": "Lješka 82, Banovo Brdo, 11030 Beograd",
+    "telefon_rezervacije": "061 500 50 51 (tel:+381615005051)",
+    "telefon_skola": "060 023 8450, Rade Poleksić (NIJE na sajtu, kartica uklonjena po zahtevu)",
+    "email": "mladost.tenis@gmail.com",
+    "whatsapp": "https://wa.me/381615005051",
+    "instagram": "https://www.instagram.com/teniskiklub.mladost/",
+    "facebook": "https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/",
+    "osnovan": 2024,
+    "tereni": "3 sljakasta, reflektori, termini do 23h, zimi pod balonom",
+    "izrada_sajta": "PATO, https://www.patoadcreatives.com/sr",
+    "cenovnik_radnim_danom": { "08-17": "1.000 RSD", "17-20": "1.200 RSD", "20-23": "1.400 RSD" },
+    "cenovnik_vikend": { "07-20": "1.200 RSD", "20-23": "1.400 RSD" },
+    "napomena_cene": "Cena je za teren po satu, ne po igracu. Cena skole tenisa se NE prikazuje, nije potvrdjena."
+  },
+
+  "tehnicki_stack": {
+    "tip": "Obican HTML, CSS i JS. Nema React, nema Tailwind, nema TypeScript, nema build step.",
+    "biblioteke": "Samo Lenis 1.3.4 za smooth scroll, lokalno u vendor/, bez CDN zavisnosti.",
+    "fajlovi_u_rootu": ["index.html", "styles.css", "main.js", "images/", "video/", "vendor/"],
+    "cache_busting": "styles.css?v=NN i main.js?v=NN u index.html. OBAVEZNO podici broj pri svakoj izmeni, korisnik inace gleda kesirani fajl i misli da nista nisi uradio.",
+    "trenutne_verzije": "styles.css?v=29, main.js?v=9",
+    "lokalni_pregled": "cd u projekat, `python -m http.server 8123`, pa http://localhost:8123/index.html. Server se gasi kad se sesija zavrsi, treba ga ponovo pokrenuti."
+  },
+
+  "deployment": {
+    "repo": "https://github.com/pavlegosicsales-cell/mladost.git",
+    "remote_ime": "mladost (NE origin)",
+    "origin_pokazuje_na": "https://github.com/pavlegosicsales-cell/teniski-klu-mladost.git, stari repo, nije dirati",
+    "grana": "main",
+    "vercel": "mladost-iota.vercel.app, servira ROOT repoa, deploy se pokrece sam na push",
+    "poslednji_commit": "c75b325",
+    "komanda": "git add -A && git commit && git push mladost main",
+    "atribucija_commita": "Zavrsiti commit message sa: Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>",
+    "pravilo": "Korisnik je rekao 'pushuj kad zavrsis'. Pushovati posle svake zavrsene serije izmena, bez ponovnog pitanja."
+  },
+
+  "dizajn_sistem": {
+    "paleta": {
+      "--white": "#FFFFFF",
+      "--sage": "#D8DFD4",
+      "--lime": "#B6E11F, jedina CTA boja",
+      "--forest": "#1A4339",
+      "--black": "#000000"
+    },
+    "pravilo_kontrasta": "Lime ne trpi beli tekst. Na lime podlozi tekst je forest ili crn. Beli tekst ide samo na forest i crno.",
+    "fontovi": {
+      "naslovi": "Bebas Neue 400, verzalni, letter-spacing -1.5px",
+      "tekst": "Urbanist 400/500/700",
+      "izvor": "Google Fonts, oba imaju latin-ext subset pa č ć ž š đ rade",
+      "napomena": "Plus Jakarta Sans je font v1 sajta, NE koristi se u v2"
+    },
+    "margine": "Desktop 150px gore/dole i 90px levo/desno na heroju. Sekcije 120px razmaka, tablet 90px, telefon 72px. Hero i usluge su namerno spojeni, bez razmaka.",
+    "max_width": "1720px na kontejnerima. VAZNO: ako korisnik trazi manje bocne margine, krivac je max-width, ne padding.",
+    "breakpointi": "1200px, 992px, 768px, 600px. Sa ArcClub-a: desktop min 1200, tablet 768-1199, mobilni max 767."
+  },
+
+  "izvori_dizajna": {
+    "arcclub": {
+      "url": "https://arcclub.framer.website/",
+      "sta_je_uzeto": "Hero sekcija 1:1 (.framer-fln5dv), dugme (.framer-iM9JK), kartica usluge iz sekcije World-Class Facilities (.framer-cnEfh)",
+      "izmene": "Akcenat #A6FF00 -> #B6E11F, strelica -> teniska loptica, bg slika -> dron video, copy na srpskom",
+      "vazno": "Bele dekorativne sare sa kartice (.framer-omo4gg) NISU preuzete, korisnik je to izricito zabranio"
+    },
+    "tennislove": {
+      "url": "https://tennislove.webflow.io/",
+      "css": "https://cdn.prod.website-files.com/699c631f518124dc4e1e9a39/css/tennislove.webflow.shared.af308938e.min.css",
+      "sta_je_uzeto": "Sticky stack scroll (.sticky-features), overlay na slici: pilula gore levo (.label-element.features), 3 ikonice gore desno (.icons-wrapper.absolute), mini kartica dole desno (.fetaures-image-absolute), Lenis postavke",
+      "izmerene_vrednosti": "row-gap 200px, kartice sticky na top 90/105/120px, margin-bottom 45/30/15px, radius 20px, blur(10px), ikonice 40x40 radius 16 inset 32px, mini kartica margin 8 padding 32 radius 16 sirina 50%"
+    },
+    "image_gallery": "21st.dev React komponenta, prepisana u obican CSS: flex-grow + hover:width 100% + transition 0.5s. Uvecana: visina 400 -> 640px, radius 8 -> 20px."
+  },
+
+  "struktura_stranice": [
+    { "sekcija": "hero", "opis": "Dron video hero.mp4 (1024x576 landscape), gradient veo, grain, tag pilula, H1 'Teniski klub / Mladost' u dva reda, podnaslov, jedno lime dugme" },
+    { "sekcija": "services", "id": "usluge", "opis": "3 usluge u sticky stacku. Kartica 36% levo/desno naizmenicno, slika 62% visine 78vh. Kartica ima broj 01-03, kicker, tamnu forest karticu sa naslovom, tagom, opisom i dugmetom." },
+    { "sekcija": "gallery", "id": "galerija", "opis": "Naslov GALERIJA, traka od 9 slika koje se sire na hover, 4 obicne slike jedna ispod druge na telefonu, dugme Pogledaj galeriju" },
+    { "sekcija": "kontakt", "id": "kontakt", "opis": "Naslov KONTAKTIRAJ NAS, levo 3 tamne kartice (Lokacija, Rezervacije, Email), desno wizard forma u 4 koraka. Leva i desna kolona su iste visine, nista ne viri." },
+    { "sekcija": "footer", "opis": "Raspored po teniskom terenu, razlicit na desktopu i telefonu. Gradient #1A4339 -> #000000, radius 20px gore, lime glow koji izlazi 160px iznad footera preko cele sirine." }
+  ],
+
+  "kljucne_odluke_i_zamke": [
+    {
+      "tema": "Dugme, swap animacija",
+      "odluka": "Original menja `order` pa tekst i pilula zamene mesta, Framer to interpolira. Kod nas isto radi transformima, a main.js upisuje --swap-label i --swap-icon.",
+      "zamka": "Pomeraj se MORA racunati iz stvarnih pozicija (i.left - l.right), ne iz sirina. Kod dugmadi sa space-between ima vise praznog prostora od gap-a, pa po sirinama pilula stane na pola teksta. Korisnik je to prijavio kao 'ne ide do kraja'.",
+      "provereno": "Na svim dugmadima pilula sleti na 4px od leve ivice."
+    },
+    {
+      "tema": "Ikonica u dugmetu",
+      "odluka": "PRAVI KRUG 46x46, radius 50%, loptica 26px. Vazi svuda, i na kompu i na telefonu.",
+      "zamka": "Original ima ovalnu pilulu jer je unutra strelica. Sa okruglom lopticom se oblik gubio i korisnik nije mogao da vidi lopticu. Loptica je bela kontura, ide na crnu podlogu."
+    },
+    {
+      "tema": "Kartice usluga, lime podloga",
+      "odluka": "Na kompu na hover, na dodiru kad kartica dodje na sredinu ekrana.",
+      "implementacija": "CSS: .svc__card.is-mid::before pali lime, a @media (hover: hover) and (pointer: fine) to gasi i vraca :hover. JS toggluje is-mid na skrolu, prag je 25% visine ekrana oko sredine.",
+      "napomena": "Dve slike, card-usluge.png (sage) i card-usluge-hover.png (lime), preliv 0.5s ease preko ::before sloja, jer background-image ne moze da se animira."
+    },
+    {
+      "tema": "Hero na telefonu",
+      "problem": "Korisnik je vise puta prijavio da se sadrzaj ne vidi.",
+      "uzroci_i_resenja": "1) Veo je gore bio 12%, beli tekst je nestajao preko svetle sljake, sada 55-85%. 2) Framer ostavlja width: 1px i flex: 1 0 0 na kontejnerima, ispod 992px se vraca na punu sirinu. 3) Tag je imao width: min-content pa se lomio u usku kolonu 83x191px, sada width auto. 4) Skinut backdrop-filter sa taga, na telefonima se lose renderuje."
+    },
+    {
+      "tema": "Footer, desktop",
+      "raspored": "4 jednake kolone, teren polozeno. Gornji koridor: Adresa | Kontakt. Glavno polje: Logo (kol 1, cela visina), 2 prazna servis polja, 2 dugmeta, Mapa sajta (kol 4, cela visina). Donji koridor: Copyright | Social. Ispod terena veliki natpis MLADOST, samo kontura, presecen dnom.",
+      "napomena": "Linija servisa ide samo kroz srednje dve kolone. Oznake centra na osnovnim linijama."
+    },
+    {
+      "tema": "Footer, telefon",
+      "maketa": "footer telefon.png u rootu",
+      "raspored": "Teren uspravno, 3 kolone 16/68/16. Redovi u srednjoj koloni: Site map, Logo, Social links, Kontakt (2 reda). Koridori prazni. Dugmad i copyright IZLAZE ispod terena.",
+      "implementacija": "Tri dekorativna diva: .court__frame (okvir redova 1-5), .court__net (puna sirina), .court__center (uzduzna linija kroz servis polja). Na desktopu su display: none.",
+      "pravila": "Logo je jedini element koji sme da prelazi liniju, ima z-index 2. Facebook je izuzetak, stoji tacno na srednjoj liniji na 50%, Instagram na 23%, WhatsApp na 77%.",
+      "odstupanja_od_makete": "Dugmad idu jedno ispod drugog, ne u redu, jer na 375px dve pilule ne staju. Copyright je iznad MLADOST natpisa, ne ispod."
+    },
+    {
+      "tema": "Wizard forma",
+      "pravila": "Iz Skila 02 (website-build-rules). Koraci 1-3 samo dugmad, kuca se tek na 4. Tackice napretka, Nazad na svakom koraku posle prvog, dugme se zakljuca dok traje slanje, potvrda inline bez redirekta.",
+      "specificno": "Loptica umesto kvacice kad se opcija izabere, sa odskokom cubic-bezier(0.34, 1.56, 0.64, 1). Sve opcije imaju linijske ikonice u istom stilu kao ikonice na slikama usluga. Pozadina forme je form-bg.png.",
+      "endpoint": "const ENDPOINT = '' na vrhu wizard bloka u main.js. Ceka Skill 03."
+    },
+    {
+      "tema": "Kontrast, naucena lekcija",
+      "pravilo": "NE koristiti providne bele slojeve preko svetle podloge. Korisnik je to nazvao 'sivo i ruzno'. Kartice i opcije su tamni paneli: kartice gradient #1F5044 -> #0D2B24, opcije rgba(5,24,20,.78). Kontrast belog teksta je 11:1 i 17:1."
+    }
+  ],
+
+  "assets": {
+    "u_repou": "images/ (logo, loptica, card-usluge, card-usluge-hover, form-bg, hero-poster, usluga-*, galerija-1..9), video/hero.mp4, vendor/lenis.*",
+    "ignorisano": "images + videos/ (31MB sirovog materijala), card usluge.png, form background.png, gradient-*.png, footer telefon.png, inspo/",
+    "napomena_video": "Svi dron snimci su 1024x576 landscape ALI imaju rotation=90 u metapodacima, pa ih browser prikazuje uspravno. Ispravka: ffmpeg -display_rotation 0 -i in.mp4 -c copy out.mp4, bez re-enkodovanja. hero.mp4 je vec ispravljen.",
+    "tezina": "card-usluge.png 1.36MB i card-usluge-hover.png 1.85MB su veliki. Za produkciju ih prebaciti u WebP.",
+    "v1": "Stari sajt je u v1/ i ne servira se. Nema svoje slike, premestene su u ignorisani folder."
+  },
+
+  "radni_proces": {
+    "provera": "Uvek proveriti izmene u pregledacu preko mcp__Claude_Browser__javascript_tool na localhost:8123, izmeriti getBoundingClientRect i computed style, pa korisniku javiti konkretne brojke.",
+    "ogranicenje_pregledaca": "Browser pane ne renderuje frejmove kad je sakriven. Screenshot ne radi, requestAnimationFrame ne okida, CSS tranzicije stoje na pocetnoj vrednosti. Da bi se procitalo krajnje stanje, privremeno ubaciti style sa transition: none !important. IntersectionObserver takodje ne okida.",
+    "heredoc_zamka": "Bash heredoc sa CSS-om koji sadrzi apostrofe puca. Pisati veci CSS u scratchpad fajl preko Write alata, pa ga spojiti Python skriptom.",
+    "pisanje_izmena": "Za CSS i HTML koristiti Python skripte sa assert-om da je stari tekst nadjen, tako se greska vidi odmah."
+  },
+
+  "otvoreno": [
+    {
+      "pitanje": "Korisnik je poceo recenicu 'takodje kada se video zavrs...' i nije je zavrsio. Pitati sta treba da se desi kad se hero video zavrsi.",
+      "prioritet": "nisko"
+    },
+    {
+      "pitanje": "Sledeci korak po pipeline-u je Skill 03, form-backend-setup, koji generise Google Apps Script i taj URL se lepi u ENDPOINT.",
+      "prioritet": "visoko"
+    },
+    {
+      "pitanje": "Stranice koje linkovi vode a ne postoje: skola-tenisa.html, individualni-treninzi.html, rekreativci.html, treneri.html, blog.html, kontakt.html, galerija.html, o-klubu.html",
+      "prioritet": "srednje"
+    },
+    {
+      "pitanje": "Sekcije koje su bile u planu a nisu napravljene: brojke i benefiti, treneri, blog",
+      "prioritet": "srednje"
+    },
+    {
+      "pitanje": "Nepotvrdjeno kod klijenta: da li je mladost.tenis@gmail.com pravi mejl za upite, cena skole tenisa, tacan broj Google recenzija, postanski broj 11030",
+      "prioritet": "nisko"
+    }
+  ],
+
+  "istorija_commita": [
+    "f391fe4 v1: pocetna, kontakt i politika privatnosti",
+    "0b21785 v2: nova pocetna strana",
+    "4f99c09 Novi sajt ide u root, stari se sklanja u v1",
+    "aabd8e7 Naslovi sekcija, veci razmaci, hero i footer na telefonu",
+    "78ef743 Footer dugmad, linije terena, socijalne ikonice i lime na skrol",
+    "7863786 Krug umesto pilule na dugmadima i ojacan hero na telefonu",
+    "117cbaf Lime na karticama usluga: hover na kompu, skrol samo na dodiru",
+    "c75b325 Swap na dugmetu ide do kraja, krug svuda, popravljena greska u JS-u"
+  ]
+}
