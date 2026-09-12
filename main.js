@@ -5,10 +5,11 @@
    bez animacije, a original to animira.
    ========================================================================== */
 
-function izmeriDugmad() {
-  var GAP = 14; /* isti gap kao u CSS-u */
+function izmeriDugmad(samo) {
+  var jedan = samo && samo.nodeType === 1 && samo.querySelector;
+  var lista = jedan ? [samo] : Array.prototype.slice.call(document.querySelectorAll('.btn'));
 
-  document.querySelectorAll('.btn').forEach(function (btn) {
+  lista.forEach(function (btn) {
     var label = btn.querySelector('.btn__label');
     var icon = btn.querySelector('.btn__icon');
     if (!label || !icon) return;
@@ -17,13 +18,33 @@ function izmeriDugmad() {
     btn.style.setProperty('--swap-label', '0px');
     btn.style.setProperty('--swap-icon', '0px');
 
-    var labelW = label.getBoundingClientRect().width;
-    var iconW = icon.getBoundingClientRect().width;
+    var l = label.getBoundingClientRect();
+    var i = icon.getBoundingClientRect();
 
-    /* tekst ide udesno za sirinu pilule plus gap,
-       pilula ide ulevo za sirinu teksta plus gap */
-    btn.style.setProperty('--swap-label', (iconW + GAP).toFixed(2) + 'px');
-    btn.style.setProperty('--swap-icon', (-(labelW + GAP)).toFixed(2) + 'px');
+    /* Original (ArcClub .framer-iM9JK) menja `order` pa tekst i pilula
+       zamene mesta, a Framer to interpolira. Ovde se ista zamena radi
+       transformom. Pomeraj se racuna iz STVARNIH pozicija, ne iz sirina,
+       jer izmedju njih ume da bude vise praznog prostora nego sto je gap,
+       pa bi po sirinama pilula stala na pola teksta. */
+    var razmak = i.left - l.right;              /* stvarni razmak */
+    var pomeriTekst = i.width + razmak;         /* tekst ide udesno */
+    var pomeriPilulu = -(l.width + razmak);     /* pilula ide ulevo */
+
+    btn.style.setProperty('--swap-label', pomeriTekst.toFixed(2) + 'px');
+    btn.style.setProperty('--swap-icon', pomeriPilulu.toFixed(2) + 'px');
+  });
+}
+
+/* Ne meri se na hover, jer bi se u tom trenutku citale pozicije usred
+   animacije. Umesto toga ResizeObserver javi kad se dugme stvarno promeni. */
+if (typeof ResizeObserver !== 'undefined') {
+  var posmatrac = new ResizeObserver(function (unosi) {
+    unosi.forEach(function (u) {
+      if (!u.target.matches(':hover')) izmeriDugmad(u.target);
+    });
+  });
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.btn').forEach(function (b) { posmatrac.observe(b); });
   });
 }
 
@@ -32,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   /* fontovi menjaju sirinu teksta, pa se meri ponovo kad se ucitaju */
   if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(izmeriDugmad);
+    document.fonts.ready.then(function () { izmeriDugmad(); });
   }
 
   var t;

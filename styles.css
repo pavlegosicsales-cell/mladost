@@ -1671,18 +1671,25 @@ a { text-decoration: none; color: inherit; }
 /* --------------------------------------------------------------------------
    Loptica na dugmadima je bila premala i na svetloj pilули
    -------------------------------------------------------------------------- */
-.btn__icon img { width: 28px; height: 28px; }
-
-/* dugmad u footeru su iste sirine, bez obzira na duzinu teksta */
-.court__cell--btn-a .btn,
-.court__cell--btn-b .btn {
-  width: 100%;
-  max-width: 264px;
-  justify-content: space-between;
-  padding-left: 20px;
+/* Dugmad u footeru su iste sirine samo na telefonu, gde stoje jedno ispod
+   drugog. Tu se gasi swap animacija, jer se uz space-between racuna po
+   sirinama pa bi se tekst i krug preklopili. Na kompu ostaje standardno
+   dugme sa swap-om. */
+@media (max-width: 991px) {
+  .court__cell--btn-a .btn,
+  .court__cell--btn-b .btn {
+    width: 100%;
+    max-width: 264px;
+    justify-content: space-between;
+    padding-left: 20px;
+  }
+  /* padding se ne obrce, jer je razmak vec u meri koju racuna main.js */
+  .court__cell--btn-a .btn:hover,
+  .court__cell--btn-b .btn:hover { padding: 4px 4px 4px 20px; }
 }
-/* Original ArcClub ima ovalnu pilulu jer je unutra strelica. Kod nas je
-   loptica, okrugao oblik, pa se u ovalu gubio. Sada je pravi krug. */
+.btn--ghost .btn__icon { background-color: var(--black); }
+
+/* Krug umesto ovalne pilule sa originala, jer je unutra loptica. */
 .btn__icon {
   width: 46px;
   height: 46px;
@@ -1690,7 +1697,7 @@ a { text-decoration: none; color: inherit; }
   border-radius: 50%;
   justify-content: center;
 }
-.btn--ghost .btn__icon { background-color: var(--black); }
+.btn__icon img { width: 26px; height: 26px; }
 
 .choice__ball { width: 34px; height: 34px; }
 .choice__ball img { width: 24px; height: 24px; }
