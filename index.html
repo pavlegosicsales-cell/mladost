@@ -17,11 +17,51 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=30">
+<link rel="stylesheet" href="styles.css?v=32">
 </head>
 <body>
 
 <main>
+
+  <!-- ================= NAVBAR =================
+       Efekat preuzet sa qutenza.framer.website: plutajuca traka koja uleti
+       odozgo, linija ispod linka raste na hover, hamburger se sklopi u X.
+       Font i dugme su nasi. -->
+  <nav class="nav" data-name="Navigation" aria-label="Glavna navigacija">
+    <div class="nav__inner">
+
+      <div class="nav__main">
+        <div class="nav__row">
+          <a class="nav__logo" href="index.html" aria-label="Teniski Klub Mladost, pocetna">
+            <img src="images/logo.png" alt="" width="44" height="44" aria-hidden="true">
+            <span class="nav__logo-text">Mladost</span>
+          </a>
+
+          <button class="nav__burger" type="button" id="nav-burger"
+                  aria-label="Otvori meni" aria-expanded="false" aria-controls="nav-links">
+            <span class="nav__burger-line nav__burger-line--top"></span>
+            <span class="nav__burger-line nav__burger-line--bottom"></span>
+          </button>
+        </div>
+
+        <div class="nav__links" id="nav-links">
+          <a class="nav__link t-btn" href="#usluge">Usluge</a>
+          <a class="nav__link t-btn" href="#galerija">Galerija</a>
+          <a class="nav__link t-btn" href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+
+      <div class="nav__cta">
+        <a class="btn" href="tel:+381615005051" data-name="Primary">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon" data-name="Button">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
 
   <!-- ================= HERO ================= -->
   <section class="hero" data-name="Hero Sections">
@@ -534,6 +574,6 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=9"></script>
+<script src="main.js?v=10"></script>
 </body>
 </html>

@@ -42,6 +42,9 @@ body {
 
 img { display: block; max-width: 100%; }
 
+/* traka navigacije je absolute unutar main-a, pa main mora da bude pozicioniran */
+main { position: relative; }
+
 a { text-decoration: none; color: inherit; }
 
 /* --------------------------------------------------------------------------
@@ -321,12 +324,12 @@ a { text-decoration: none; color: inherit; }
    -------------------------------------------------------------------------- */
 @media (min-width: 768px) and (max-width: 1199.98px) {
   .hero { padding: 16px 40px 40px; }
-  .hero__container { max-width: 100%; padding: 90px 0 0; }
+  .hero__container { max-width: 100%; padding: 130px 0 0; }
 }
 
 @media (max-width: 767.98px) {
   .hero { padding: 10px 20px 24px; }
-  .hero__container { max-width: 100%; padding: 60px 0 0; }
+  .hero__container { max-width: 100%; padding: 110px 0 0; }
   .hero__title { gap: 20px; }
 }
 
@@ -1899,4 +1902,290 @@ a { text-decoration: none; color: inherit; }
 
   .hero__h1,
   .hero__sub { position: relative; z-index: 1; }
+}
+
+
+/* ==========================================================================
+   NAVBAR, preuzet sa qutenza.framer.website (.framer-7u5xG)
+
+   Sta je uzeto 1:1:
+     - plutajuca traka, position absolute, top 24px, centrirana, z-index 10
+     - poluprovidna bela podloga rgba(255,255,255,.12), radius 12px
+     - padding 16px 20px, logo i linkovi levo, dugme desno, space-between
+     - razmak logo grupa -> linkovi 56px, izmedju linkova 32px
+     - linija ispod linka koja raste od 0% do 100% na hover (.framer-te3eon)
+     - ulazna animacija: opacity 0.001 -> 1, translateY -32px -> 0,
+       spring damping 40 stiffness 150, sto je prigusen slucaj bez odskoka
+     - telefon: traka ide preko cele sirine, top 0, bez radiusa,
+       hamburger od dve linije koje se sklope u X, linkovi u koloni
+   Promenjeno:
+     - Poppins -> Urbanist za linkove, Bebas Neue za ime kluba
+     - njihovo providno dugme -> nase lime dugme sa lopticom
+     - sirina poravnata sa nasim kontejnerom, max 1720px umesto 1224px
+   ========================================================================== */
+
+.nav {
+  position: absolute;
+  z-index: 10;
+  top: 24px;
+  left: 50%;
+  width: calc(100% - 180px);
+  max-width: 1720px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.12);
+  /* traka stoji preko heroja, pa podloga mora da odvoji tekst od videa */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transform: translateX(-50%);
+  animation: nav-ulaz 0.75s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* translateX(-50%) mora da ostane u svakom kadru, inace traka odleti u stranu */
+@keyframes nav-ulaz {
+  from { opacity: 0.001; transform: translateX(-50%) translateY(-32px); }
+  to   { opacity: 1;     transform: translateX(-50%) translateY(0); }
+}
+
+.nav__inner {
+  display: flex;
+  flex-flow: row;
+  place-content: center space-between;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+/* logo i linkovi su jedna grupa, kao .framer-12e7pzh */
+.nav__main {
+  display: flex;
+  flex-flow: row;
+  flex: none;
+  align-items: center;
+  gap: 56px;
+}
+
+.nav__row {
+  display: flex;
+  flex-flow: row;
+  flex: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__logo {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav__logo img {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.nav__logo-text {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.nav__links {
+  display: flex;
+  flex-flow: row;
+  flex: none;
+  align-items: center;
+  gap: 32px;
+}
+
+/* .framer-z87rM: link je kolona, linija visi na dnu i raste u sirinu */
+.nav__link {
+  position: relative;
+  display: flex;
+  flex-flow: column;
+  place-content: center;
+  align-items: center;
+  gap: 10px;
+  width: min-content;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background-color: var(--white);
+  transition: width 0.35s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+.nav__link:hover::after,
+.nav__link:focus-visible::after { width: 100%; }
+
+.nav__link:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.nav__cta { flex: none; }
+
+/* hamburger, .framer-z2ejf8: kvadrat 32x32 sa dve linije */
+.nav__burger {
+  display: none;
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  order: 1;            /* na telefonu logo levo, hamburger desno */
+}
+
+.nav__burger-line {
+  position: absolute;
+  height: 2px;
+  border-radius: 10px;
+  background-color: var(--white);
+  transition: width 0.35s cubic-bezier(0.44, 0, 0.56, 1),
+              top 0.35s cubic-bezier(0.44, 0, 0.56, 1),
+              bottom 0.35s cubic-bezier(0.44, 0, 0.56, 1),
+              transform 0.35s cubic-bezier(0.44, 0, 0.56, 1);
+}
+
+/* gornja 22px, donja kraca 16px, tacno kao na originalu */
+.nav__burger-line--top { top: 10px; left: calc(50% - 11px); width: 22px; }
+.nav__burger-line--bottom { bottom: 10px; left: 5px; width: 16px; }
+
+/* otvoreno: obe linije dodju na sredinu i ukrste se */
+.nav.is-open .nav__burger-line--top {
+  top: calc(50% - 1px);
+  transform: rotate(45deg);
+}
+.nav.is-open .nav__burger-line--bottom {
+  bottom: calc(50% - 1px);
+  left: calc(50% - 11px);
+  width: 22px;
+  transform: rotate(-45deg);
+}
+
+/* --------------------------------------------------------------------------
+   Tablet, kao njihov 810-1439 breakpoint: uza traka, manji razmaci
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 1199.98px) {
+  .nav { width: calc(100% - 80px); padding: 16px 24px; }
+  .nav__main { gap: 46px; }
+  .nav__links { gap: 26px; }
+}
+
+/* --------------------------------------------------------------------------
+   Telefon: traka preko cele sirine uz vrh, meni se otvara na hamburger
+   -------------------------------------------------------------------------- */
+@media (max-width: 767.98px) {
+  .nav {
+    top: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    padding: 16px 20px;
+    border-radius: 0;
+    transform: none;
+  }
+
+  /* bez translateX, traka je vec puna sirina */
+  .nav { animation-name: nav-ulaz-telefon; }
+  @keyframes nav-ulaz-telefon {
+    from { opacity: 0.001; transform: translateY(-32px); }
+    to   { opacity: 1;     transform: translateY(0); }
+  }
+
+  .nav__inner {
+    flex-direction: column;
+    place-content: flex-start;
+    align-items: flex-start;
+    /* gap 10px sa desktopa bi ostavio prazan pojas i kad je meni zatvoren,
+       razmake u otvorenom stanju daju margin-top na linkovima i dugmetu */
+    gap: 0;
+  }
+
+  .nav__main {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+  }
+
+  .nav__row {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .nav__logo { order: 0; }
+  .nav__burger { display: block; }
+
+  /* zatvoreno stanje: visina 0 pa se traka skupi na jedan red */
+  .nav__links,
+  .nav__cta {
+    overflow: hidden;
+    max-height: 0;
+    margin-top: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: max-height 0.5s cubic-bezier(0.45, 0, 0.15, 1),
+                margin-top 0.5s cubic-bezier(0.45, 0, 0.15, 1),
+                opacity 0.3s ease,
+                transform 0.5s cubic-bezier(0.45, 0, 0.15, 1);
+  }
+
+  .nav__links {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .nav__cta { width: 100%; max-width: 350px; }
+
+  .nav.is-open .nav__links {
+    max-height: 220px;
+    margin-top: 20px;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  .nav.is-open .nav__cta {
+    max-height: 70px;
+    margin-top: 24px;
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+  }
+
+  /* dugme se rasteze na punu sirinu, pa tekst i krug idu na krajeve */
+  .nav__cta .btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav { animation: none; opacity: 1; }
+  .nav__link::after,
+  .nav__burger-line,
+  .nav__links,
+  .nav__cta { transition: none; }
 }

@@ -312,3 +312,52 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', naSkrol);
   proveri();
 })();
+
+
+/* ==========================================================================
+   Navigacija, hamburger meni na telefonu.
+   Traka je preuzeta sa qutenza.framer.website, gde je otvoreno stanje zasebna
+   varijanta. Kod nas je to klasa .is-open na .nav, CSS radi ostalo.
+   ========================================================================== */
+(function () {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+
+  var dugme = nav.querySelector('.nav__burger');
+  var linkovi = nav.querySelectorAll('.nav__links a, .nav__cta a');
+  if (!dugme) return;
+
+  function postavi(otvoreno) {
+    nav.classList.toggle('is-open', otvoreno);
+    dugme.setAttribute('aria-expanded', otvoreno ? 'true' : 'false');
+    dugme.setAttribute('aria-label', otvoreno ? 'Zatvori meni' : 'Otvori meni');
+
+    /* Dugme se na telefonu rasteze na punu sirinu kad se meni otvori, pa se
+       menja i rastojanje za swap. ResizeObserver iz gornjeg bloka to uhvati,
+       ali tek po zavrsetku prelaza, zato se meri jos jednom posle animacije. */
+    if (otvoreno) {
+      setTimeout(function () { izmeriDugmad(); }, 520);
+    }
+  }
+
+  dugme.addEventListener('click', function () {
+    postavi(!nav.classList.contains('is-open'));
+  });
+
+  /* klik na link zatvara meni, inace ostane otvoren preko sadrzaja */
+  linkovi.forEach(function (a) {
+    a.addEventListener('click', function () { postavi(false); });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) {
+      postavi(false);
+      dugme.focus();
+    }
+  });
+
+  /* prelaskom na desktop meni se vraca u normalu */
+  window.addEventListener('resize', function () {
+    if (window.innerWidth > 767.98 && nav.classList.contains('is-open')) postavi(false);
+  });
+})();
