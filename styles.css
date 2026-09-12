@@ -2189,3 +2189,27 @@ a { text-decoration: none; color: inherit; }
   .nav__links,
   .nav__cta { transition: none; }
 }
+
+/* ==========================================================================
+   PARALLAX NA HEROJU, efekat sa expanded-priority-588823.framer.app
+
+   Na originalu je pozadina heroja (.framer-1a9j7r6) vezana za skrol i klizi
+   sporije od stranice, pa deluje da video i sajt nisu ujednaceni.
+   Kod nas isto: main.js upisuje --hero-parallax = skrol * 0.4, video ide
+   nadole za toliko, sto znaci da se u odnosu na ekran penje 60% brzine
+   stranice. Hero ima overflow: hidden pa nista ne viri.
+
+   Visina ne mora da se povecava: kad se pozadina pomeri nadole za 0.4d, a
+   stranica je vec otisla za d, gornja ivica ostaje iznad vidljivog dela.
+   Samo na kompu, na dodiru skrol nije gladak pa efekat trza.
+   ========================================================================== */
+@media (min-width: 1200px) {
+  .hero__bg {
+    transform: translate3d(0, var(--hero-parallax, 0px), 0);
+    will-change: transform;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__bg { transform: none; }
+}

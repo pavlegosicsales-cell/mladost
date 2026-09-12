@@ -361,3 +361,55 @@ document.addEventListener('DOMContentLoaded', function () {
     if (window.innerWidth > 767.98 && nav.classList.contains('is-open')) postavi(false);
   });
 })();
+
+
+/* ==========================================================================
+   Parallax na heroju, sa expanded-priority-588823.framer.app.
+   Video klizi sporije od stranice, pa se hero i sadrzaj ispod razdvajaju.
+   ========================================================================== */
+(function () {
+  var hero = document.querySelector('.hero');
+  var pozadina = hero && hero.querySelector('.hero__bg');
+  if (!pozadina) return;
+
+  /* 0.4 znaci da se video u odnosu na ekran penje 60% brzine stranice.
+     Vise od toga i razmimoilazenje pocne da deluje kao greska. */
+  var BRZINA = 0.4;
+  var ceka = false;
+  var ukljucen = false;
+
+  function dozvoljeno() {
+    return window.matchMedia('(min-width: 1200px)').matches &&
+           !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  function pomeri() {
+    ceka = false;
+    if (!ukljucen) return;
+    var visina = hero.offsetHeight;
+    /* preko visine heroja nema sta da se pomera, hero je vec otisao sa ekrana */
+    var skrol = Math.min(window.pageYOffset || 0, visina);
+    pozadina.style.setProperty('--hero-parallax', (skrol * BRZINA).toFixed(1) + 'px');
+  }
+
+  function naSkrol() {
+    if (ceka) return;
+    ceka = true;
+    window.requestAnimationFrame(pomeri);
+  }
+
+  function podesi() {
+    var sada = dozvoljeno();
+    if (sada === ukljucen) return;
+    ukljucen = sada;
+    if (ukljucen) {
+      pomeri();
+    } else {
+      pozadina.style.removeProperty('--hero-parallax');
+    }
+  }
+
+  window.addEventListener('scroll', naSkrol, { passive: true });
+  window.addEventListener('resize', function () { podesi(); naSkrol(); });
+  podesi();
+})();
