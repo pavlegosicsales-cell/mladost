@@ -471,6 +471,14 @@ a { text-decoration: none; color: inherit; }
   .svc__card:focus-within::before { opacity: 1; }
 }
 
+/* Na dodiru prelaz nije okidan pokazivacem nego skrolom, pa 0.5s ease deluje
+   naglo. Duze traje i ima izrazen ease na oba kraja, da lime doplovi. */
+@media (hover: none), (pointer: coarse) {
+  .svc__card::before {
+    transition: opacity 1s cubic-bezier(0.45, 0, 0.15, 1);
+  }
+}
+
 /* sadrzaj iznad sloja sa hover grafikom */
 .svc__top,
 .svc__card .svc__inner { position: relative; z-index: 1; }
