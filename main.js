@@ -368,9 +368,9 @@ document.addEventListener('DOMContentLoaded', function () {
    Video klizi sporije od stranice, pa se hero i sadrzaj ispod razdvajaju.
    ========================================================================== */
 (function () {
-  /* .hero na pocetnoj, .ohero na stranici O nama */
-  var hero = document.querySelector('.hero, .ohero');
-  var pozadina = hero && hero.querySelector('.hero__bg, .ohero__bg');
+  /* .hero na pocetnoj, .ohero na O nama, .khero na Kontaktu */
+  var hero = document.querySelector('.hero, .ohero, .khero');
+  var pozadina = hero && hero.querySelector('.hero__bg, .ohero__bg, .khero__bg');
   if (!pozadina) return;
 
   /* 0.4 znaci da se video u odnosu na ekran penje 60% brzine stranice.
@@ -596,5 +596,74 @@ document.addEventListener('DOMContentLoaded', function () {
       vidljiv = true;
       kreni();
     }
+  });
+})();
+
+
+/* ==========================================================================
+   Forma na stranici Kontakt. Isti ENDPOINT i iste poruke kao wizard na
+   pocetnoj, samo bez koraka. Dok je ENDPOINT prazan, upit se ne salje.
+   ========================================================================== */
+(function () {
+  var forma = document.getElementById('kontakt-forma');
+  if (!forma) return;
+
+  var poruka = document.getElementById('k-msg');
+  var dugme = document.getElementById('k-posalji');
+
+  function javi(tekst, ok) {
+    poruka.textContent = tekst;
+    poruka.classList.remove('is-ok', 'is-err');
+    poruka.classList.add(ok ? 'is-ok' : 'is-err');
+  }
+
+  forma.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var ime = forma.querySelector('#k-ime').value.trim();
+    var telefon = forma.querySelector('#k-telefon').value.trim();
+    var email = forma.querySelector('#k-email').value.trim();
+
+    if (!ime || !telefon || !email) {
+      javi('Popuni ime, telefon i email da bismo mogli da se javimo.', false);
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      javi('Email adresa nije ispravna. Proveri je pa probaj ponovo.', false);
+      return;
+    }
+
+    var podaci = {
+      usluga: forma.querySelector('#k-usluga').value,
+      ime: ime,
+      telefon: telefon,
+      email: email,
+      poruka: forma.querySelector('#k-poruka').value.trim(),
+      stranica: window.location.href
+    };
+
+    if (!ENDPOINT) {
+      javi('Forma još nije povezana sa serverom. Pozovi 061 500 50 51 i javljamo se odmah.', false);
+      console.warn('ENDPOINT je prazan. Pokreni Skill 03 i nalepi Apps Script URL u main.js.');
+      return;
+    }
+
+    dugme.disabled = true;
+
+    fetch(ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(podaci),
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+    })
+      .then(function (r) {
+        if (!r.ok) throw new Error('Neuspesno slanje');
+        forma.reset();
+        javi('Hvala, upit je stigao. Javljamo se na telefon koji si ostavio, najčešće isti dan.', true);
+        dugme.disabled = false;
+      })
+      .catch(function () {
+        javi('Slanje nije uspelo. Pozovi 061 500 50 51 ili piši na mladost.tenis@gmail.com.', false);
+        dugme.disabled = false;
+      });
   });
 })();

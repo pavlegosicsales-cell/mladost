@@ -3222,3 +3222,388 @@ a { text-decoration: none; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .slajder__slika { transition: none; }
 }
+
+
+/* ==========================================================================
+   KONTAKT, HERO
+   "Visit ArcClub" (.framer-boand6): kartica blur 13px, padding 50, max 392,
+   razmak naslov/kontakti 102, redovi gap 18, ikonica 24 + padding 6.
+   Kod nas tamno staklo umesto belih 14% (beli providni slojevi preko
+   svetle podloge su "sivo i ruzno"), lime kvadrati, Bebas naslov.
+   ========================================================================== */
+.khero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 88vh;
+  padding: 160px 90px 110px;
+  overflow: hidden;
+  background: var(--black);
+}
+
+.khero__bg { position: absolute; inset: 0; }
+.khero__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+}
+
+.khero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.12) 45%, rgba(0, 0, 0, 0) 70%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 28%, rgba(0, 0, 0, 0) 75%, rgba(0, 0, 0, 0.3) 100%);
+}
+.khero .hero__grain { opacity: 0.14; }
+
+.khero__inner {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.khero__kartica {
+  display: flex;
+  flex-direction: column;
+  gap: 96px;
+  max-width: 440px;
+  padding: 50px;
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 24, 20, 0.46);
+  -webkit-backdrop-filter: blur(13px);
+  backdrop-filter: blur(13px);
+  color: var(--white);
+}
+
+.khero__naslovi { display: flex; flex-direction: column; gap: 20px; }
+.khero__h1 {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: 64px;
+  line-height: 0.95;
+  letter-spacing: -1px;
+}
+.khero__tekst {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.khero__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.khero__red {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--white);
+}
+.khero__red > span:last-child { padding-top: 7px; }
+.khero__red:hover > span:last-child,
+.khero__red:focus-visible > span:last-child { text-decoration: underline; text-underline-offset: 4px; }
+.khero__ik {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  background: var(--lime);
+  color: var(--forest);
+}
+.khero__ik svg { width: 22px; height: 22px; }
+
+@media (min-width: 1200px) {
+  .khero__bg {
+    transform: translate3d(0, var(--hero-parallax, 0px), 0);
+    will-change: transform;
+  }
+}
+
+/* ==========================================================================
+   KONTAKT, FORMA
+   qutenza (.framer-1hifdkt + .framer-arirb1): forma 808 i kartice 392,
+   gap 24, polja u dve kolone gap 24, kartice padding 24 gap 32, ikonica 52.
+   ========================================================================== */
+.kforma { padding: 120px 90px; background: var(--white); }
+.kforma__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
+
+.kforma__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.kforma__red {
+  display: grid;
+  grid-template-columns: minmax(0, 808fr) minmax(0, 392fr);
+  gap: 24px;
+}
+
+.kforma__forma {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-content: start;
+  padding: 36px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+}
+
+.kpolje { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.kpolje--puna { grid-column: 1 / -1; }
+
+.kpolje label {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.kpolje input,
+.kpolje select,
+.kpolje textarea {
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 24, 20, 0.62);
+  font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
+  font-size: 16px;
+  color: var(--white);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.kpolje textarea { min-height: 180px; resize: vertical; }
+.kpolje input::placeholder,
+.kpolje textarea::placeholder { color: rgba(255, 255, 255, 0.42); }
+.kpolje input:focus,
+.kpolje select:focus,
+.kpolje textarea:focus {
+  outline: none;
+  border-color: var(--lime);
+  box-shadow: 0 0 0 4px rgba(182, 225, 31, 0.18);
+}
+
+/* select bez sistemske strelice, nasa strelica preko omotaca */
+.kpolje__izbor { position: relative; }
+.kpolje select {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 44px;
+  cursor: pointer;
+}
+.kpolje select option { color: #000; }
+.kpolje__izbor::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--lime);
+  border-bottom: 2px solid var(--lime);
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+}
+
+/* dugme preko cele sirine, kao Send Message na originalu */
+.kforma__dugme {
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
+.kforma__msg {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.5;
+  min-height: 1.5em;
+}
+.kforma__msg:empty { display: none; }
+.kforma__msg.is-ok { color: var(--lime); }
+.kforma__msg.is-err { color: #ffb4a8; }
+
+.kforma__kartice {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.kkartica {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 0;
+  gap: 32px;
+  padding: 28px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  color: var(--white);
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1), border-color 0.45s ease;
+}
+a.kkartica:hover,
+a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime); }
+
+.kkartica__ik {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--lime);
+}
+.kkartica__ik svg { width: 24px; height: 24px; }
+
+.kkartica__tekst { display: flex; flex-direction: column; gap: 6px; }
+.kkartica__naslov { font-size: 22px; font-weight: 700; line-height: 1.25; }
+.kkartica__vrednost { font-size: 18px; font-weight: 600; line-height: 1.5; color: var(--lime); }
+
+/* ==========================================================================
+   KONTAKT, CESTA PITANJA
+   arcclub FAQ (.framer-BcoN5): stavka padding 32, radius 16, gap 16,
+   pitanje 20px, strelica 24px, dve kolone gap 24.
+   ========================================================================== */
+.faq { padding: 0 90px 120px; background: var(--white); }
+.faq__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
+
+.faq__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 56px;
+  text-align: center;
+}
+.faq__naslov { margin: 0; text-align: center; }
+.faq__sub {
+  max-width: 560px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: rgba(0, 0, 0, 0.62);
+}
+
+.faq__kolone {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.faq__kolona { display: flex; flex-direction: column; gap: 24px; }
+
+.faq__k {
+  border-radius: 16px;
+  background: var(--sage);
+  color: var(--forest);
+  interpolate-size: allow-keywords;
+}
+.faq__k summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 32px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  list-style: none;
+  cursor: pointer;
+}
+.faq__k summary::-webkit-details-marker { display: none; }
+.faq__k summary svg {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.faq__k[open] summary svg { transform: rotate(180deg); }
+.faq__k summary:focus-visible { outline: 2px solid var(--forest); outline-offset: -4px; border-radius: 16px; }
+
+/* razmak pitanje/odgovor 16px kao na originalu: ide kroz padding pitanja,
+   ne kroz negativnu marginu, jer details-content ima overflow hidden */
+.faq__k[open] summary { padding-bottom: 16px; }
+
+.faq__k p {
+  padding: 0 32px 32px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.72);
+}
+
+/* glatko otvaranje gde browser to podrzava, drugde se otvori odmah */
+.faq__k::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition: block-size 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), content-visibility 0.4s allow-discrete;
+}
+.faq__k[open]::details-content { block-size: auto; }
+
+/* tablet */
+@media (max-width: 1199px) {
+  .khero { padding: 130px 40px 80px; min-height: 0; }
+  .khero__kartica { gap: 60px; }
+  .kforma { padding: 90px 40px; }
+  .kforma__red { grid-template-columns: 1fr; }
+  .kforma__kartice { flex-direction: row; }
+  .kkartica { padding: 24px; }
+  .faq { padding: 0 40px 90px; }
+}
+
+/* telefon */
+@media (max-width: 767px) {
+  .khero { padding: 110px 20px 40px; }
+  .khero__kartica {
+    max-width: none;
+    gap: 32px;
+    padding: 28px 24px;
+    border-radius: 22px;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(5, 24, 20, 0.7);
+  }
+  .khero__h1 { font-size: 52px; }
+  .khero__tekst, .khero__red { font-size: 16px; }
+
+  .kforma { padding: 72px 20px; }
+  .kforma__head { margin-bottom: 40px; }
+  .kforma__forma { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
+  .kpolje label { font-size: 15px; }
+  .kforma__kartice { flex-direction: column; gap: 12px; }
+  .kkartica { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; padding: 18px; }
+  .kkartica__ik { width: 46px; height: 46px; flex: none; }
+  .kkartica__naslov { font-size: 18px; }
+  .kkartica__vrednost { font-size: 16px; }
+
+  .faq { padding: 0 20px 72px; }
+  .faq__head { margin-bottom: 36px; }
+  .faq__kolone { grid-template-columns: 1fr; gap: 12px; }
+  .faq__kolona { gap: 12px; }
+  .faq__k summary { padding: 22px; font-size: 17px; }
+  .faq__k[open] summary { padding-bottom: 12px; }
+  .faq__k p { padding: 0 22px 22px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .khero__bg { transform: none; }
+  .kkartica, .faq__k summary svg, .faq__k::details-content { transition: none; }
+}
