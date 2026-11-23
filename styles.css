@@ -3898,8 +3898,27 @@ a { text-decoration: none; color: inherit; }
   border-top: 1px solid rgba(255, 255, 255, 0.12);
   list-style: none;
 }
-.shero__cinjenice li { display: flex; align-items: flex-start; gap: 12px; }
-.shero__cinjenice svg { flex: none; width: 24px; height: 24px; color: var(--lime); }
+.shero__cinjenice li { display: flex; align-items: center; gap: 14px; }
+/* isti oblik kao ikonice na karticama usluga na pocetnoj (.svc__icon):
+   40x40, radius 16, bela podloga, forest linija. Na tamnoj podlozi bela
+   je skoro puna, inace deluje sivo. */
+.shero__ikona {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 11px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.94);
+  color: var(--forest);
+}
+.shero__ikona svg { display: block; width: 100%; height: 100%; }
+/* tekst pored ikonice je span sa svetlom bojom; ikonica je takodje span,
+   pa joj forest mora da se vrati jacim selektorom */
+.shero__cinjenice .shero__ikona { color: var(--forest); }
 .shero__cinjenice span {
   font-size: 14px;
   font-weight: 500;
