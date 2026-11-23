@@ -2733,3 +2733,116 @@ a { text-decoration: none; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
 }
+
+
+/* ==========================================================================
+   O NAMA, TIM
+   Sa tennislove.webflow.io/about (.container.meet-the-team). Original:
+   bela kartica na bez podlozi, radius 48, padding 80 gore i dole, pet slika
+   136px sirine sa okvirom 4px u boji kartice: sredina 80px visine, do nje
+   dve od 60px spustene 32px i preklopljene 28px, na krajevima dve od 50px
+   spustene 69px i providne 17%. Razmak 32px do naslova, tekst na 50%.
+   Kod nas: sage kartica na beloj strani, okvir slika sage, radius 24.
+   ========================================================================== */
+.tim { padding: 0 90px 120px; background: var(--white); }
+
+.tim__kartica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+  padding: 80px 24px;
+  border-radius: 24px;
+  background: var(--sage);
+  text-align: center;
+}
+
+/* .agents-avatars */
+.tim__slike {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* .team-thumbnail-wrapper */
+.tim__slika {
+  position: relative;
+  z-index: 3;
+  flex: none;
+  width: 136px;
+  height: 80px;
+  border: 4px solid var(--sage);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.tim__slika img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* .right-2 i .left-2 */
+.tim__slika--sred { z-index: 2; height: 60px; margin-top: 32px; }
+.tim__slika--sred.tim__slika--l { margin-right: -29px; }
+.tim__slika--sred.tim__slika--d { margin-left: -28px; }
+
+/* .left-1 i .right-1 */
+.tim__slika--kraj { z-index: 1; height: 50px; margin-top: 69px; opacity: 0.17; }
+.tim__slika--kraj.tim__slika--l { margin-right: -28px; }
+.tim__slika--kraj.tim__slika--d { margin-left: -28px; }
+
+.tim__naslov {
+  margin-top: 32px;
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: clamp(40px, 3.6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+/* na originalu druga linija ide serifnim fontom, kod nas lime oznaka
+   kao u izjavi iznad */
+.tim__akcenat {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 0.04em 0.22em 0;
+  border-radius: 0.14em;
+  background: var(--lime);
+  color: var(--forest);
+}
+
+/* .paragraph.large: font naslova, verzal, 600 */
+.tim__tekst {
+  max-width: 760px;
+  margin-top: 32px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+
+.tim__kartica .btn { margin-top: 52px; }
+
+@media (max-width: 1199px) {
+  .tim { padding: 0 40px 90px; }
+}
+
+/* telefon: krajnje slike se sklanjaju, ostale tri se smanjuju */
+@media (max-width: 599px) {
+  .tim { padding: 0 20px 72px; }
+  .tim__kartica { padding: 56px 18px; border-radius: 20px; }
+  .tim__slika { width: 104px; height: 62px; border-radius: 16px; }
+  .tim__slika--sred { height: 48px; margin-top: 24px; }
+  .tim__slika--kraj { display: none; }
+  .tim__naslov { margin-top: 24px; font-size: 38px; }
+  .tim__tekst { margin-top: 20px; font-size: 14px; }
+  .tim__kartica .btn { margin-top: 32px; }
+}
