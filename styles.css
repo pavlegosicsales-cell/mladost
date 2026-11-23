@@ -1087,7 +1087,11 @@ a { text-decoration: none; color: inherit; }
 
 /* izbori */
 .choices { display: grid; gap: 10px; }
-@media (min-width: 560px) { .choices { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 560px) {
+  .choices { grid-template-columns: 1fr 1fr; }
+  /* neparan broj opcija: poslednja ide preko obe kolone, bez rupe pored nje */
+  .choices .choice:last-child:nth-child(odd) { grid-column: 1 / -1; }
+}
 
 .choice {
   position: relative;
