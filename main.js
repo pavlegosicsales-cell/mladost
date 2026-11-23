@@ -414,3 +414,25 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', function () { podesi(); naSkrol(); });
   podesi();
 })();
+
+
+/* ==========================================================================
+   Ulaz na skrol za [data-reveal], akcija a-2 sa tennislove.webflow.io:
+   element dolazi 30% odozdo i pojavljuje se za 0.5s, jednom.
+   ========================================================================== */
+(function () {
+  var elementi = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!elementi.length || !('IntersectionObserver' in window)) return;
+
+  document.documentElement.classList.add('js-reveal');
+
+  var posmatrac = new IntersectionObserver(function (unosi) {
+    unosi.forEach(function (u) {
+      if (!u.isIntersecting) return;
+      u.target.classList.add('is-visible');
+      posmatrac.unobserve(u.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+
+  elementi.forEach(function (el) { posmatrac.observe(el); });
+})();

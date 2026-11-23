@@ -2530,3 +2530,206 @@ a { text-decoration: none; color: inherit; }
   .ohero__bg video { display: none; }
   .ohero__bg { background: url("images/o-nama-poster.jpg") center / cover no-repeat; }
 }
+
+
+/* ==========================================================================
+   O NAMA, NASA PRICA
+   Sa tennislove.webflow.io/about (.about-us-text-wrapper, .large-photo,
+   .description.metrics). Izmerene vrednosti originala: izjava 26px sa
+   razmakom 80px gore i dole, slike u tekstu visine 40px radius 28px,
+   linija 4px sa prelivom, velika slika radius 48px, kartice 2x2 na 64%
+   sirine uz desnu ivicu, broj 70px, unutrasnji blok margin 8 padding 24.
+   Kod nas: forest umesto plave, lime oznaka umesto serifnog fonta,
+   tamni vrh kartice umesto svetloplavog, radius po nasem sistemu.
+   ========================================================================== */
+.prica { padding: 120px 90px; background: var(--white); }
+
+.prica__inner {
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.prica__naslov { margin: 0; }
+
+/* .line.dark: 4px, preliv iz primarne u svetlu, kod nas forest u lime */
+.prica__linija {
+  width: 100%;
+  height: 4px;
+  margin: 20px 0;
+  border-radius: 8px;
+  background-image: linear-gradient(90deg, var(--forest), var(--lime));
+}
+
+/* .about-us-text-wrapper */
+.prica__izjava {
+  margin: 80px 0;
+  font-size: clamp(22px, 1.9vw, 34px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--forest);
+}
+
+/* .description-image.about-text-1: slika u redu teksta */
+.prica__pill {
+  display: inline-block;
+  width: auto;
+  height: 1.5em;
+  aspect-ratio: 2 / 1;
+  margin: 0 0.1em;
+  border-radius: 999px;
+  object-fit: cover;
+  vertical-align: -0.38em;
+}
+
+/* Na originalu kljucne reci idu serifnim fontom (Kalnia). Kod nas oznaka
+   u lime, tekst ostaje forest jer lime ne trpi beli tekst. */
+.prica__akcenat {
+  padding: 0.02em 0.28em 0.06em;
+  border-radius: 0.3em;
+  background: var(--lime);
+  color: var(--forest);
+  white-space: nowrap;
+}
+
+/* .large-photo-wrapper */
+.prica__foto {
+  margin: 0;
+  aspect-ratio: 16 / 8.5;
+  border-radius: 24px;
+  overflow: hidden;
+  background: var(--sage);
+}
+.prica__foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* .description-wrapper: kartice desno na 64%. Levo je na originalu prazno,
+   kod nas kratak tekst o klubu danas i dugme. */
+.prica__dno {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 64%;
+  gap: 48px;
+  margin-top: 32px;
+}
+
+.prica__levo {
+  position: sticky;
+  top: 120px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-top: 8px;
+}
+.prica__podnaslov {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: var(--forest);
+}
+.prica__tekst {
+  max-width: 440px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(0, 0, 0, 0.72);
+}
+.prica__levo .btn { margin-top: 8px; }
+
+/* .description-column-right */
+.brojke {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* .description.metrics */
+.broj {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 40px;
+  border-radius: 24px;
+  background: var(--sage);
+}
+
+/* .metrics-small-wrapper.top */
+.broj__vrh {
+  margin: 8px 8px 0;
+  padding: 28px 28px 24px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+}
+.broj__num {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 96px;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  color: var(--white);
+}
+.broj__label {
+  margin-top: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+.broj__txt {
+  padding: 0 32px 30px;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--forest);
+}
+
+/* Ulaz na skrol, akcija a-2 sa originala: translateY 30% i opacity 0,
+   pa 0.5s ease do pocetnog polozaja. Skriva se tek kad JS radi
+   (klasa js-reveal na html), pa bez JS-a sadrzaj ostaje vidljiv. */
+.js-reveal [data-reveal] {
+  opacity: 0;
+  transform: translateY(30%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.js-reveal [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .prica { padding: 90px 40px; }
+  .prica__izjava { margin: 56px 0; }
+  .prica__dno { grid-template-columns: 1fr; gap: 32px; }
+  .prica__levo { position: static; }
+  .broj__num { font-size: 80px; }
+}
+
+/* telefon */
+@media (max-width: 767px) {
+  .prica { padding: 72px 20px; }
+  .prica__izjava { margin: 40px 0; font-size: 20px; line-height: 1.65; }
+  .prica__foto { aspect-ratio: 1; border-radius: 20px; }
+  .prica__podnaslov { font-size: 34px; }
+  .prica__tekst { font-size: 16px; }
+  .brojke { grid-template-columns: 1fr; }
+  .broj { gap: 24px; }
+  .broj__vrh { padding: 24px 22px 20px; }
+  .broj__num { font-size: 72px; }
+  .broj__txt { padding: 0 24px 24px; font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] { opacity: 1; transform: none; transition: none; }
+}

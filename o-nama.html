@@ -17,7 +17,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=42">
+<link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body>
 
@@ -125,6 +125,79 @@
         </p>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ================= NASA PRICA =================
+       Raspored sa tennislove.webflow.io/about: naslov sa linijom, izjava sa
+       malim slikama u tekstu, velika slika, kartice sa brojkama 2x2 desno.
+       Kod nas: Bebas i Urbanist, forest tekst, lime oznake na kljucnim
+       recima, tamni vrh kartica. Tekst je iz klijentovog dokumenta O klubu. -->
+  <section class="prica" id="prica">
+    <div class="prica__inner">
+
+      <h2 class="sekcija__naslov prica__naslov">Naša priča</h2>
+      <div class="prica__linija" aria-hidden="true"></div>
+
+      <p class="prica__izjava" data-reveal>
+        Klub su 2024. osnovali teniski treneri
+        <img class="prica__pill" src="images/o-nama-treneri.webp" alt="" width="400" height="200" aria-hidden="true">
+        i profesori škole iz komšiluka, ljudi koji su na ovim terenima <mark class="prica__akcenat">nekad i radili.</mark>
+        Tereni iz devedesetih
+        <img class="prica__pill" src="images/o-nama-reketi.webp" alt="" width="400" height="200" aria-hidden="true">
+        stajali su prazni od 2016. i skoro deset godina bili <mark class="prica__akcenat">zarasli u korov.</mark>
+        Obnova je krenula početkom 2025. Od <mark class="prica__akcenat">1. maja</mark> na šljaci se ponovo trenira, igra i druži
+        <img class="prica__pill" src="images/o-nama-basta.webp" alt="" width="400" height="200" aria-hidden="true">
+        do 23h.
+      </p>
+
+      <figure class="prica__foto">
+        <img src="images/o-nama-tereni.webp" alt="Tri šljakasta terena kluba Mladost snimljena dronom iz vazduha" width="1920" height="1080" loading="lazy">
+      </figure>
+
+      <div class="prica__dno">
+
+        <div class="prica__levo">
+          <h3 class="prica__podnaslov">Klub danas</h3>
+          <p class="prica__tekst">Član smo Teniskog saveza Srbije i Teniskog saveza Beograda. Organizujemo turnire svih kategorija i letnje kampove za decu svih nivoa igre, a tereni rade cele godine: leti napolju, zimi pod balonom.</p>
+          <a class="btn" href="skola-tenisa.html">
+            <span class="btn__label t-btn">Upiši dete u školu</span>
+            <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+          </a>
+        </div>
+
+        <ul class="brojke">
+          <li class="broj" data-reveal>
+            <div class="broj__vrh">
+              <p class="broj__num">7</p>
+              <p class="broj__label">Trenera</p>
+            </div>
+            <p class="broj__txt">Licencirani treneri TSS, takmičarska sekcija i kondicioni trener.</p>
+          </li>
+          <li class="broj" data-reveal>
+            <div class="broj__vrh">
+              <p class="broj__num">4</p>
+              <p class="broj__label">Programa</p>
+            </div>
+            <p class="broj__txt">Škola tenisa, takmičarske grupe, individualni rad i kondicioni treninzi.</p>
+          </li>
+          <li class="broj" data-reveal>
+            <div class="broj__vrh">
+              <p class="broj__num">12</p>
+              <p class="broj__label">Meseci u godini</p>
+            </div>
+            <p class="broj__txt">Leti se igra napolju, zimi pod balonom. Sezona ne staje.</p>
+          </li>
+          <li class="broj" data-reveal>
+            <div class="broj__vrh">
+              <p class="broj__num">1. maj</p>
+              <p class="broj__label">Ponovo otvoren</p>
+            </div>
+            <p class="broj__txt">Prva lopta na obnovljenoj šljaci pala je 1. maja 2025. godine.</p>
+          </li>
+        </ul>
+
+      </div>
     </div>
   </section>
 
@@ -236,6 +309,6 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=19"></script>
+<script src="main.js?v=20"></script>
 </body>
 </html>
