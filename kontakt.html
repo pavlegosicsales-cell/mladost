@@ -17,7 +17,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=51">
+<link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body>
 
@@ -68,57 +68,16 @@
     </div>
   </nav>
 
-  <!-- ================= HERO, KONTAKT =================
-       "Visit ArcClub" sa arcclub.framer.website/contact: slika preko cele
-       sirine, staklena kartica levo sa naslovom, tekstom i tri kontakta.
-       Kod nas tamno staklo, lime kvadrati, Bebas naslov. -->
-  <section class="khero" data-name="Kontakt Hero">
-    <div class="khero__bg">
-      <img src="images/kontakt-hero.webp" alt="Šljakasti teren kluba Mladost sa mrežom i reflektorima" width="1920" height="1440">
-    </div>
-    <div class="khero__veil" aria-hidden="true"></div>
-    <div class="hero__grain" aria-hidden="true"></div>
-
-    <div class="khero__inner">
-      <div class="khero__kartica">
-        <div class="khero__naslovi">
-          <h1 class="khero__h1">Dođi na teren</h1>
-          <p class="khero__tekst">Svrati na meč, trening ili samo da se upoznamo. Tereni na Banovom Brdu rade svaki dan do 23h, leti napolju, zimi pod balonom.</p>
-        </div>
-
-        <ul class="khero__lista">
-          <li>
-            <a class="khero__red" href="tel:+381615005051">
-              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/></svg></span>
-              <span>061 500 50 51</span>
-            </a>
-          </li>
-          <li>
-            <a class="khero__red" href="mailto:mladost.tenis@gmail.com">
-              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m4 8 7.1 4.6a2 2 0 0 0 1.8 0L20 8"/></svg></span>
-              <span>mladost.tenis@gmail.com</span>
-            </a>
-          </li>
-          <li>
-            <a class="khero__red" href="https://www.google.com/maps?q=Lje%C5%A1ka+82,+Banovo+Brdo,+Beograd" target="_blank" rel="noopener">
-              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
-              <span>Lješka 82, Banovo Brdo,<br>11030 Beograd</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FORMA =================
-       Raspored sa qutenza.framer.website/contact: forma levo (808), kartice
-       desno (392). Kartice ne ponavljaju kontakte iz heroja. -->
+  <!-- ================= FORMA, VRH STRANICE =================
+       Raspored sa qutenza.framer.website/contact: tamna sekcija, forma levo
+       (808), kartice desno (392). Tamna je i zato sto nav stoji preko nje.
+       Kartice ne ponavljaju kontakte iz video sekcije ispod. -->
   <section class="kforma" id="upit">
     <div class="kforma__inner">
 
       <div class="kforma__head">
         <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Pošalji upit</p>
-        <h2 class="veliki-naslov veliki-naslov--centar">Piši nam, <mark class="veliki-naslov__akcenat">javljamo se</mark><br>sa slobodnim terminima</h2>
+        <h1 class="veliki-naslov veliki-naslov--centar">Piši nam, <mark class="veliki-naslov__akcenat">javljamo se</mark><br>sa slobodnim terminima</h1>
       </div>
 
       <div class="kforma__red">
@@ -184,6 +143,50 @@
         </div>
       </div>
 
+    </div>
+  </section>
+
+  <!-- ================= POSETI NAS =================
+       "Visit ArcClub" sa arcclub.framer.website/contact: video preko cele
+       sirine, staklena kartica levo sa naslovom, tekstom i tri kontakta.
+       Kod nas tamno staklo, lime kvadrati, Bebas naslov. -->
+  <section class="khero" data-name="Kontakt Hero">
+    <div class="khero__bg">
+      <video src="video/kontakt.mp4" poster="images/kontakt-poster.jpg"
+             autoplay muted loop playsinline preload="metadata"
+             aria-label="Snimak iz vazduha: tri šljakasta terena kluba Mladost"></video>
+    </div>
+    <div class="khero__veil" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <div class="khero__inner">
+      <div class="khero__kartica">
+        <div class="khero__naslovi">
+          <h2 class="khero__h1">Dođi na teren</h2>
+          <p class="khero__tekst">Svrati na meč, trening ili samo da se upoznamo. Tereni na Banovom Brdu rade svaki dan do 23h, leti napolju, zimi pod balonom.</p>
+        </div>
+
+        <ul class="khero__lista">
+          <li>
+            <a class="khero__red" href="tel:+381615005051">
+              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.4a12 12 0 0 0 6.1 6.1l1.4-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7a2 2 0 0 1 2-2.2z"/></svg></span>
+              <span>061 500 50 51</span>
+            </a>
+          </li>
+          <li>
+            <a class="khero__red" href="mailto:mladost.tenis@gmail.com">
+              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="m4 8 7.1 4.6a2 2 0 0 0 1.8 0L20 8"/></svg></span>
+              <span>mladost.tenis@gmail.com</span>
+            </a>
+          </li>
+          <li>
+            <a class="khero__red" href="https://www.google.com/maps?q=Lje%C5%A1ka+82,+Banovo+Brdo,+Beograd" target="_blank" rel="noopener">
+              <span class="khero__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+              <span>Lješka 82, Banovo Brdo,<br>11030 Beograd</span>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -339,6 +342,6 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=23"></script>
+<script src="main.js?v=24"></script>
 </body>
 </html>

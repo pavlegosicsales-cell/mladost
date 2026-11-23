@@ -368,9 +368,9 @@ document.addEventListener('DOMContentLoaded', function () {
    Video klizi sporije od stranice, pa se hero i sadrzaj ispod razdvajaju.
    ========================================================================== */
 (function () {
-  /* .hero na pocetnoj, .ohero na O nama, .khero na Kontaktu */
-  var hero = document.querySelector('.hero, .ohero, .khero');
-  var pozadina = hero && hero.querySelector('.hero__bg, .ohero__bg, .khero__bg');
+  /* .hero na pocetnoj, .ohero na O nama. Kontakt nema hero na vrhu. */
+  var hero = document.querySelector('.hero, .ohero');
+  var pozadina = hero && hero.querySelector('.hero__bg, .ohero__bg');
   if (!pozadina) return;
 
   /* 0.4 znaci da se video u odnosu na ekran penje 60% brzine stranice.
@@ -665,5 +665,58 @@ document.addEventListener('DOMContentLoaded', function () {
         javi('Slanje nije uspelo. Pozovi 061 500 50 51 ili piši na mladost.tenis@gmail.com.', false);
         dugme.disabled = false;
       });
+  });
+})();
+
+/* ==========================================================================
+   Cesta pitanja: otvaranje i zatvaranje animira visinu cele stavke.
+   Ranije je islo kroz ::details-content i menjao se padding pitanja, pa je
+   sadrzaj skakao. Sada pitanje ne menja velicinu, a visina klizi od
+   trenutne do ciljne, i kad se klikne usred animacije nastavlja odatle.
+   ========================================================================== */
+(function () {
+  var stavke = document.querySelectorAll('.faq__k');
+  if (!stavke.length) return;
+  var mirno = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  stavke.forEach(function (d) {
+    var pitanje = d.querySelector('summary');
+    var anim = null;
+    var otvorena = d.open;
+
+    pitanje.addEventListener('click', function (e) {
+      e.preventDefault();
+      otvorena = !otvorena;
+
+      if (mirno.matches || !d.animate) {
+        d.open = otvorena;
+        return;
+      }
+
+      var od = d.getBoundingClientRect().height;
+      if (anim) anim.cancel();
+
+      var doVisine;
+      if (otvorena) {
+        d.classList.remove('is-zatvara');
+        d.open = true;
+        doVisine = d.getBoundingClientRect().height;
+      } else {
+        d.classList.add('is-zatvara');
+        doVisine = pitanje.getBoundingClientRect().height;
+      }
+
+      anim = d.animate(
+        { height: [od + 'px', doVisine + 'px'] },
+        { duration: 380, easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)' }
+      );
+      anim.onfinish = function () {
+        if (!otvorena) {
+          d.open = false;
+          d.classList.remove('is-zatvara');
+        }
+        anim = null;
+      };
+    });
   });
 })();

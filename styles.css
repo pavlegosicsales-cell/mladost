@@ -3235,18 +3235,20 @@ a { text-decoration: none; color: inherit; }
   position: relative;
   display: flex;
   align-items: center;
-  min-height: 88vh;
-  padding: 160px 90px 110px;
+  min-height: 760px;
+  padding: 100px 90px;
   overflow: hidden;
   background: var(--black);
 }
 
 .khero__bg { position: absolute; inset: 0; }
+.khero__bg video,
 .khero__bg img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 35%;
+  object-position: center;
 }
 
 .khero__veil {
@@ -3328,19 +3330,18 @@ a { text-decoration: none; color: inherit; }
 }
 .khero__ik svg { width: 22px; height: 22px; }
 
-@media (min-width: 1200px) {
-  .khero__bg {
-    transform: translate3d(0, var(--hero-parallax, 0px), 0);
-    will-change: transform;
-  }
-}
-
 /* ==========================================================================
    KONTAKT, FORMA
    qutenza (.framer-1hifdkt + .framer-arirb1): forma 808 i kartice 392,
    gap 24, polja u dve kolone gap 24, kartice padding 24 gap 32, ikonica 52.
    ========================================================================== */
-.kforma { padding: 120px 90px; background: var(--white); }
+.kforma {
+  padding: 170px 90px 120px;
+  background: linear-gradient(180deg, #0d2b24 0%, #10342b 55%, var(--forest) 100%);
+}
+.kforma .veliki-naslov { color: var(--white); }
+.kforma .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
+.kforma .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
 .kforma__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
 
 .kforma__head {
@@ -3363,7 +3364,8 @@ a { text-decoration: none; color: inherit; }
   align-content: start;
   padding: 36px;
   border-radius: 20px;
-  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .kpolje { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
@@ -3383,7 +3385,7 @@ a { text-decoration: none; color: inherit; }
   padding: 14px 16px;
   border-radius: 12px;
   border: 1.5px solid rgba(255, 255, 255, 0.16);
-  background: rgba(5, 24, 20, 0.62);
+  background: rgba(0, 0, 0, 0.28);
   font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
   font-size: 16px;
   color: var(--white);
@@ -3422,12 +3424,9 @@ a { text-decoration: none; color: inherit; }
   pointer-events: none;
 }
 
-/* dugme preko cele sirine, kao Send Message na originalu */
-.kforma__dugme {
-  width: 100%;
-  justify-content: space-between;
-  margin-top: 4px;
-}
+/* normalno dugme, ne preko cele sirine: na sirokom dugmetu loptica
+   putuje pola ekrana pri hover-u */
+.kforma__dugme { margin-top: 4px; }
 
 .kforma__msg {
   margin-top: 14px;
@@ -3454,8 +3453,8 @@ a { text-decoration: none; color: inherit; }
   gap: 32px;
   padding: 28px;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
   color: var(--white);
   transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1), border-color 0.45s ease;
 }
@@ -3482,7 +3481,7 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
    arcclub FAQ (.framer-BcoN5): stavka padding 32, radius 16, gap 16,
    pitanje 20px, strelica 24px, dve kolone gap 24.
    ========================================================================== */
-.faq { padding: 0 90px 120px; background: var(--white); }
+.faq { padding: 120px 90px; background: var(--white); }
 .faq__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
 
 .faq__head {
@@ -3514,7 +3513,7 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   border-radius: 16px;
   background: var(--sage);
   color: var(--forest);
-  interpolate-size: allow-keywords;
+  overflow: hidden;
 }
 .faq__k summary {
   display: flex;
@@ -3535,14 +3534,14 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   height: 24px;
   transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
-.faq__k[open] summary svg { transform: rotate(180deg); }
+.faq__k[open]:not(.is-zatvara) summary svg { transform: rotate(180deg); }
 .faq__k summary:focus-visible { outline: 2px solid var(--forest); outline-offset: -4px; border-radius: 16px; }
 
-/* razmak pitanje/odgovor 16px kao na originalu: ide kroz padding pitanja,
-   ne kroz negativnu marginu, jer details-content ima overflow hidden */
-.faq__k[open] summary { padding-bottom: 16px; }
-
+/* Razmak pitanje/odgovor 16px kao na originalu. Pitanje zadrzava isti
+   padding i otvoreno i zatvoreno, pa nista ne skace; odgovor se podigne
+   za 16px. Visinu stavke animira main.js. */
 .faq__k p {
+  margin-top: -16px;
   padding: 0 32px 32px;
   font-size: 17px;
   font-weight: 500;
@@ -3550,28 +3549,20 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   color: rgba(0, 0, 0, 0.72);
 }
 
-/* glatko otvaranje gde browser to podrzava, drugde se otvori odmah */
-.faq__k::details-content {
-  block-size: 0;
-  overflow: hidden;
-  transition: block-size 0.4s cubic-bezier(0.2, 0.7, 0.3, 1), content-visibility 0.4s allow-discrete;
-}
-.faq__k[open]::details-content { block-size: auto; }
-
 /* tablet */
 @media (max-width: 1199px) {
-  .khero { padding: 130px 40px 80px; min-height: 0; }
+  .khero { padding: 80px 40px; min-height: 640px; }
   .khero__kartica { gap: 60px; }
-  .kforma { padding: 90px 40px; }
+  .kforma { padding: 140px 40px 90px; }
   .kforma__red { grid-template-columns: 1fr; }
   .kforma__kartice { flex-direction: row; }
   .kkartica { padding: 24px; }
-  .faq { padding: 0 40px 90px; }
+  .faq { padding: 90px 40px; }
 }
 
 /* telefon */
 @media (max-width: 767px) {
-  .khero { padding: 110px 20px 40px; }
+  .khero { padding: 56px 20px; min-height: 0; }
   .khero__kartica {
     max-width: none;
     gap: 32px;
@@ -3584,7 +3575,7 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   .khero__h1 { font-size: 52px; }
   .khero__tekst, .khero__red { font-size: 16px; }
 
-  .kforma { padding: 72px 20px; }
+  .kforma { padding: 116px 20px 72px; }
   .kforma__head { margin-bottom: 40px; }
   .kforma__forma { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
   .kpolje label { font-size: 15px; }
@@ -3594,16 +3585,16 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   .kkartica__naslov { font-size: 18px; }
   .kkartica__vrednost { font-size: 16px; }
 
-  .faq { padding: 0 20px 72px; }
+  .faq { padding: 72px 20px; }
   .faq__head { margin-bottom: 36px; }
   .faq__kolone { grid-template-columns: 1fr; gap: 12px; }
   .faq__kolona { gap: 12px; }
   .faq__k summary { padding: 22px; font-size: 17px; }
-  .faq__k[open] summary { padding-bottom: 12px; }
-  .faq__k p { padding: 0 22px 22px; font-size: 16px; }
+  .faq__k p { margin-top: -10px; padding: 0 22px 22px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .khero__bg { transform: none; }
-  .kkartica, .faq__k summary svg, .faq__k::details-content { transition: none; }
+  .khero__bg video { display: none; }
+  .khero__bg { background: url("images/kontakt-poster.jpg") center / cover no-repeat; }
+  .kkartica, .faq__k summary svg { transition: none; }
 }
