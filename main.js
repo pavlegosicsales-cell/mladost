@@ -692,3 +692,343 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (e.key === 'ArrowRight') prikazi(i + 1);
   });
 })();
+
+
+/* ==========================================================================
+   GALERIJA, HERO: Morph Gallery (21st.dev), prepisan iz React-a u obican JS.
+   Slajdovi prelaze jedan u drugi kroz sum (fbm) u WebGL shaderu: svaki
+   piksel dobija prag, napredak prelazi preko pragova, pa stari kadar puca
+   u krpice. Prag je pomeren svetlinom novog kadra, pa svetli delovi
+   novog kadra probiju prvi. Shader, kriva i parametri su isti kao original:
+   duration 1500, noiseScale 3.5, edge 0.15, drift 0.5, autoplay 4500.
+   Bez WebGL-a (ili ako nijedna slika ne moze da se ucita) ide obicno
+   pretapanje slika, galerija radi, samo bez morfa.
+   ========================================================================== */
+(function () {
+  var koren = document.getElementById('mhero');
+  if (!koren) return;
+
+  var canvas = koren.querySelector('.mhero__canvas');
+  var rezerva = koren.querySelector('.mhero__rezerva');
+  var palcevi = Array.prototype.slice.call(koren.querySelectorAll('.mhero__palac'));
+  var najava = koren.querySelector('.mhero__najava');
+  var stavke = palcevi.map(function (b) {
+    return { src: b.dataset.src, alt: b.dataset.alt || '' };
+  });
+  var n = stavke.length;
+  if (!n) return;
+
+  var PODESAVANJA = { duration: 1500, noiseScale: 3.5, edge: 0.15, drift: 0.5, autoplay: 4500 };
+  var mirno = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  var aktivan = 0;
+  var zahtev = null;          /* { from, to } koji petlja preuzme */
+  var pauza = false;
+  var tajmer = null;
+  var palo = false;
+
+  function wrap(i) { return ((i % n) + n) % n; }
+  function easeInOutQuint(t) {
+    var x = Math.min(Math.max(t, 0), 1);
+    return x < 0.5 ? 16 * Math.pow(x, 5) : 1 - Math.pow(-2 * x + 2, 5) / 2;
+  }
+
+  function oznaci() {
+    palcevi.forEach(function (b, i) {
+      b.classList.toggle('is-active', i === aktivan);
+      b.setAttribute('aria-current', i === aktivan ? 'true' : 'false');
+    });
+    najava.textContent = stavke[aktivan].alt + ', ' + (aktivan + 1) + ' od ' + n;
+    if (palo) {
+      Array.prototype.forEach.call(rezerva.children, function (img, i) {
+        img.classList.toggle('is-active', i === aktivan);
+      });
+    }
+  }
+
+  function idi(sledeci) {
+    var w = wrap(sledeci);
+    if (w === aktivan) return;
+    zahtev = { from: aktivan, to: w };
+    aktivan = w;
+    oznaci();
+  }
+
+  /* ---- autoplay, staje na hover, fokus i kad je tab sakriven ---- */
+  function kreni() {
+    stani();
+    if (mirno.matches || pauza || document.hidden || n < 2) return;
+    tajmer = window.setInterval(function () { idi(aktivan + 1); }, Math.max(PODESAVANJA.autoplay, 600));
+  }
+  function stani() { if (tajmer) { window.clearInterval(tajmer); tajmer = null; } }
+  function postaviPauzu(p) { pauza = p; kreni(); }
+
+  koren.addEventListener('mouseenter', function () { postaviPauzu(true); });
+  koren.addEventListener('mouseleave', function () { postaviPauzu(false); });
+  koren.addEventListener('focusin', function () { postaviPauzu(true); });
+  koren.addEventListener('focusout', function () { postaviPauzu(false); });
+  document.addEventListener('visibilitychange', kreni);
+
+  /* ---- strelice, palcevi, tastatura, prevlacenje ---- */
+  koren.querySelector('.mhero__strelica--levo').addEventListener('click', function () { idi(aktivan - 1); kreni(); });
+  koren.querySelector('.mhero__strelica--desno').addEventListener('click', function () { idi(aktivan + 1); kreni(); });
+  palcevi.forEach(function (b, i) { b.addEventListener('click', function () { idi(i); kreni(); }); });
+  koren.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); idi(aktivan - 1); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); idi(aktivan + 1); }
+  });
+  var pocetakX = null;
+  koren.addEventListener('pointerdown', function (e) { pocetakX = e.clientX; });
+  koren.addEventListener('pointerup', function (e) {
+    if (pocetakX === null) return;
+    var dx = e.clientX - pocetakX;
+    pocetakX = null;
+    if (Math.abs(dx) > 48) { idi(aktivan + (dx < 0 ? 1 : -1)); kreni(); }
+  });
+
+  /* ---- rezerva bez shadera: obicno pretapanje slika ---- */
+  function padni() {
+    if (palo) return;
+    palo = true;
+    canvas.style.display = 'none';
+    stavke.forEach(function (s, i) {
+      var img = document.createElement('img');
+      img.src = s.src;
+      img.alt = s.alt;
+      if (i === aktivan) img.classList.add('is-active');
+      rezerva.appendChild(img);
+    });
+    rezerva.hidden = false;
+  }
+
+  /* ---- WebGL ---- */
+  var VERT = [
+    'attribute vec2 a_position;',
+    'varying vec2 v_uv;',
+    'void main() {',
+    '  v_uv = a_position * 0.5 + 0.5;',
+    '  gl_Position = vec4(a_position, 0.0, 1.0);',
+    '}'
+  ].join('\n');
+
+  var FRAG = [
+    'precision highp float;',
+    'uniform sampler2D u_from;',
+    'uniform sampler2D u_to;',
+    'uniform float u_progress;',
+    'uniform vec2 u_resolution;',
+    'uniform float u_fromAspect;',
+    'uniform float u_toAspect;',
+    'uniform float u_scale;',
+    'uniform float u_direction;',
+    'uniform float u_edge;',
+    'uniform float u_drift;',
+    'varying vec2 v_uv;',
+    'vec3 permute(vec3 x) { return mod(((x * 34.0) + 1.0) * x, 289.0); }',
+    'float snoise(vec2 v) {',
+    '  const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);',
+    '  vec2 i  = floor(v + dot(v, C.yy));',
+    '  vec2 x0 = v - i + dot(i, C.xx);',
+    '  vec2 i1 = (x0.x > x0.y) ? vec2(1.0, 0.0) : vec2(0.0, 1.0);',
+    '  vec4 x12 = x0.xyxy + C.xxzz;',
+    '  x12.xy -= i1;',
+    '  i = mod(i, 289.0);',
+    '  vec3 p = permute(permute(i.y + vec3(0.0, i1.y, 1.0)) + i.x + vec3(0.0, i1.x, 1.0));',
+    '  vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.0);',
+    '  m = m * m;',
+    '  m = m * m;',
+    '  vec3 x  = 2.0 * fract(p * C.www) - 1.0;',
+    '  vec3 h  = abs(x) - 0.5;',
+    '  vec3 ox = floor(x + 0.5);',
+    '  vec3 a0 = x - ox;',
+    '  m *= 1.79284291400159 - 0.85373472095314 * (a0 * a0 + h * h);',
+    '  vec3 g;',
+    '  g.x  = a0.x  * x0.x  + h.x  * x0.y;',
+    '  g.yz = a0.yz * x12.xz + h.yz * x12.yw;',
+    '  return 130.0 * dot(m, g);',
+    '}',
+    'float fbm(vec2 v) {',
+    '  float value = 0.0;',
+    '  float amplitude = 0.5;',
+    '  for (int i = 0; i < 5; i++) { value += amplitude * snoise(v); v *= 2.0; amplitude *= 0.5; }',
+    '  return value;',
+    '}',
+    /* odbijanje umesto razmazivanja ivice kad drift izgura UV van slike */
+    'vec2 mirror(vec2 uv) { return 1.0 - abs(1.0 - mod(uv, 2.0)); }',
+    'vec2 coverUV(vec2 uv, float imgAspect) {',
+    '  float canvasAspect = u_resolution.x / u_resolution.y;',
+    '  vec2 scale = (canvasAspect > imgAspect) ? vec2(1.0, imgAspect / canvasAspect) : vec2(canvasAspect / imgAspect, 1.0);',
+    '  return mirror((uv - 0.5) * scale + 0.5);',
+    '}',
+    'void main() {',
+    '  float adjusted = u_progress * (1.0 + 2.0 * u_edge) - u_edge;',
+    '  float noise = fbm(v_uv * u_scale + vec2(0.0, u_progress * u_direction)) * 0.5 + 0.5;',
+    '  noise = smoothstep(0.0, 2.0, length(texture2D(u_to, coverUV(v_uv, u_toAspect)).rgb) + noise);',
+    '  float mixFactor = 1.0 - smoothstep(adjusted - u_edge, adjusted + u_edge, noise);',
+    '  vec2 fromUV = coverUV(v_uv + vec2(0.0, noise * u_progress * u_drift * u_direction), u_fromAspect);',
+    '  vec2 toUV = coverUV(v_uv + vec2(0.0, noise * (1.0 - u_progress) * -0.5 * u_drift * u_direction), u_toAspect);',
+    '  gl_FragColor = mix(texture2D(u_from, fromUV), texture2D(u_to, toUV), mixFactor);',
+    '}'
+  ].join('\n');
+
+  function kompajliraj(gl, tip, izvor) {
+    var s = gl.createShader(tip);
+    gl.shaderSource(s, izvor);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) {
+      var log = gl.getShaderInfoLog(s);
+      gl.deleteShader(s);
+      throw new Error('shader: ' + log);
+    }
+    return s;
+  }
+
+  function pokreniGL() {
+    var gl = canvas.getContext('webgl', { alpha: false, antialias: false }) ||
+             canvas.getContext('experimental-webgl');
+    if (!gl) { padni(); return; }
+
+    var program;
+    try {
+      var vs = kompajliraj(gl, gl.VERTEX_SHADER, VERT);
+      var fs = kompajliraj(gl, gl.FRAGMENT_SHADER, FRAG);
+      program = gl.createProgram();
+      gl.attachShader(program, vs);
+      gl.attachShader(program, fs);
+      gl.linkProgram(program);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      if (!gl.getProgramParameter(program, gl.LINK_STATUS)) throw new Error('link');
+    } catch (e) { padni(); return; }
+
+    gl.useProgram(program);
+    var buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
+    var loc = gl.getAttribLocation(program, 'a_position');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+
+    var u = {};
+    ['from', 'to', 'progress', 'resolution', 'fromAspect', 'toAspect', 'scale', 'direction', 'edge', 'drift']
+      .forEach(function (ime) { u[ime] = gl.getUniformLocation(program, 'u_' + ime); });
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+
+    var teksture = stavke.map(function () { return null; });
+    var odnosi = stavke.map(function () { return 1; });
+    var od = aktivan, ka = aktivan, napredak = 1, pocetak = 0, smer = 1;
+    var radi = false, odbijeno = 0, raf = 0;
+
+    function velicina() {
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      var w = Math.round(canvas.clientWidth * dpr);
+      var h = Math.round(canvas.clientHeight * dpr);
+      if (!w || !h || (canvas.width === w && canvas.height === h)) return;
+      canvas.width = w;
+      canvas.height = h;
+      gl.viewport(0, 0, w, h);
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(velicina).observe(canvas);
+    else window.addEventListener('resize', velicina);
+
+    /* dok sve slike ne stignu, pokazi najblizu koja postoji umesto crnog */
+    function uzmi(i) {
+      if (teksture[i]) return teksture[i];
+      for (var k = 0; k < teksture.length; k++) if (teksture[k]) return teksture[k];
+      return null;
+    }
+
+    function crtaj() {
+      if (zahtev) {
+        var z = zahtev;
+        zahtev = null;
+        if (z.from !== z.to) {
+          od = z.from;
+          ka = z.to;
+          napredak = 0;
+          pocetak = performance.now();
+          /* smer prati kraci put u krug, pa i skok sa poslednje na prvu ide napred */
+          smer = (((z.to - z.from + n) % n) * 2 <= n) ? 1 : -1;
+        }
+      }
+      if (napredak < 1) {
+        var trajanje = mirno.matches ? 0 : Math.max(PODESAVANJA.duration, 1);
+        napredak = trajanje === 0 ? 1 : easeInOutQuint(Math.min((performance.now() - pocetak) / trajanje, 1));
+      }
+      var tOd = uzmi(od), tKa = uzmi(ka);
+      if (!tOd || !tKa) return;
+
+      gl.activeTexture(gl.TEXTURE0);
+      gl.bindTexture(gl.TEXTURE_2D, tOd);
+      gl.uniform1i(u.from, 0);
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, tKa);
+      gl.uniform1i(u.to, 1);
+      gl.uniform1f(u.progress, napredak);
+      gl.uniform2f(u.resolution, canvas.width, canvas.height);
+      gl.uniform1f(u.fromAspect, odnosi[od] || 1);
+      gl.uniform1f(u.toAspect, odnosi[ka] || 1);
+      gl.uniform1f(u.scale, PODESAVANJA.noiseScale);
+      gl.uniform1f(u.direction, smer);
+      gl.uniform1f(u.edge, Math.max(PODESAVANJA.edge, 0.001));
+      gl.uniform1f(u.drift, PODESAVANJA.drift);
+      gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    }
+
+    /* crta se samo dok je hero na ekranu, ostatak stranice ne placa shader */
+    var vidljiv = true;
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (u2) {
+        vidljiv = u2[0].isIntersecting;
+        if (vidljiv && radi && !raf) raf = requestAnimationFrame(petlja);
+      }).observe(koren);
+    }
+    function petlja() {
+      raf = 0;
+      if (!vidljiv) return;
+      crtaj();
+      raf = requestAnimationFrame(petlja);
+    }
+
+    canvas.addEventListener('webglcontextlost', function (e) {
+      e.preventDefault();
+      cancelAnimationFrame(raf);
+      raf = 0;
+      padni();
+    });
+
+    /* svaka slika ide u teksturu cim stigne, petlja krece na prvoj */
+    stavke.forEach(function (s, i) {
+      var img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.decoding = 'async';
+      img.onload = function () {
+        if (palo) return;
+        var tex = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, tex);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        teksture[i] = tex;
+        odnosi[i] = img.naturalWidth / Math.max(img.naturalHeight, 1);
+        if (!radi) {
+          radi = true;
+          velicina();
+          koren.classList.add('is-ready');
+          raf = requestAnimationFrame(petlja);
+        }
+      };
+      img.onerror = function () {
+        odbijeno += 1;
+        if (odbijeno === n) padni();
+      };
+      img.src = s.src;
+    });
+  }
+
+  oznaci();
+  pokreniGL();
+  kreni();
+})();

@@ -17,7 +17,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=56">
+<link rel="stylesheet" href="styles.css?v=59">
 </head>
 <body>
 
@@ -69,59 +69,36 @@
   </nav>
 
   <!-- ================= GALERIJA, HERO =================
-       Tamna sekcija ispod nava, naslov u sredini, dve trake pravih fotki
-       iz kluba koje klize u suprotnim smerovima i staju na hover. -->
-  <section class="ghero" data-name="Galerija Hero">
-    <div class="hero__grain" aria-hidden="true"></div>
+       Morph Gallery sa 21st.dev, prepisana iz React-a u obican JS (main.js).
+       Slajdovi prelaze jedan u drugi kroz sum u WebGL shaderu. Strelice,
+       palcevi dole, autoplay 4.5s, staje na hover, prevlacenje prstom.
+       Nas fazon: naslov levo dole, lime na aktivnom palcu i hover strelice. -->
+  <section class="mhero" id="mhero" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Galerija fotografija">
+    <canvas class="mhero__canvas" aria-hidden="true"></canvas>
+    <div class="mhero__rezerva" hidden></div>
+    <div class="mhero__veo-gore" aria-hidden="true"></div>
+    <div class="mhero__veo" aria-hidden="true"></div>
 
-    <div class="ghero__head">
+    <div class="mhero__tekst">
       <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Galerija</p>
-      <h1 class="veliki-naslov veliki-naslov--centar">Život na <mark class="veliki-naslov__akcenat">šljaci</mark></h1>
-      <p class="ghero__sub">Treninzi, turniri, letnje večeri u bašti i zima pod balonom. Sve snimljeno u klubu na Banovom Brdu.</p>
-      <a class="btn" href="#sve">
-        <span class="btn__label t-btn">Pogledaj sve</span>
-        <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
-      </a>
+      <h1 class="veliki-naslov">Život na <mark class="veliki-naslov__akcenat">šljaci</mark></h1>
     </div>
 
-    <div class="ghero__trake" aria-hidden="true">
-      <div class="traka">
-        <div class="traka__niz">
-            <img src="images/gal-h01.webp" alt="" width="360" height="480">
-            <img src="images/gal-h02.webp" alt="" width="768" height="480">
-            <img src="images/gal-h03.webp" alt="" width="558" height="480">
-            <img src="images/gal-h04.webp" alt="" width="360" height="480">
-            <img src="images/gal-h05.webp" alt="" width="480" height="480">
-            <img src="images/gal-h06.webp" alt="" width="480" height="480">
-            <img src="images/gal-h07.webp" alt="" width="768" height="480">
-            <img src="images/gal-h01.webp" alt="" width="360" height="480">
-            <img src="images/gal-h02.webp" alt="" width="768" height="480">
-            <img src="images/gal-h03.webp" alt="" width="558" height="480">
-            <img src="images/gal-h04.webp" alt="" width="360" height="480">
-            <img src="images/gal-h05.webp" alt="" width="480" height="480">
-            <img src="images/gal-h06.webp" alt="" width="480" height="480">
-            <img src="images/gal-h07.webp" alt="" width="768" height="480">
-        </div>
-      </div>
-      <div class="traka traka--desno">
-        <div class="traka__niz">
-            <img src="images/gal-h08.webp" alt="" width="360" height="480">
-            <img src="images/gal-h09.webp" alt="" width="556" height="480">
-            <img src="images/gal-h10.webp" alt="" width="360" height="480">
-            <img src="images/gal-h11.webp" alt="" width="558" height="480">
-            <img src="images/gal-h12.webp" alt="" width="360" height="480">
-            <img src="images/gal-h13.webp" alt="" width="480" height="480">
-            <img src="images/gal-h14.webp" alt="" width="360" height="480">
-            <img src="images/gal-h08.webp" alt="" width="360" height="480">
-            <img src="images/gal-h09.webp" alt="" width="556" height="480">
-            <img src="images/gal-h10.webp" alt="" width="360" height="480">
-            <img src="images/gal-h11.webp" alt="" width="558" height="480">
-            <img src="images/gal-h12.webp" alt="" width="360" height="480">
-            <img src="images/gal-h13.webp" alt="" width="480" height="480">
-            <img src="images/gal-h14.webp" alt="" width="360" height="480">
-        </div>
-      </div>
-    </div>
+    <button type="button" class="mhero__strelica mhero__strelica--levo" aria-label="Prethodna fotografija"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <button type="button" class="mhero__strelica mhero__strelica--desno" aria-label="Sledeća fotografija"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg></button>
+
+    <ul class="mhero__palci">
+        <li><button type="button" class="mhero__palac" data-src="images/gal-03.webp" data-alt="Tri šljakasta terena snimljena dronom" aria-label="Prikaži: Tri šljakasta terena snimljena dronom"><img src="images/gal-03-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-02.webp" data-alt="Deca iz škole tenisa sa medaljama i trenerima pod balonom" aria-label="Prikaži: Deca iz škole tenisa sa medaljama i trenerima pod balonom"><img src="images/gal-02-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-12.webp" data-alt="Duga iznad terena u sumrak" aria-label="Prikaži: Duga iznad terena u sumrak"><img src="images/gal-12-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-09.webp" data-alt="Teren noću pod reflektorima" aria-label="Prikaži: Teren noću pod reflektorima"><img src="images/gal-09-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-13.webp" data-alt="Trener sa grupom dece uz mrežu" aria-label="Prikaži: Trener sa grupom dece uz mrežu"><img src="images/gal-13-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-21.webp" data-alt="Teren po danu sa mrežom" aria-label="Prikaži: Teren po danu sa mrežom"><img src="images/gal-21-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-25.webp" data-alt="Bašta kluba snimljena odozgo" aria-label="Prikaži: Bašta kluba snimljena odozgo"><img src="images/gal-25-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+        <li><button type="button" class="mhero__palac" data-src="images/gal-24.webp" data-alt="Teren uveče pod reflektorima" aria-label="Prikaži: Teren uveče pod reflektorima"><img src="images/gal-24-m.webp" alt="" width="80" height="50" loading="lazy" decoding="async"></button></li>
+    </ul>
+
+    <span class="mhero__najava" aria-live="polite"></span>
   </section>
 
   <!-- ================= GALERIJA, MREZA =================
@@ -360,6 +337,6 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=27"></script>
+<script src="main.js?v=28"></script>
 </body>
 </html>

@@ -1152,7 +1152,11 @@ a { text-decoration: none; color: inherit; }
 
 /* polja */
 .polja { display: grid; gap: 14px; }
-@media (min-width: 560px) { .polja { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 560px) {
+  .polja { grid-template-columns: 1fr 1fr; }
+  /* ime i telefon u redu, email preko cele sirine, da ne ostane rupa pored njega */
+  .polja .polje:nth-child(3) { grid-column: 1 / -1; }
+}
 .polje--puna { grid-column: 1 / -1; }
 
 .polje label {
@@ -3488,76 +3492,144 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ==========================================================================
-   GALERIJA, HERO
-   Tamna sekcija (nav je beo i stoji preko nje), naslov u sredini, ispod
-   dve trake pravih fotki iz kluba koje klize u suprotnim smerovima.
-   Trake staju na hover, a bez pokreta (reduced motion) se skroluju rukom.
+   GALERIJA, HERO: Morph Gallery (21st.dev)
+   Original: sekcija 100svh crna, canvas preko cele povrsine (fade in 400ms
+   kad stigne prva tekstura), donji veo h-56 do crne 65%, strelice 44px
+   okrugle bela 10% + blur, palcevi 80x50 dole u sredini (bottom 32px,
+   gap 8, aktivni beli okvir, ostali 55%), na telefonu bez palceva.
+   Kod nas: gornji veo za nav, naslov levo dole, lime za aktivno i hover.
    ========================================================================== */
-.ghero {
+.mhero {
   position: relative;
-  padding: 170px 0 110px;
+  height: 100vh;
+  height: 100svh;
+  min-height: 560px;
   overflow: hidden;
-  background: linear-gradient(180deg, #0d2b24 0%, #10342b 60%, var(--forest) 100%);
+  background: #000;
+  outline: none;
+  touch-action: pan-y;
+}
+.mhero__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.mhero.is-ready .mhero__canvas { opacity: 1; }
+
+.mhero__rezerva img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.mhero__rezerva img.is-active { opacity: 1; }
+
+.mhero__veo-gore {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 5;
+  height: 220px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+  pointer-events: none;
+}
+.mhero__veo {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 5;
+  height: 360px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+  pointer-events: none;
+}
+
+.mhero__tekst {
+  position: absolute;
+  left: max(90px, calc((100% - 1720px) / 2));
+  bottom: 130px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  pointer-events: none;
+}
+.mhero .oznaka { border-color: rgba(255, 255, 255, 0.25); color: var(--white); }
+.mhero .oznaka__ikona { background: rgba(255, 255, 255, 0.12); }
+.mhero .veliki-naslov {
+  margin-top: 18px;
+  font-size: clamp(64px, 6.6vw, 124px);
   color: var(--white);
 }
-.ghero .hero__grain { opacity: 0.12; }
 
-.ghero__head {
-  position: relative;
-  z-index: 2;
+.mhero__strelica {
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--white);
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.mhero__strelica svg { width: 20px; height: 20px; }
+.mhero__strelica:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+.mhero__strelica:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+.mhero__strelica--levo { left: 32px; }
+.mhero__strelica--desno { right: 32px; }
+
+.mhero__palci {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  z-index: 10;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 20px;
-  text-align: center;
+  gap: 8px;
+  max-width: calc(100% - 2rem);
+  margin: 0;
+  padding: 0 0 10px;
+  list-style: none;
+  overflow-x: auto;
+  transform: translateX(-50%);
 }
-.ghero .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
-.ghero .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
-.ghero .veliki-naslov { color: var(--white); font-size: clamp(64px, 7.4vw, 140px); }
-.ghero__sub {
-  max-width: 600px;
-  margin-top: 22px;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.82);
+.mhero__palci li { flex: none; }
+.mhero__palac {
+  display: block;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  overflow: hidden;
+  background: none;
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.25s ease, border-color 0.25s ease;
 }
-.ghero__head .btn { margin-top: 34px; }
+.mhero__palac:hover { opacity: 0.85; }
+.mhero__palac.is-active { border-color: var(--lime); opacity: 1; }
+.mhero__palac:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
+.mhero__palac img { display: block; width: 80px; height: 50px; max-width: none; object-fit: cover; }
 
-.ghero__trake {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-top: 72px;
-  /* ivice se gube u pozadinu umesto da slike budu odsecene na ivici */
-  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
-  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+.mhero__najava {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
 }
-
-.traka { overflow: hidden; }
-.traka__niz {
-  display: flex;
-  gap: 16px;
-  width: max-content;
-  animation: traka-levo 70s linear infinite;
-}
-.traka--desno .traka__niz { animation-name: traka-desno; animation-duration: 80s; }
-.traka:hover .traka__niz { animation-play-state: paused; }
-
-/* niz je dupliran u HTML-u, pa pomeraj od pola sirine izgleda beskonacno */
-@keyframes traka-levo { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
-@keyframes traka-desno { from { transform: translateX(calc(-50% - 8px)); } to { transform: translateX(0); } }
-
-.traka img {
-  flex: none;
-  width: auto;
-  height: 300px;
-  border-radius: 18px;
-  object-fit: cover;
-}
-.traka--desno img { height: 240px; }
 
 /* ==========================================================================
    GALERIJA, MREZA
@@ -3690,22 +3762,19 @@ a { text-decoration: none; color: inherit; }
 
 /* tablet */
 @media (max-width: 1199px) {
-  .ghero { padding: 140px 0 90px; }
+  .mhero__tekst { left: 40px; bottom: 120px; }
   .gal { padding: 90px 40px; }
   .gal__mreza { column-count: 3; }
 }
 
 /* telefon */
 @media (max-width: 767px) {
-  .ghero { padding: 116px 0 64px; }
-  .ghero .veliki-naslov { font-size: clamp(52px, 15vw, 72px); }
-  .ghero__sub { font-size: 16px; }
-  .ghero__trake { margin-top: 48px; gap: 10px; }
-  .traka__niz { gap: 10px; }
-  @keyframes traka-levo { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 5px)); } }
-  @keyframes traka-desno { from { transform: translateX(calc(-50% - 5px)); } to { transform: translateX(0); } }
-  .traka img { height: 180px; border-radius: 14px; }
-  .traka--desno img { height: 140px; }
+  .mhero__palci { display: none; }
+  .mhero__tekst { left: 20px; right: 20px; bottom: 48px; }
+  .mhero .veliki-naslov { font-size: clamp(52px, 15vw, 72px); }
+  .mhero__strelica { width: 44px; height: 44px; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(0, 0, 0, 0.35); }
+  .mhero__strelica--levo { left: 16px; }
+  .mhero__strelica--desno { right: 16px; }
 
   .gal { padding: 72px 12px; }
   .gal__naslov { margin-left: 8px; }
@@ -3723,7 +3792,48 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .traka { overflow-x: auto; }
-  .traka__niz { animation: none; }
+  .mhero__canvas, .mhero__rezerva img, .mhero__palac, .mhero__strelica { transition: none; }
   .gal__item img, .lb, .lb__dugme { transition: none; }
+}
+
+/* ==========================================================================
+   FORMA, VARIJANTA SA BELIM POLJIMA (.forma--bela), proba 23.11.2026.
+   Opcije i polja za unos su bela sa forest tekstom, izabrana opcija i
+   dalje postaje lime. Skida se brisanjem klase forma--bela sa <form>.
+   ========================================================================== */
+.forma--bela .choice {
+  border-color: rgba(255, 255, 255, 0.9);
+  background-image: none;
+  background-color: var(--white);
+  color: var(--forest);
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.55);
+}
+.forma--bela .choice:hover {
+  border-color: var(--lime);
+  background-image: none;
+  background-color: var(--white);
+}
+.forma--bela .choice__icon {
+  border-color: rgba(26, 67, 57, 0.16);
+  background: rgba(26, 67, 57, 0.07);
+  color: var(--forest);
+}
+.forma--bela .choice.is-picked {
+  border-color: var(--lime);
+  background-image: none;
+  background-color: var(--lime);
+}
+
+.forma--bela .polje input,
+.forma--bela .polje textarea {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: var(--white);
+  color: var(--forest);
+}
+.forma--bela .polje input::placeholder,
+.forma--bela .polje textarea::placeholder { color: rgba(26, 67, 57, 0.45); }
+.forma--bela .polje input:focus,
+.forma--bela .polje textarea:focus {
+  border-color: var(--lime);
+  background: var(--white);
 }
