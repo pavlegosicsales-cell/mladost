@@ -417,24 +417,76 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* ==========================================================================
-   Ulaz na skrol za [data-reveal], akcija a-2 sa tennislove.webflow.io:
-   element dolazi 30% odozdo i pojavljuje se za 0.5s, jednom.
+   Pojavljivanje sa qutenza.framer.website (vidi POJAVLJIVANJE u styles.css).
+   Hero na vrhu svake stranice ulazi pri ucitavanju sa kasnjenjima kao na
+   originalu, ostalo kad se vidi 20% elementa, redom na 0.15s u grupi.
+   Elementi se obelezavaju ovde, po vrsti, pa HTML ne mora da se dira.
    ========================================================================== */
 (function () {
-  var elementi = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
-  if (!elementi.length || !('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!('IntersectionObserver' in window)) return;
 
-  document.documentElement.classList.add('js-reveal');
+  var HERO = '.hero, .ohero, .shero, .mhero, .kforma__head';
+  /* [selektor, kasnjenje u sekundama], iz appear JSON-a: 0.9, 1.0, 1.1, 1.2 */
+  var HERO_REDOM = [
+    ['.hero .tag, .ohero__kicker, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka', 0.9],
+    ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov', 1.0],
+    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna', 1.1],
+    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci', 1.2]
+  ];
+  /* [selektor, pomeraj u px]; natpisi 12, kartice 24, velike povrsine 40 */
+  var SKROL = [
+    ['.oznaka, .sekcija__naslov, .veliki-naslov, .kontakt__lead, .treneri__uvod, .faq__sub', 12],
+    ['.broj, .bento__k, .obnova__k, .trener, .gal__item, .faq__k, .info-card, .put__stavka, .put__kondicija, .kforma .kontakt__inner, [data-reveal]', 24],
+    ['.prica__foto, .slajder, .obnova__foto, .tim__kartica, .forma, .khero__kartica', 40]
+  ];
+
+  document.documentElement.classList.add('js-pojava');
+
+  var heroEl = [];
+  HERO_REDOM.forEach(function (par) {
+    document.querySelectorAll(par[0]).forEach(function (el) {
+      if (el.hasAttribute('data-pojava')) return;
+      el.setAttribute('data-pojava', 'hero');
+      el.style.setProperty('--p-y', '20px');
+      el.style.setProperty('--p-delay', par[1] + 's');
+      heroEl.push(el);
+    });
+  });
+
+  var skrolEl = [];
+  SKROL.forEach(function (par) {
+    document.querySelectorAll(par[0]).forEach(function (el) {
+      if (el.hasAttribute('data-pojava')) return;
+      if (el.closest(HERO)) return;
+      /* ne dupliraj: ako je roditelj vec obelezen, dete ide sa njim */
+      if (el.parentElement && el.parentElement.closest('[data-pojava]')) return;
+      el.setAttribute('data-pojava', 'skrol');
+      el.style.setProperty('--p-y', par[1] + 'px');
+      skrolEl.push(el);
+    });
+  });
+
+  /* hero: posle prvog iscrtavanja, da tranzicija stvarno krene */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      heroEl.forEach(function (el) { el.classList.add('is-in'); });
+    });
+  });
 
   var posmatrac = new IntersectionObserver(function (unosi) {
-    unosi.forEach(function (u) {
-      if (!u.isIntersecting) return;
-      u.target.classList.add('is-visible');
-      posmatrac.unobserve(u.target);
+    var novi = unosi.filter(function (u) { return u.isIntersecting; }).map(function (u) { return u.target; });
+    novi.sort(function (a, b) {
+      return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
     });
-  }, { rootMargin: '0px 0px -8% 0px' });
+    novi.forEach(function (el, i) {
+      el.style.setProperty('--p-delay', (Math.min(i, 5) * 0.15).toFixed(2) + 's');
+      el.classList.add('is-in');
+      posmatrac.unobserve(el);
+    });
+  }, { threshold: 0.2 });
 
-  elementi.forEach(function (el) { posmatrac.observe(el); });
+  skrolEl.forEach(function (el) { posmatrac.observe(el); });
 })();
 
 
