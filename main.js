@@ -1032,3 +1032,25 @@ document.addEventListener('DOMContentLoaded', function () {
   pokreniGL();
   kreni();
 })();
+
+/* ==========================================================================
+   Pecat sa grbom: tekst po krugu se okrece dok se skroluje.
+   0.25 stepena po pikselu skrola, preko CSS promenljive.
+   ========================================================================== */
+(function () {
+  var krugovi = document.querySelectorAll('.pecat__krug');
+  if (!krugovi.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var ceka = false;
+  function okreni() {
+    ceka = false;
+    var ugao = ((window.pageYOffset || 0) * 0.25).toFixed(1) + 'deg';
+    krugovi.forEach(function (k) { k.style.setProperty('--pecat-ugao', ugao); });
+  }
+  window.addEventListener('scroll', function () {
+    if (ceka) return;
+    ceka = true;
+    window.requestAnimationFrame(okreni);
+  }, { passive: true });
+  okreni();
+})();
