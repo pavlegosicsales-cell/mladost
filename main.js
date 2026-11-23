@@ -436,3 +436,114 @@ document.addEventListener('DOMContentLoaded', function () {
 
   elementi.forEach(function (el) { posmatrac.observe(el); });
 })();
+
+
+/* ==========================================================================
+   Popunjavanje teksta na skrol, preneto sa B-Steel sajta (tamo iz Konstre).
+   Tekst se deli na reci pa na slova, i svako slovo dobija svoj deo opsega:
+
+     opseg     od kad vrh bloka dodje na 70% visine ekrana do 30%
+     po slovu  [i/n, (i+1)/n] unutar tog opsega
+     opacity   0.2 -> 1, boja bleda -> forest (racuna CSS iz --t)
+
+   Razlika od B-Steela: tamo blok ima samo tekst, ovde izjava ima slike u
+   redu i lime oznake. Zato se idu cvorovi redom: tekst se deli na slova,
+   slika je jedna jedinica na svom mestu, a <mark> ostaje omotac i dobija
+   svoj --t (prosek svojih slova) da bi se i lime podloga punila.
+   ========================================================================== */
+(function () {
+  var blokovi = document.querySelectorAll('[data-scroll-fill]');
+  if (!blokovi.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var stavke = [];
+
+  function podeliTekst(tekst, roditelj, jedinice) {
+    tekst.split(/(\s+)/).forEach(function (deo) {
+      if (!deo) return;
+      if (/^\s+$/.test(deo)) {
+        roditelj.appendChild(document.createTextNode(' '));
+        return;
+      }
+      var rec = document.createElement('span');
+      rec.className = 'fill-word';
+      deo.split('').forEach(function (ch) {
+        var c = document.createElement('span');
+        c.className = 'fill-char';
+        c.textContent = ch;
+        rec.appendChild(c);
+        jedinice.push(c);
+      });
+      roditelj.appendChild(rec);
+    });
+  }
+
+  function obradi(blok) {
+    var jedinice = [];
+    var oznake = [];
+    var cvorovi = Array.prototype.slice.call(blok.childNodes);
+    blok.textContent = '';
+
+    cvorovi.forEach(function (cvor) {
+      if (cvor.nodeType === 3) {
+        podeliTekst(cvor.nodeValue, blok, jedinice);
+      } else if (cvor.nodeType === 1 && cvor.tagName === 'MARK') {
+        var od = jedinice.length;
+        var tekst = cvor.textContent;
+        cvor.textContent = '';
+        podeliTekst(tekst.trim(), cvor, jedinice);
+        blok.appendChild(cvor);
+        oznake.push({ el: cvor, od: od, do: jedinice.length, last: -1 });
+      } else if (cvor.nodeType === 1) {
+        blok.appendChild(cvor);
+        jedinice.push(cvor);
+      }
+    });
+
+    stavke.push({ el: blok, jedinice: jedinice, oznake: oznake, last: [] });
+  }
+
+  Array.prototype.forEach.call(blokovi, obradi);
+  document.documentElement.classList.add('js-scroll-fill');
+
+  var ceka = false;
+
+  function oboji() {
+    ceka = false;
+    var vh = window.innerHeight;
+
+    stavke.forEach(function (s) {
+      var vrh = s.el.getBoundingClientRect().top;
+      /* 0 kad je vrh na 70% ekrana, 1 kad dodje na 30% */
+      var p = Math.max(0, Math.min(1, (0.7 * vh - vrh) / (0.4 * vh)));
+      var n = s.jedinice.length;
+      var vrednosti = [];
+
+      for (var i = 0; i < n; i++) {
+        var t = Math.max(0, Math.min(1, (p - i / n) * n));
+        t = Math.round(t * 100) / 100;
+        vrednosti[i] = t;
+        if (s.last[i] === t) continue;
+        s.last[i] = t;
+        s.jedinice[i].style.setProperty('--t', t);
+      }
+
+      s.oznake.forEach(function (o) {
+        var zbir = 0;
+        for (var k = o.od; k < o.do; k++) zbir += vrednosti[k];
+        var t = Math.round(zbir / Math.max(1, o.do - o.od) * 100) / 100;
+        if (o.last === t) return;
+        o.last = t;
+        o.el.style.setProperty('--t', t);
+      });
+    });
+  }
+
+  window.addEventListener('scroll', function () {
+    if (ceka) return;
+    ceka = true;
+    window.requestAnimationFrame(oboji);
+  }, { passive: true });
+  window.addEventListener('resize', oboji);
+  oboji();
+})();

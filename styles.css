@@ -2846,3 +2846,25 @@ a { text-decoration: none; color: inherit; }
   .tim__tekst { margin-top: 20px; font-size: 14px; }
   .tim__kartica .btn { margin-top: 32px; }
 }
+
+
+/* ==========================================================================
+   Popunjavanje teksta na skrol (sa B-Steel sajta). main.js upisuje --t
+   od 0 do 1 na svako slovo, sliku i oznaku, a CSS racuna prozirnost i boju.
+   Bez JS-a klasa js-scroll-fill ne postoji i tekst stoji pun.
+   ========================================================================== */
+.fill-word { display: inline-block; white-space: nowrap; }
+
+.js-scroll-fill .fill-char,
+.js-scroll-fill .prica__pill {
+  opacity: calc(0.2 + 0.8 * var(--t, 0));
+}
+
+@supports (color: color-mix(in srgb, red 50%, blue)) {
+  .js-scroll-fill .fill-char {
+    color: color-mix(in srgb, var(--forest) calc(var(--t, 0) * 100%), #9aaba4);
+  }
+  .js-scroll-fill .prica__akcenat {
+    background: color-mix(in srgb, var(--lime) calc(var(--t, 0) * 100%), rgba(182, 225, 31, 0.12));
+  }
+}
