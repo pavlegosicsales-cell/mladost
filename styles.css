@@ -4027,18 +4027,13 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ==========================================================================
-   PECAT SA GRBOM NA HERO FOTKI (Skola tenisa)
+   PECAT SA GRBOM (TOCAK)
    Kao na dekopro.rs/o-nama (.op-pecat): krug 136px, gore desno preko ugla
-   fotke (top -41, right -29), tekst po krugu, znak u sredini.
-   Razlika: isecak oko kruga je maska na samoj fotki (rupa 10px sira od
-   kruga), pa se kroz prsten vidi prava pozadina sekcije, i preliv.
-   Tekst se okrece na skrol (main.js upisuje --pecat-ugao).
+   slike (top -41, right -29), tekst po krugu, grb u sredini. Isecak oko
+   kruga je maska na samoj slici (rupa 10px sira od kruga). Tekst se
+   okrece na skrol (main.js upisuje --pecat-ugao). Stoji na slici u
+   sekciji Put kroz skolu (prvo je bio na heroju).
    ========================================================================== */
-.shero__glavna {
-  -webkit-mask-image: radial-gradient(circle at calc(100% - 39px) 27px, transparent 77.5px, #000 78px);
-  mask-image: radial-gradient(circle at calc(100% - 39px) 27px, transparent 77.5px, #000 78px);
-}
-
 .pecat {
   position: absolute;
   top: -41px;
@@ -4049,8 +4044,10 @@ a { text-decoration: none; color: inherit; }
   width: 136px;
   height: 136px;
   border-radius: 50%;
+  /* okrenut SVG dijagonalom viri van kruga i gura sirinu stranice */
+  overflow: hidden;
   background: var(--white);
-  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.4);
 }
 .pecat__krug {
   position: absolute;
@@ -4070,19 +4067,10 @@ a { text-decoration: none; color: inherit; }
   border-radius: 50%;
 }
 
-/* oznaka upisa sa gornjeg desnog ugla prelazi dole desno, gore je pecat */
-.shero__bedz { top: auto; bottom: 88px; }
-
 @media (max-width: 767px) {
-  .shero__glavna {
-    -webkit-mask-image: radial-gradient(circle at calc(100% - 44px) 26px, transparent 59.5px, #000 60px);
-    mask-image: radial-gradient(circle at calc(100% - 44px) 26px, transparent 59.5px, #000 60px);
-  }
   .pecat { width: 104px; height: 104px; top: -26px; right: -8px; }
   .pecat__znak { width: 48px; height: 48px; }
-  .shero__bedz { bottom: 54px; }
 }
-
 
 /* ==========================================================================
    SKOLA TENISA, PUT KROZ SKOLU
@@ -4232,13 +4220,15 @@ a { text-decoration: none; color: inherit; }
   overflow: hidden;
   background: var(--sage);
 }
-.put__slika img { display: block; width: 100%; height: 100%; object-fit: cover; }
+/* samo glavna fotka; grb u pecatu je takodje img i ne sme da se razvuce */
+.put__slika > img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 @media (max-width: 1199px) {
   .put { padding: 90px 40px; }
   .put__telo { flex-direction: column; gap: 48px; }
   /* u koloni flex-basis 0 bi spustio visinu slike na nulu */
-  .put__slika { position: static; flex: none; width: 100%; height: auto; max-height: none; aspect-ratio: 16 / 10; }
+  /* relative, ne static: pecat se meri od slike */
+  .put__slika { position: relative; flex: none; width: 100%; height: auto; max-height: none; aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 767px) {
@@ -4350,4 +4340,18 @@ a { text-decoration: none; color: inherit; }
   .trener__inicijali { width: 56px; height: 56px; font-size: 24px; }
   .trener__ime { font-size: 28px; }
   .trener__uloga { font-size: 13px; }
+}
+
+/* tocak na slici sekcije Put kroz skolu */
+.put__slika { overflow: visible; background: none; }
+.put__slika > img {
+  border-radius: 20px;
+  -webkit-mask-image: radial-gradient(circle at calc(100% - 39px) 27px, transparent 77.5px, #000 78px);
+  mask-image: radial-gradient(circle at calc(100% - 39px) 27px, transparent 77.5px, #000 78px);
+}
+@media (max-width: 767px) {
+  .put__slika > img {
+    -webkit-mask-image: radial-gradient(circle at calc(100% - 44px) 26px, transparent 59.5px, #000 60px);
+    mask-image: radial-gradient(circle at calc(100% - 44px) 26px, transparent 59.5px, #000 60px);
+  }
 }
