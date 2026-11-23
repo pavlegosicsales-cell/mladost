@@ -3331,9 +3331,9 @@ a { text-decoration: none; color: inherit; }
 .khero__ik svg { width: 22px; height: 22px; }
 
 /* ==========================================================================
-   KONTAKT, FORMA
-   qutenza (.framer-1hifdkt + .framer-arirb1): forma 808 i kartice 392,
-   gap 24, polja u dve kolone gap 24, kartice padding 24 gap 32, ikonica 52.
+   KONTAKT, FORMA NA VRHU
+   Tamna sekcija (nav je beo i stoji preko nje), naslov, pa isti blok
+   .kontakt__inner kao na pocetnoj: kartice levo, wizard desno.
    ========================================================================== */
 .kforma {
   padding: 170px 90px 120px;
@@ -3343,138 +3343,15 @@ a { text-decoration: none; color: inherit; }
 .kforma .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
 .kforma .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
 .kforma__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
-
 .kforma__head {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 64px;
 }
-
-.kforma__red {
-  display: grid;
-  grid-template-columns: minmax(0, 808fr) minmax(0, 392fr);
-  gap: 24px;
-}
-
-.kforma__forma {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  align-content: start;
-  padding: 36px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.kpolje { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.kpolje--puna { grid-column: 1 / -1; }
-
-.kpolje label {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--white);
-}
-
-.kpolje input,
-.kpolje select,
-.kpolje textarea {
-  width: 100%;
-  min-height: 52px;
-  padding: 14px 16px;
-  border-radius: 12px;
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
-  background: rgba(0, 0, 0, 0.28);
-  font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
-  font-size: 16px;
-  color: var(--white);
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.kpolje textarea { min-height: 180px; resize: vertical; }
-.kpolje input::placeholder,
-.kpolje textarea::placeholder { color: rgba(255, 255, 255, 0.42); }
-.kpolje input:focus,
-.kpolje select:focus,
-.kpolje textarea:focus {
-  outline: none;
-  border-color: var(--lime);
-  box-shadow: 0 0 0 4px rgba(182, 225, 31, 0.18);
-}
-
-/* select bez sistemske strelice, nasa strelica preko omotaca */
-.kpolje__izbor { position: relative; }
-.kpolje select {
-  -webkit-appearance: none;
-  appearance: none;
-  padding-right: 44px;
-  cursor: pointer;
-}
-.kpolje select option { color: #000; }
-.kpolje__izbor::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 18px;
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid var(--lime);
-  border-bottom: 2px solid var(--lime);
-  transform: translateY(-70%) rotate(45deg);
-  pointer-events: none;
-}
-
-/* normalno dugme, ne preko cele sirine: na sirokom dugmetu loptica
-   putuje pola ekrana pri hover-u */
-.kforma__dugme { margin-top: 4px; }
-
-.kforma__msg {
-  margin-top: 14px;
-  font-size: 15px;
-  font-weight: 600;
-  line-height: 1.5;
-  min-height: 1.5em;
-}
-.kforma__msg:empty { display: none; }
-.kforma__msg.is-ok { color: var(--lime); }
-.kforma__msg.is-err { color: #ffb4a8; }
-
-.kforma__kartice {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.kkartica {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex: 1 1 0;
-  gap: 32px;
-  padding: 28px;
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--white);
-  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.3, 1), border-color 0.45s ease;
-}
-a.kkartica:hover,
-a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime); }
-
-.kkartica__ik {
-  display: grid;
-  place-items: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--lime);
-}
-.kkartica__ik svg { width: 24px; height: 24px; }
-
-.kkartica__tekst { display: flex; flex-direction: column; gap: 6px; }
-.kkartica__naslov { font-size: 22px; font-weight: 700; line-height: 1.25; }
-.kkartica__vrednost { font-size: 18px; font-weight: 600; line-height: 1.5; color: var(--lime); }
+/* na tamnoj podlozi uvodni tekst i ivice kartica moraju da budu svetli */
+.kforma .kontakt__lead { color: rgba(255, 255, 255, 0.78); }
+.kforma .info-card { border-color: rgba(255, 255, 255, 0.14); }
 
 /* ==========================================================================
    KONTAKT, CESTA PITANJA
@@ -3513,35 +3390,50 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   border-radius: 16px;
   background: var(--sage);
   color: var(--forest);
-  overflow: hidden;
 }
-.faq__k summary {
+
+/* Pitanje je dugme preko cele stavke, isti padding otvoreno i zatvoreno. */
+.faq__q {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
   gap: 20px;
+  width: 100%;
   padding: 32px;
+  border: 0;
+  border-radius: 16px;
+  background: none;
+  font-family: "Urbanist", "Urbanist Placeholder", sans-serif;
   font-size: 20px;
   font-weight: 700;
   line-height: 1.35;
-  list-style: none;
+  text-align: left;
+  color: inherit;
   cursor: pointer;
 }
-.faq__k summary::-webkit-details-marker { display: none; }
-.faq__k summary svg {
+.faq__q svg {
   flex: none;
   width: 24px;
   height: 24px;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
 }
-.faq__k[open]:not(.is-zatvara) summary svg { transform: rotate(180deg); }
-.faq__k summary:focus-visible { outline: 2px solid var(--forest); outline-offset: -4px; border-radius: 16px; }
+.faq__k.is-open .faq__q svg { transform: rotate(180deg); }
+.faq__q:focus-visible { outline: 2px solid var(--forest); outline-offset: -4px; }
 
-/* Razmak pitanje/odgovor 16px kao na originalu. Pitanje zadrzava isti
-   padding i otvoreno i zatvoreno, pa nista ne skace; odgovor se podigne
-   za 16px. Visinu stavke animira main.js. */
-.faq__k p {
-  margin-top: -16px;
+/* Otvaranje cistim CSS-om: red mreze ide 0fr -> 1fr, a odgovor se podigne
+   16px (razmak pitanje/odgovor sa originala). Tranziciju vodi browser,
+   pa klik usred animacije samo okrene smer, bez zaglavljivanja. */
+.faq__a {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  transition: grid-template-rows 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
+              margin-top 0.4s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+.faq__k.is-open .faq__a { grid-template-rows: 1fr; margin-top: -16px; }
+.faq__a-in { min-height: 0; overflow: hidden; }
+
+.faq__a p {
   padding: 0 32px 32px;
   font-size: 17px;
   font-weight: 500;
@@ -3554,9 +3446,6 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
   .khero { padding: 80px 40px; min-height: 640px; }
   .khero__kartica { gap: 60px; }
   .kforma { padding: 140px 40px 90px; }
-  .kforma__red { grid-template-columns: 1fr; }
-  .kforma__kartice { flex-direction: row; }
-  .kkartica { padding: 24px; }
   .faq { padding: 90px 40px; }
 }
 
@@ -3577,24 +3466,18 @@ a.kkartica:focus-visible { transform: translateY(-3px); border-color: var(--lime
 
   .kforma { padding: 116px 20px 72px; }
   .kforma__head { margin-bottom: 40px; }
-  .kforma__forma { grid-template-columns: 1fr; gap: 18px; padding: 22px; }
-  .kpolje label { font-size: 15px; }
-  .kforma__kartice { flex-direction: column; gap: 12px; }
-  .kkartica { flex-direction: row; align-items: center; justify-content: flex-start; gap: 16px; padding: 18px; }
-  .kkartica__ik { width: 46px; height: 46px; flex: none; }
-  .kkartica__naslov { font-size: 18px; }
-  .kkartica__vrednost { font-size: 16px; }
 
   .faq { padding: 72px 20px; }
   .faq__head { margin-bottom: 36px; }
   .faq__kolone { grid-template-columns: 1fr; gap: 12px; }
   .faq__kolona { gap: 12px; }
-  .faq__k summary { padding: 22px; font-size: 17px; }
-  .faq__k p { margin-top: -10px; padding: 0 22px 22px; font-size: 16px; }
+  .faq__q { padding: 22px; font-size: 17px; }
+  .faq__k.is-open .faq__a { margin-top: -10px; }
+  .faq__a p { padding: 0 22px 22px; font-size: 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .khero__bg video { display: none; }
   .khero__bg { background: url("images/kontakt-poster.jpg") center / cover no-repeat; }
-  .kkartica, .faq__k summary svg { transition: none; }
+  .faq__q svg, .faq__a { transition: none; }
 }

@@ -601,122 +601,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 /* ==========================================================================
-   Forma na stranici Kontakt. Isti ENDPOINT i iste poruke kao wizard na
-   pocetnoj, samo bez koraka. Dok je ENDPOINT prazan, upit se ne salje.
+   Cesta pitanja: dugme samo menja klasu is-open i aria-expanded.
+   Animaciju radi CSS (grid-template-rows), pa nema stanja koja mogu da
+   se zaglave kad se klikce brzo ili usred animacije.
    ========================================================================== */
 (function () {
-  var forma = document.getElementById('kontakt-forma');
-  if (!forma) return;
-
-  var poruka = document.getElementById('k-msg');
-  var dugme = document.getElementById('k-posalji');
-
-  function javi(tekst, ok) {
-    poruka.textContent = tekst;
-    poruka.classList.remove('is-ok', 'is-err');
-    poruka.classList.add(ok ? 'is-ok' : 'is-err');
-  }
-
-  forma.addEventListener('submit', function (e) {
-    e.preventDefault();
-
-    var ime = forma.querySelector('#k-ime').value.trim();
-    var telefon = forma.querySelector('#k-telefon').value.trim();
-    var email = forma.querySelector('#k-email').value.trim();
-
-    if (!ime || !telefon || !email) {
-      javi('Popuni ime, telefon i email da bismo mogli da se javimo.', false);
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      javi('Email adresa nije ispravna. Proveri je pa probaj ponovo.', false);
-      return;
-    }
-
-    var podaci = {
-      usluga: forma.querySelector('#k-usluga').value,
-      ime: ime,
-      telefon: telefon,
-      email: email,
-      poruka: forma.querySelector('#k-poruka').value.trim(),
-      stranica: window.location.href
-    };
-
-    if (!ENDPOINT) {
-      javi('Forma još nije povezana sa serverom. Pozovi 061 500 50 51 i javljamo se odmah.', false);
-      console.warn('ENDPOINT je prazan. Pokreni Skill 03 i nalepi Apps Script URL u main.js.');
-      return;
-    }
-
-    dugme.disabled = true;
-
-    fetch(ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(podaci),
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
-    })
-      .then(function (r) {
-        if (!r.ok) throw new Error('Neuspesno slanje');
-        forma.reset();
-        javi('Hvala, upit je stigao. Javljamo se na telefon koji si ostavio, najčešće isti dan.', true);
-        dugme.disabled = false;
-      })
-      .catch(function () {
-        javi('Slanje nije uspelo. Pozovi 061 500 50 51 ili piši na mladost.tenis@gmail.com.', false);
-        dugme.disabled = false;
-      });
-  });
-})();
-
-/* ==========================================================================
-   Cesta pitanja: otvaranje i zatvaranje animira visinu cele stavke.
-   Ranije je islo kroz ::details-content i menjao se padding pitanja, pa je
-   sadrzaj skakao. Sada pitanje ne menja velicinu, a visina klizi od
-   trenutne do ciljne, i kad se klikne usred animacije nastavlja odatle.
-   ========================================================================== */
-(function () {
-  var stavke = document.querySelectorAll('.faq__k');
-  if (!stavke.length) return;
-  var mirno = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-  stavke.forEach(function (d) {
-    var pitanje = d.querySelector('summary');
-    var anim = null;
-    var otvorena = d.open;
-
-    pitanje.addEventListener('click', function (e) {
-      e.preventDefault();
-      otvorena = !otvorena;
-
-      if (mirno.matches || !d.animate) {
-        d.open = otvorena;
-        return;
-      }
-
-      var od = d.getBoundingClientRect().height;
-      if (anim) anim.cancel();
-
-      var doVisine;
-      if (otvorena) {
-        d.classList.remove('is-zatvara');
-        d.open = true;
-        doVisine = d.getBoundingClientRect().height;
-      } else {
-        d.classList.add('is-zatvara');
-        doVisine = pitanje.getBoundingClientRect().height;
-      }
-
-      anim = d.animate(
-        { height: [od + 'px', doVisine + 'px'] },
-        { duration: 380, easing: 'cubic-bezier(0.2, 0.7, 0.3, 1)' }
-      );
-      anim.onfinish = function () {
-        if (!otvorena) {
-          d.open = false;
-          d.classList.remove('is-zatvara');
-        }
-        anim = null;
-      };
+  document.querySelectorAll('.faq__q').forEach(function (dugme) {
+    dugme.addEventListener('click', function () {
+      var stavka = dugme.closest('.faq__k');
+      var otvori = !stavka.classList.contains('is-open');
+      stavka.classList.toggle('is-open', otvori);
+      dugme.setAttribute('aria-expanded', otvori ? 'true' : 'false');
     });
   });
 })();
