@@ -3481,3 +3481,245 @@ a { text-decoration: none; color: inherit; }
   .khero__bg { background: url("images/kontakt-poster.jpg") center / cover no-repeat; }
   .faq__q svg, .faq__a { transition: none; }
 }
+
+
+/* ==========================================================================
+   GALERIJA, HERO
+   Tamna sekcija (nav je beo i stoji preko nje), naslov u sredini, ispod
+   dve trake pravih fotki iz kluba koje klize u suprotnim smerovima.
+   Trake staju na hover, a bez pokreta (reduced motion) se skroluju rukom.
+   ========================================================================== */
+.ghero {
+  position: relative;
+  padding: 170px 0 110px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #0d2b24 0%, #10342b 60%, var(--forest) 100%);
+  color: var(--white);
+}
+.ghero .hero__grain { opacity: 0.12; }
+
+.ghero__head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 20px;
+  text-align: center;
+}
+.ghero .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
+.ghero .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
+.ghero .veliki-naslov { color: var(--white); font-size: clamp(64px, 7.4vw, 140px); }
+.ghero__sub {
+  max-width: 600px;
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+}
+.ghero__head .btn { margin-top: 34px; }
+
+.ghero__trake {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 72px;
+  /* ivice se gube u pozadinu umesto da slike budu odsecene na ivici */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+.traka { overflow: hidden; }
+.traka__niz {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: traka-levo 70s linear infinite;
+}
+.traka--desno .traka__niz { animation-name: traka-desno; animation-duration: 80s; }
+.traka:hover .traka__niz { animation-play-state: paused; }
+
+/* niz je dupliran u HTML-u, pa pomeraj od pola sirine izgleda beskonacno */
+@keyframes traka-levo { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
+@keyframes traka-desno { from { transform: translateX(calc(-50% - 8px)); } to { transform: translateX(0); } }
+
+.traka img {
+  flex: none;
+  width: auto;
+  height: 300px;
+  border-radius: 18px;
+  object-fit: cover;
+}
+.traka--desno img { height: 240px; }
+
+/* ==========================================================================
+   GALERIJA, MREZA
+   Najobicnija galerija: kolone, slike u svom odnosu, klik otvara veci
+   prikaz. Video ima ikonicu za pustanje i oznaku.
+   ========================================================================== */
+.gal { padding: 120px 90px; background: var(--white); }
+.gal__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
+.gal__naslov { margin: 0 0 40px; }
+
+.gal__mreza { column-count: 4; column-gap: 16px; }
+
+.gal__item {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--sage);
+  cursor: zoom-in;
+  break-inside: avoid;
+}
+.gal__item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+@media (hover: hover) and (pointer: fine) {
+  .gal__item:hover img { transform: scale(1.04); }
+}
+.gal__item:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+
+.gal__item--video { cursor: pointer; }
+.gal__play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--forest);
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.gal__play svg { width: 24px; height: 24px; margin-left: 3px; }
+.gal__oznaka {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: rgba(5, 24, 20, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* --------------------------------------------------------------------------
+   Uvecan prikaz
+   -------------------------------------------------------------------------- */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  grid-template-columns: 72px 1fr 72px;
+  align-items: center;
+  padding: 72px 16px 56px;
+  background: rgba(3, 14, 11, 0.94);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+}
+.lb.is-open { opacity: 1; visibility: visible; transition: opacity 0.3s ease; }
+
+.lb__scena {
+  grid-column: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 0;
+}
+.lb__scena img,
+.lb__scena video {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 12px;
+  background: #000;
+}
+
+.lb__dugme {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+.lb__dugme:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+.lb__dugme:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
+.lb__dugme svg { width: 22px; height: 22px; }
+.lb__nazad { grid-column: 1; justify-self: center; }
+.lb__napred { grid-column: 3; justify-self: center; }
+.lb__zatvori { position: absolute; top: 16px; right: 16px; }
+.lb__brojac {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .ghero { padding: 140px 0 90px; }
+  .gal { padding: 90px 40px; }
+  .gal__mreza { column-count: 3; }
+}
+
+/* telefon */
+@media (max-width: 767px) {
+  .ghero { padding: 116px 0 64px; }
+  .ghero .veliki-naslov { font-size: clamp(52px, 15vw, 72px); }
+  .ghero__sub { font-size: 16px; }
+  .ghero__trake { margin-top: 48px; gap: 10px; }
+  .traka__niz { gap: 10px; }
+  @keyframes traka-levo { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 5px)); } }
+  @keyframes traka-desno { from { transform: translateX(calc(-50% - 5px)); } to { transform: translateX(0); } }
+  .traka img { height: 180px; border-radius: 14px; }
+  .traka--desno img { height: 140px; }
+
+  .gal { padding: 72px 12px; }
+  .gal__naslov { margin-left: 8px; }
+  .gal__mreza { column-count: 2; column-gap: 8px; }
+  .gal__item { margin-bottom: 8px; border-radius: 10px; }
+  .gal__play { width: 48px; height: 48px; }
+  .gal__play svg { width: 18px; height: 18px; }
+  .gal__oznaka { top: 8px; left: 8px; font-size: 11px; padding: 3px 8px; }
+
+  .lb { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; padding: 64px 12px 20px; row-gap: 16px; }
+  .lb__scena { grid-column: 1 / -1; grid-row: 1; }
+  .lb__nazad { grid-column: 1; grid-row: 2; justify-self: end; margin-right: 12px; }
+  .lb__napred { grid-column: 2; grid-row: 2; justify-self: start; margin-left: 12px; }
+  .lb__brojac { bottom: auto; top: 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .traka { overflow-x: auto; }
+  .traka__niz { animation: none; }
+  .gal__item img, .lb, .lb__dugme { transition: none; }
+}

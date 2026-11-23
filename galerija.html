@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galerija | Teniski Klub Mladost Banovo Brdo</title>
+<meta name="description" content="Fotografije i snimci iz Teniskog kluba Mladost na Banovom Brdu: tri šljakasta terena, škola tenisa, treninzi pod balonom i bašta kluba.">
+<link rel="icon" href="images/logo.png" type="image/png">
+
+<!-- Fontovi sa originala: Bebas Neue za naslove, Urbanist za tekst.
+     Oba imaju latin-ext subset, dakle č ć ž š đ rade. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Lenis smooth scroll, ista biblioteka i iste postavke kao na tennislove.webflow.io.
+     Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
+<link rel="stylesheet" href="vendor/lenis.css">
+
+<link rel="stylesheet" href="styles.css?v=55">
+</head>
+<body>
+
+<main>
+
+  <!-- ================= NAVBAR =================
+       Efekat preuzet sa qutenza.framer.website: plutajuca traka koja uleti
+       odozgo, linija ispod linka raste na hover, hamburger se sklopi u X.
+       Font i dugme su nasi. -->
+  <nav class="nav" data-name="Navigation" aria-label="Glavna navigacija">
+    <div class="nav__inner">
+
+      <div class="nav__main">
+        <div class="nav__row">
+          <a class="nav__logo" href="index.html" aria-label="Teniski Klub Mladost, pocetna">
+            <img src="images/logo.png" alt="" width="44" height="44" aria-hidden="true">
+            <span class="nav__logo-text">Mladost</span>
+          </a>
+
+          <button class="nav__burger" type="button" id="nav-burger"
+                  aria-label="Otvori meni" aria-expanded="false" aria-controls="nav-links">
+            <span class="nav__burger-line nav__burger-line--top"></span>
+            <span class="nav__burger-line nav__burger-line--bottom"></span>
+          </button>
+        </div>
+
+        <div class="nav__links" id="nav-links">
+          <a class="nav__link t-btn" href="index.html">Početna</a>
+          <a class="nav__link t-btn" href="o-nama.html">O nama</a>
+          <a class="nav__link t-btn" href="skola-tenisa.html">Škola tenisa</a>
+          <a class="nav__link t-btn" href="individualni-treninzi.html">Individualni treninzi</a>
+          <a class="nav__link t-btn" href="rekreativci.html">Rekreativci</a>
+          <a class="nav__link t-btn" href="blog.html">Blog</a>
+          <a class="nav__link t-btn" href="galerija.html" aria-current="page">Galerija</a>
+          <a class="nav__link t-btn" href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="tel:+381615005051" data-name="Secondary">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon" data-name="Button">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ================= GALERIJA, HERO =================
+       Tamna sekcija ispod nava, naslov u sredini, dve trake pravih fotki
+       iz kluba koje klize u suprotnim smerovima i staju na hover. -->
+  <section class="ghero" data-name="Galerija Hero">
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <div class="ghero__head">
+      <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Galerija</p>
+      <h1 class="veliki-naslov veliki-naslov--centar">Život na <mark class="veliki-naslov__akcenat">šljaci</mark></h1>
+      <p class="ghero__sub">Treninzi, turniri, letnje večeri u bašti i zima pod balonom. Sve snimljeno u klubu na Banovom Brdu.</p>
+      <a class="btn" href="#sve">
+        <span class="btn__label t-btn">Pogledaj sve</span>
+        <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div class="ghero__trake" aria-hidden="true">
+      <div class="traka">
+        <div class="traka__niz">
+            <img src="images/gal-h01.webp" alt="" width="360" height="480">
+            <img src="images/gal-h02.webp" alt="" width="768" height="480">
+            <img src="images/gal-h03.webp" alt="" width="558" height="480">
+            <img src="images/gal-h04.webp" alt="" width="360" height="480">
+            <img src="images/gal-h05.webp" alt="" width="480" height="480">
+            <img src="images/gal-h06.webp" alt="" width="480" height="480">
+            <img src="images/gal-h07.webp" alt="" width="768" height="480">
+            <img src="images/gal-h01.webp" alt="" width="360" height="480">
+            <img src="images/gal-h02.webp" alt="" width="768" height="480">
+            <img src="images/gal-h03.webp" alt="" width="558" height="480">
+            <img src="images/gal-h04.webp" alt="" width="360" height="480">
+            <img src="images/gal-h05.webp" alt="" width="480" height="480">
+            <img src="images/gal-h06.webp" alt="" width="480" height="480">
+            <img src="images/gal-h07.webp" alt="" width="768" height="480">
+        </div>
+      </div>
+      <div class="traka traka--desno">
+        <div class="traka__niz">
+            <img src="images/gal-h08.webp" alt="" width="360" height="480">
+            <img src="images/gal-h09.webp" alt="" width="556" height="480">
+            <img src="images/gal-h10.webp" alt="" width="360" height="480">
+            <img src="images/gal-h11.webp" alt="" width="558" height="480">
+            <img src="images/gal-h12.webp" alt="" width="360" height="480">
+            <img src="images/gal-h13.webp" alt="" width="480" height="480">
+            <img src="images/gal-h14.webp" alt="" width="360" height="480">
+            <img src="images/gal-h08.webp" alt="" width="360" height="480">
+            <img src="images/gal-h09.webp" alt="" width="556" height="480">
+            <img src="images/gal-h10.webp" alt="" width="360" height="480">
+            <img src="images/gal-h11.webp" alt="" width="558" height="480">
+            <img src="images/gal-h12.webp" alt="" width="360" height="480">
+            <img src="images/gal-h13.webp" alt="" width="480" height="480">
+            <img src="images/gal-h14.webp" alt="" width="360" height="480">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALERIJA, MREZA =================
+       Najobicnija galerija u kolonama. Fotke i videi, klik otvara veci
+       prikaz (strelice, Esc, levo/desno). -->
+  <section class="gal" id="sve">
+    <div class="gal__inner">
+      <h2 class="sekcija__naslov gal__naslov">Fotografije i snimci</h2>
+      <div class="gal__mreza">
+        <button type="button" class="gal__item gal__item--video" data-video="video/o-nama.mp4" aria-label="Pusti video: Šljakasti teren noću pod reflektorima">
+          <img src="images/gal-01-m.webp" alt="Šljakasti teren noću pod reflektorima" width="800" height="450" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-02.webp" aria-label="Otvori fotografiju: Deca iz škole tenisa sa medaljama i trenerima pod balonom">
+          <img src="images/gal-02-m.webp" alt="Deca iz škole tenisa sa medaljama i trenerima pod balonom" width="800" height="600" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-03.webp" aria-label="Otvori fotografiju: Tri šljakasta terena snimljena dronom">
+          <img src="images/gal-03-m.webp" alt="Tri šljakasta terena snimljena dronom" width="800" height="450" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-04.webp" aria-label="Otvori fotografiju: Dvoje dece na treningu na šljaci">
+          <img src="images/gal-04-m.webp" alt="Dvoje dece na treningu na šljaci" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item gal__item--video" data-video="video/galerija-05.mp4" aria-label="Pusti video: Dron iznad šljakastih terena">
+          <img src="images/gal-05-m.webp" alt="Dron iznad šljakastih terena" width="800" height="1422" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-06.webp" aria-label="Otvori fotografiju: Linije servis polja na šljaci iz blizine">
+          <img src="images/gal-06-m.webp" alt="Linije servis polja na šljaci iz blizine" width="800" height="1124" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-07.webp" aria-label="Otvori fotografiju: Trener sa dvojicom mladih igrača i diplomama">
+          <img src="images/gal-07-m.webp" alt="Trener sa dvojicom mladih igrača i diplomama" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-08.webp" aria-label="Otvori fotografiju: Bašta kluba odozgo, sa ležaljkama i zelenilom">
+          <img src="images/gal-08-m.webp" alt="Bašta kluba odozgo, sa ležaljkama i zelenilom" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-09.webp" aria-label="Otvori fotografiju: Teren noću pod reflektorima">
+          <img src="images/gal-09-m.webp" alt="Teren noću pod reflektorima" width="800" height="600" loading="lazy">
+        </button>
+        <button type="button" class="gal__item gal__item--video" data-video="video/kontakt.mp4" aria-label="Pusti video: Dron snimak sva tri terena odozgo">
+          <img src="images/gal-10-m.webp" alt="Dron snimak sva tri terena odozgo" width="800" height="450" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-11.webp" aria-label="Otvori fotografiju: Tereni pod balonom spremni za zimsku sezonu">
+          <img src="images/gal-11-m.webp" alt="Tereni pod balonom spremni za zimsku sezonu" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-12.webp" aria-label="Otvori fotografiju: Duga iznad terena u sumrak">
+          <img src="images/gal-12-m.webp" alt="Duga iznad terena u sumrak" width="800" height="600" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-13.webp" aria-label="Otvori fotografiju: Trener sa grupom dece uz mrežu">
+          <img src="images/gal-13-m.webp" alt="Trener sa grupom dece uz mrežu" width="800" height="800" loading="lazy">
+        </button>
+        <button type="button" class="gal__item gal__item--video" data-video="video/galerija-14.mp4" aria-label="Pusti video: Dron iznad terena i balona">
+          <img src="images/gal-14-m.webp" alt="Dron iznad terena i balona" width="800" height="1422" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-15.webp" aria-label="Otvori fotografiju: Stari drveni reketi na zidu klupske kuće">
+          <img src="images/gal-15-m.webp" alt="Stari drveni reketi na zidu klupske kuće" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-16.webp" aria-label="Otvori fotografiju: Tereni i kraj snimljeni dronom">
+          <img src="images/gal-16-m.webp" alt="Tereni i kraj snimljeni dronom" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-17.webp" aria-label="Otvori fotografiju: Bašta uveče pod lampicama">
+          <img src="images/gal-17-m.webp" alt="Bašta uveče pod lampicama" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-18.webp" aria-label="Otvori fotografiju: Svlačionica sa klupama i slikama terena">
+          <img src="images/gal-18-m.webp" alt="Svlačionica sa klupama i slikama terena" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-19.webp" aria-label="Otvori fotografiju: Trening pod balonom zimi">
+          <img src="images/gal-19-m.webp" alt="Trening pod balonom zimi" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item gal__item--video" data-video="video/galerija-20.mp4" aria-label="Pusti video: Dron nad šljakom">
+          <img src="images/gal-20-m.webp" alt="Dron nad šljakom" width="800" height="1422" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-21.webp" aria-label="Otvori fotografiju: Teren po danu sa mrežom">
+          <img src="images/gal-21-m.webp" alt="Teren po danu sa mrežom" width="800" height="600" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-22.webp" aria-label="Otvori fotografiju: Nove tuš kabine u klupskoj kući">
+          <img src="images/gal-22-m.webp" alt="Nove tuš kabine u klupskoj kući" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-23.webp" aria-label="Otvori fotografiju: Tereni odozgo, snimak dronom">
+          <img src="images/gal-23-m.webp" alt="Tereni odozgo, snimak dronom" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-24.webp" aria-label="Otvori fotografiju: Teren uveče pod reflektorima">
+          <img src="images/gal-24-m.webp" alt="Teren uveče pod reflektorima" width="800" height="800" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-25.webp" aria-label="Otvori fotografiju: Bašta kluba snimljena odozgo">
+          <img src="images/gal-25-m.webp" alt="Bašta kluba snimljena odozgo" width="800" height="450" loading="lazy">
+        </button>
+        <button type="button" class="gal__item gal__item--video" data-video="video/hero.mp4" aria-label="Pusti video: Dron snimak kluba iz vazduha">
+          <img src="images/gal-26-m.webp" alt="Dron snimak kluba iz vazduha" width="800" height="450" loading="lazy">
+          <span class="gal__oznaka">Video</span>
+          <span class="gal__play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5z"/></svg></span>
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-27.webp" aria-label="Otvori fotografiju: Svlačionica sa zelenim zidom">
+          <img src="images/gal-27-m.webp" alt="Svlačionica sa zelenim zidom" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-28.webp" aria-label="Otvori fotografiju: Tereni pored balona, snimak dronom">
+          <img src="images/gal-28-m.webp" alt="Tereni pored balona, snimak dronom" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-29.webp" aria-label="Otvori fotografiju: Klupska kuća i bašta">
+          <img src="images/gal-29-m.webp" alt="Klupska kuća i bašta" width="800" height="1422" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-30.webp" aria-label="Otvori fotografiju: Hodnik klupske kuće sa slikama">
+          <img src="images/gal-30-m.webp" alt="Hodnik klupske kuće sa slikama" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-31.webp" aria-label="Otvori fotografiju: Šljakasti tereni po danu">
+          <img src="images/gal-31-m.webp" alt="Šljakasti tereni po danu" width="800" height="1066" loading="lazy">
+        </button>
+        <button type="button" class="gal__item" data-full="images/gal-32.webp" aria-label="Otvori fotografiju: Balon iznutra, tereni spremni za zimu">
+          <img src="images/gal-32-m.webp" alt="Balon iznutra, tereni spremni za zimu" width="800" height="1066" loading="lazy">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- uvecan prikaz, puni ga main.js -->
+  <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Uvećan prikaz" aria-hidden="true">
+    <button type="button" class="lb__dugme lb__zatvori" aria-label="Zatvori"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <button type="button" class="lb__dugme lb__nazad" aria-label="Prethodna"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+    <div class="lb__scena"></div>
+    <button type="button" class="lb__dugme lb__napred" aria-label="Sledeća"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+    <p class="lb__brojac" aria-live="polite"></p>
+  </div>
+
+</main>
+
+<!-- ================= FOOTER, raspored po teniskom terenu ================= -->
+<footer class="footer">
+  <div class="footer__inner">
+
+    <div class="court">
+      <div class="court__frame" aria-hidden="true"></div>
+      <div class="court__net" aria-hidden="true"></div>
+      <div class="court__center" aria-hidden="true"></div>
+
+      <!-- gornji koridor, levo -->
+      <div class="court__cell court__cell--contact-l">
+        <p class="court__label">Adresa</p>
+        <address class="court__text">Lješka 82, Banovo Brdo<br>11030 Beograd</address>
+      </div>
+
+      <!-- gornji koridor, desno -->
+      <div class="court__cell court__cell--contact-r">
+        <p class="court__label">Kontakt</p>
+        <p class="court__text">
+          <a href="tel:+381615005051">061 500 50 51</a><br>
+          <a href="mailto:mladost.tenis@gmail.com">mladost.tenis@gmail.com</a>
+        </p>
+      </div>
+
+      <!-- levo zadnje polje, logo -->
+      <div class="court__cell court__cell--logo">
+        <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo" width="190" height="190">
+      </div>
+
+      <!-- gornja servis polja, prazna po maketi -->
+      <div class="court__cell court__cell--void-a" aria-hidden="true"></div>
+      <div class="court__cell court__cell--void-b" aria-hidden="true"></div>
+
+      <!-- donja servis polja, dugmad -->
+      <div class="court__cell court__cell--btn-a">
+        <a class="btn" href="tel:+381615005051">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <div class="court__cell court__cell--btn-b">
+        <a class="btn btn--ghost" href="skola-tenisa.html">
+          <span class="btn__label t-btn">Upiši dete u školu</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <!-- desno zadnje polje, site map -->
+      <nav class="court__cell court__cell--sitemap" aria-label="Mapa sajta">
+        <p class="court__label">Mapa sajta</p>
+        <ul class="sitemap">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="o-nama.html">O nama</a></li>
+          <li><a href="skola-tenisa.html">Škola tenisa</a></li>
+          <li><a href="individualni-treninzi.html">Individualni treninzi</a></li>
+          <li><a href="rekreativci.html">Rekreativci</a></li>
+          <li><a href="treneri.html">Treneri</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <!-- donji koridor, levo -->
+      <div class="court__cell court__cell--copy">
+        <p class="court__text court__text--small">
+          &copy; 2026 Teniski Klub Mladost.
+          <span class="court__sep">·</span>
+          Izrada: <a href="https://www.patoadcreatives.com/sr" target="_blank" rel="noopener">PATO</a>
+        </p>
+      </div>
+
+      <!-- donji koridor, desno -->
+      <div class="court__cell court__cell--social">
+        <ul class="socials">
+          <li>
+            <a href="https://www.instagram.com/teniskiklub.mladost/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/381615005051" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 0 16 8 8 0 0 1-4.1-1.1l-.3-.2-2.6.7.7-2.5-.2-.3A8 8 0 0 1 12 4m-3.2 4c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.5 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.3-1.4-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- veliki natpis ispod terena, presecen dnom -->
+    <div class="footer__wordmark" aria-hidden="true"><span>MLADOST</span></div>
+
+  </div>
+</footer>
+
+<script src="vendor/lenis.min.js"></script>
+<script src="main.js?v=27"></script>
+</body>
+</html>

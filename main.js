@@ -615,3 +615,80 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 })();
+
+
+/* ==========================================================================
+   Galerija: uvecan prikaz fotke ili videa. Strelice i tasteri levo/desno
+   menjaju stavku, Esc i klik van slike zatvaraju. Dok je otvoren, Lenis
+   stoji da se stranica ne skroluje ispod.
+   ========================================================================== */
+(function () {
+  var stavke = Array.prototype.slice.call(document.querySelectorAll('.gal__item'));
+  var lb = document.getElementById('lb');
+  if (!stavke.length || !lb) return;
+
+  var scena = lb.querySelector('.lb__scena');
+  var brojac = lb.querySelector('.lb__brojac');
+  var zatvori = lb.querySelector('.lb__zatvori');
+  var i = 0;
+  var poslednjiFokus = null;
+
+  function prikazi(n) {
+    i = (n + stavke.length) % stavke.length;
+    var s = stavke[i];
+    scena.textContent = '';
+    if (s.dataset.video) {
+      var v = document.createElement('video');
+      v.src = s.dataset.video;
+      v.poster = s.querySelector('img').src;
+      v.controls = true;
+      v.autoplay = true;
+      v.loop = true;
+      v.playsInline = true;
+      v.muted = true;
+      v.setAttribute('aria-label', s.getAttribute('aria-label'));
+      scena.appendChild(v);
+    } else {
+      var img = document.createElement('img');
+      img.src = s.dataset.full;
+      img.alt = s.querySelector('img').alt;
+      scena.appendChild(img);
+    }
+    brojac.textContent = (i + 1) + ' / ' + stavke.length;
+  }
+
+  function otvori(n) {
+    poslednjiFokus = document.activeElement;
+    prikazi(n);
+    lb.classList.add('is-open');
+    lb.setAttribute('aria-hidden', 'false');
+    if (window.lenis) window.lenis.stop();
+    document.documentElement.style.overflow = 'hidden';
+    zatvori.focus();
+  }
+
+  function zatvoriLb() {
+    lb.classList.remove('is-open');
+    lb.setAttribute('aria-hidden', 'true');
+    scena.textContent = '';
+    if (window.lenis) window.lenis.start();
+    document.documentElement.style.overflow = '';
+    if (poslednjiFokus) poslednjiFokus.focus();
+  }
+
+  stavke.forEach(function (s, n) {
+    s.addEventListener('click', function () { otvori(n); });
+  });
+  lb.querySelector('.lb__nazad').addEventListener('click', function () { prikazi(i - 1); });
+  lb.querySelector('.lb__napred').addEventListener('click', function () { prikazi(i + 1); });
+  zatvori.addEventListener('click', zatvoriLb);
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb || e.target === scena) zatvoriLb();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!lb.classList.contains('is-open')) return;
+    if (e.key === 'Escape') zatvoriLb();
+    else if (e.key === 'ArrowLeft') prikazi(i - 1);
+    else if (e.key === 'ArrowRight') prikazi(i + 1);
+  });
+})();
