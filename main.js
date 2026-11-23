@@ -1054,3 +1054,31 @@ document.addEventListener('DOMContentLoaded', function () {
   }, { passive: true });
   okreni();
 })();
+
+/* ==========================================================================
+   Put kroz skolu: traka svake stavke se puni (0 -> 1) dok gornja ivica
+   stavke ide od sredine ekrana navise za jednu visinu stavke. Isto kao
+   "Kako je posao rastao" na dekopro.rs (tamo izmereno na Konstri).
+   Bez JS-a i uz manje pokreta trake su pune (CSS: --put podrazumevano 1).
+   ========================================================================== */
+(function () {
+  var lista = document.querySelector('[data-put]');
+  if (!lista || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var stavke = Array.prototype.slice.call(lista.querySelectorAll('.put__stavka'));
+  var ceka = false, stanje = [];
+  function oboji() {
+    ceka = false;
+    var pola = window.innerHeight / 2;
+    stavke.forEach(function (s, i) {
+      var r = s.getBoundingClientRect();
+      var t = Math.max(0, Math.min(1, (pola - r.top) / r.height));
+      t = Math.round(t * 1000) / 1000;
+      if (stanje[i] === t) return;
+      stanje[i] = t;
+      s.style.setProperty('--put', t);
+    });
+  }
+  window.addEventListener('scroll', function () { if (!ceka) { ceka = true; requestAnimationFrame(oboji); } }, { passive: true });
+  window.addEventListener('resize', function () { stanje = []; oboji(); });
+  oboji();
+})();
