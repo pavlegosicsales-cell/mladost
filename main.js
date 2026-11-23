@@ -368,8 +368,9 @@ document.addEventListener('DOMContentLoaded', function () {
    Video klizi sporije od stranice, pa se hero i sadrzaj ispod razdvajaju.
    ========================================================================== */
 (function () {
-  var hero = document.querySelector('.hero');
-  var pozadina = hero && hero.querySelector('.hero__bg');
+  /* .hero na pocetnoj, .ohero na stranici O nama */
+  var hero = document.querySelector('.hero, .ohero');
+  var pozadina = hero && hero.querySelector('.hero__bg, .ohero__bg');
   if (!pozadina) return;
 
   /* 0.4 znaci da se video u odnosu na ekran penje 60% brzine stranice.
