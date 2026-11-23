@@ -2868,3 +2868,357 @@ a { text-decoration: none; color: inherit; }
     background: color-mix(in srgb, var(--lime) calc(var(--t, 0) * 100%), rgba(182, 225, 31, 0.12));
   }
 }
+
+
+/* ==========================================================================
+   O NAMA, ZAJEDNICKO ZA "ZASTO MLADOST" I "OBNOVA KLUBA"
+   Raspored sa tennico.framer.website/about, stil nas.
+   ========================================================================== */
+
+/* mala oznaka iznad naslova: kvadrat sa lopticom i tekst verzalom */
+.oznaka {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 5px;
+  border: 1px solid rgba(26, 67, 57, 0.18);
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.oznaka__ikona {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--forest);
+}
+.oznaka__ikona img { width: 16px; height: 16px; }
+
+.veliki-naslov {
+  margin-top: 24px;
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: clamp(56px, 5.6vw, 104px);
+  line-height: 0.98;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+  color: var(--forest);
+}
+.veliki-naslov--centar { text-align: center; }
+.veliki-naslov__akcenat {
+  display: inline-block;
+  line-height: 0.9;
+  padding: 0.06em 0.16em 0;
+  border-radius: 0.1em;
+  background: var(--lime);
+  color: var(--forest);
+}
+
+/* --------------------------------------------------------------------------
+   ZASTO MLADOST, mreza 1fr 1fr 2fr kao na originalu (282 / 286 / 592 na
+   1200px kontejneru), dva reda, slajder zauzima desnu kolonu celom visinom.
+   -------------------------------------------------------------------------- */
+.zasto { padding: 0 90px 120px; background: var(--white); }
+.zasto__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.bento {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  grid-template-rows: repeat(2, minmax(280px, 19vw));
+  gap: 20px;
+  width: 100%;
+  margin-top: 72px;
+}
+
+.bento__k {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 32px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.bento__k--tamna {
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  color: var(--white);
+}
+.bento__k--lime { background: var(--lime); color: var(--forest); }
+
+/* tanki krugovi u pozadini, kao sare na originalnim karticama */
+.bento__krug {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.bento__krug--1 { width: 240px; height: 240px; top: -70px; left: -90px; border: 2px solid rgba(255, 255, 255, 0.07); }
+.bento__krug--2 { width: 240px; height: 240px; top: -110px; left: 70px; border: 2px solid rgba(255, 255, 255, 0.07); }
+.bento__krug--3 { width: 220px; height: 220px; bottom: -120px; left: -60px; border: 2px solid rgba(26, 67, 57, 0.12); }
+
+.bento__vrh {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+/* inicijali trenera umesto portreta, preklopljeni kao avatari */
+.bento__inicijali { display: flex; }
+.bento__inicijali span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-left: -12px;
+  border: 3px solid #184a3e;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--forest);
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 22px;
+  line-height: 1;
+  padding-top: 2px;
+}
+.bento__inicijali span:first-child { margin-left: 0; }
+
+.bento__mali {
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+.bento__k--tamna .bento__mali { color: rgba(255, 255, 255, 0.88); }
+
+.bento__ikona { width: 76px; height: 76px; color: var(--forest); }
+
+.bento__naslov {
+  position: relative;
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: clamp(36px, 2.8vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+}
+
+/* siroka kartica sa slikom, donji red levo */
+.bento__k--slika {
+  grid-column: 1 / 3;
+  grid-row: 2;
+  justify-content: flex-end;
+  color: var(--white);
+}
+.bento__pozadina {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.bento__veo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 25%, rgba(5, 24, 20, 0.85) 100%);
+}
+.bento__dno { position: relative; }
+.bento__lime { color: var(--lime); }
+.bento__tekst {
+  max-width: 560px;
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* slajder: tri slike se smenjuju pretapanjem, crtice dole desno */
+.slajder {
+  position: relative;
+  grid-column: 3;
+  grid-row: 1 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--forest);
+}
+.slajder__slika {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.slajder__slika.is-active { opacity: 1; }
+.slajder__tacke {
+  position: absolute;
+  right: 40px;
+  bottom: 36px;
+  display: flex;
+  gap: 8px;
+}
+.slajder__tacka {
+  width: 32px;
+  height: 14px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.slajder__tacka::before {
+  content: "";
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  transition: background-color 0.3s ease;
+}
+.slajder__tacka.is-active::before { background: var(--lime); }
+.slajder__tacka:focus-visible { outline: 2px solid var(--lime); outline-offset: 2px; }
+
+/* --------------------------------------------------------------------------
+   OBNOVA KLUBA, dva reda: kartica 664 + slika 516 na originalu (56/44%),
+   u drugom redu obrnuto. Kartica: naslov, tekst, dve slike dole.
+   -------------------------------------------------------------------------- */
+.obnova { padding: 0 90px 120px; background: var(--white); }
+.obnova__inner {
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+.obnova .veliki-naslov { margin-bottom: 72px; }
+
+.obnova__red {
+  display: grid;
+  grid-template-columns: 1.29fr 1fr;
+  gap: 20px;
+}
+.obnova__red + .obnova__red { margin-top: 20px; }
+.obnova__red--obrnut { grid-template-columns: 1fr 1.29fr; }
+
+.obnova__k {
+  display: flex;
+  flex-direction: column;
+  padding: 36px;
+  border-radius: 20px;
+}
+.obnova__k--tamna {
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  color: var(--white);
+}
+.obnova__k--lime { background: var(--lime); color: var(--forest); }
+
+.obnova__naslov {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-weight: 400;
+  font-size: clamp(48px, 3.8vw, 72px);
+  line-height: 1;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+.obnova__tekst {
+  max-width: 680px;
+  margin-top: 18px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+.obnova__k--tamna .obnova__tekst { color: rgba(255, 255, 255, 0.88); }
+
+.obnova__slike {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: auto;
+  padding-top: 40px;
+}
+.obnova__slike img {
+  width: 100%;
+  height: auto; /* atribut height="600" bi inace pregazio aspect-ratio */
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.obnova__foto {
+  position: relative;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--sage);
+}
+/* slika ne sme da diktira visinu reda, red prati karticu */
+.obnova__foto img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* tablet */
+@media (max-width: 1199px) {
+  .zasto, .obnova { padding: 0 40px 90px; }
+  .bento {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 280px 300px 420px;
+    margin-top: 56px;
+  }
+  .slajder { grid-column: 1 / 3; grid-row: 3; }
+  .obnova .veliki-naslov { margin-bottom: 56px; }
+  .obnova__red,
+  .obnova__red--obrnut { grid-template-columns: 1fr 1fr; }
+  .obnova__k { padding: 28px; }
+  .obnova__slike { gap: 14px; padding-top: 40px; }
+}
+
+/* telefon: sve u jednu kolonu, kartica uvek pre slike */
+@media (max-width: 767px) {
+  .zasto, .obnova { padding: 0 20px 72px; }
+  .oznaka { font-size: 14px; }
+  .veliki-naslov { font-size: clamp(42px, 12vw, 56px); margin-top: 18px; }
+  .bento {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .bento__k { min-height: 230px; padding: 24px; }
+  .bento__k--slika { grid-column: auto; grid-row: auto; min-height: 320px; }
+  .slajder { grid-column: auto; grid-row: auto; aspect-ratio: 1 / 1.05; }
+  .slajder__tacke { right: 24px; bottom: 22px; }
+  .bento__tekst { font-size: 16px; }
+
+  .obnova .veliki-naslov { margin-bottom: 40px; }
+  .obnova__red,
+  .obnova__red--obrnut { grid-template-columns: 1fr; gap: 12px; }
+  .obnova__red + .obnova__red { margin-top: 12px; }
+  .obnova__red--obrnut .obnova__k { order: -1; }
+  .obnova__k { padding: 24px; }
+  .obnova__tekst { font-size: 16px; }
+  .obnova__slike { gap: 10px; padding-top: 28px; }
+  .obnova__slike img { border-radius: 10px; }
+  .obnova__foto { aspect-ratio: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slajder__slika { transition: none; }
+}

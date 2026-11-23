@@ -17,7 +17,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=45">
+<link rel="stylesheet" href="styles.css?v=49">
 </head>
 <body>
 
@@ -201,6 +201,112 @@
     </div>
   </section>
 
+  <!-- ================= ZASTO MLADOST =================
+       Raspored sa tennico.framer.website/about (Why choose us): oznaka,
+       veliki naslov u dva reda, mreza od tri kartice levo i visok slajder
+       desno. Boje, fontovi i oznake su nasi. Tekst iz dokumenta O klubu,
+       deo Usluge i Treneri. -->
+  <section class="zasto">
+    <div class="zasto__inner">
+
+      <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Zašto Mladost</p>
+      <h2 class="veliki-naslov veliki-naslov--centar">
+        Svaki igrač dobija <mark class="veliki-naslov__akcenat">svoj plan</mark><br>
+        i trenera koji ga vodi
+      </h2>
+
+      <div class="bento">
+
+        <article class="bento__k bento__k--tamna" data-reveal>
+          <span class="bento__krug bento__krug--1" aria-hidden="true"></span>
+          <span class="bento__krug bento__krug--2" aria-hidden="true"></span>
+          <div class="bento__vrh">
+            <div class="bento__inicijali" aria-hidden="true">
+              <span>VV</span><span>PJ</span><span>NĐ</span>
+            </div>
+            <p class="bento__mali">Licencirani treneri TSS</p>
+          </div>
+          <h3 class="bento__naslov">Stručni treneri</h3>
+        </article>
+
+        <article class="bento__k bento__k--lime" data-reveal>
+          <span class="bento__krug bento__krug--3" aria-hidden="true"></span>
+          <div class="bento__vrh">
+            <svg class="bento__ikona" viewBox="0 0 48 48" fill="currentColor" aria-hidden="true"><circle cx="24" cy="11" r="6"/><circle cx="10" cy="15" r="4.5"/><circle cx="38" cy="15" r="4.5"/><path d="M14 38v-6a10 10 0 0 1 20 0v6z"/><path d="M2 36v-3a7 7 0 0 1 11-5.7A13 13 0 0 0 11 32v4zM46 36v-3a7 7 0 0 0-11-5.7 13 13 0 0 1 2 4.7v4z"/></svg>
+            <p class="bento__mali">Od škole tenisa do takmičara</p>
+          </div>
+          <h3 class="bento__naslov">Grupe po nivou</h3>
+        </article>
+
+        <article class="bento__k bento__k--slika" data-reveal>
+          <img class="bento__pozadina" src="images/zasto-plan.webp" alt="" width="1400" height="598" loading="lazy">
+          <div class="bento__veo" aria-hidden="true"></div>
+          <div class="bento__dno">
+            <h3 class="bento__naslov">Plan i program <span class="bento__lime">za svakog</span></h3>
+            <p class="bento__tekst">Individualni rad sa trenerom na svim nivoima, kondicioni treninzi i škola tenisa od najmlađih do rekreativaca.</p>
+          </div>
+        </article>
+
+        <div class="slajder" data-reveal aria-roledescription="slajder" aria-label="Fotografije sa treninga">
+          <img class="slajder__slika is-active" src="images/zasto-slajd-1.webp" alt="Trener sa grupom dece uz mrežu na šljaci" width="1000" height="860" loading="lazy">
+          <img class="slajder__slika" src="images/zasto-slajd-2.webp" alt="Deca iz škole tenisa sa medaljama i trenerom pod balonom" width="1000" height="860" loading="lazy">
+          <img class="slajder__slika" src="images/zasto-slajd-3.webp" alt="Trener sa dvojicom mladih igrača i njihovim diplomama" width="1000" height="860" loading="lazy">
+          <div class="slajder__tacke">
+            <button type="button" class="slajder__tacka is-active" aria-label="Slika 1"></button>
+            <button type="button" class="slajder__tacka" aria-label="Slika 2"></button>
+            <button type="button" class="slajder__tacka" aria-label="Slika 3"></button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= OBNOVA KLUBA =================
+       Raspored sa tennico.framer.website/about (Our mission & vision):
+       oznaka i naslov levo, dva reda kartica, tamna kartica sa dve slike
+       pored visoke slike, pa obrnuto. Narandzasta kartica je kod nas lime.
+       Tekst iz dokumenta O klubu, deo o obnovi. -->
+  <section class="obnova">
+    <div class="obnova__inner">
+
+      <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Obnova kluba</p>
+      <h2 class="veliki-naslov">
+        Obnovljen <mark class="veliki-naslov__akcenat">od temelja</mark><br>
+        napravljen za igru
+      </h2>
+
+      <div class="obnova__red">
+        <article class="obnova__k obnova__k--tamna" data-reveal>
+          <h3 class="obnova__naslov">Tereni</h3>
+          <p class="obnova__tekst">Novi šljakasti tereni napravljeni su tačno na mestu nekadašnjih. Reflektori drže teren osvetljen do 23h, a zimi tereni idu pod balon, pa se igra preko cele godine.</p>
+          <div class="obnova__slike">
+            <img src="images/obnova-tereni.webp" alt="Šljakasti teren noću pod reflektorima" width="700" height="600" loading="lazy">
+            <img src="images/obnova-balon.webp" alt="Tereni pod balonom tokom zimske sezone" width="700" height="600" loading="lazy">
+          </div>
+        </article>
+        <figure class="obnova__foto" data-reveal>
+          <img src="images/obnova-dron.webp" alt="Šljakasti teren snimljen dronom odozgo" width="1000" height="1000" loading="lazy">
+        </figure>
+      </div>
+
+      <div class="obnova__red obnova__red--obrnut">
+        <figure class="obnova__foto" data-reveal>
+          <img src="images/obnova-basta.webp" alt="Bašta kluba uveče pod lampicama" width="1000" height="1000" loading="lazy">
+        </figure>
+        <article class="obnova__k obnova__k--lime" data-reveal>
+          <h3 class="obnova__naslov">Bašta i klupska kuća</h3>
+          <p class="obnova__tekst">Potpuno nova bašta i prostor za uživanje u letnjim večerima, posle meča ili dok dete trenira. Klupska kuća je renovirana od temelja, a tuš kabine su nove.</p>
+          <div class="obnova__slike">
+            <img src="images/obnova-tusevi.webp" alt="Nove tuš kabine u klupskoj kući" width="700" height="600" loading="lazy">
+            <img src="images/obnova-svlacionica.webp" alt="Renovirana svlačionica sa klupama i slikama terena" width="700" height="600" loading="lazy">
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
   <!-- ================= TIM =================
        Kartica "Meet our game-changers" sa tennislove.webflow.io/about
        (.container.meet-the-team, .agents-avatars). Kod nas sage kartica,
@@ -339,6 +445,6 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=21"></script>
+<script src="main.js?v=22"></script>
 </body>
 </html>

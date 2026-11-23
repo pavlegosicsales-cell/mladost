@@ -547,3 +547,54 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('resize', oboji);
   oboji();
 })();
+
+
+/* ==========================================================================
+   Slajder u kartici "Zasto Mladost": slike se smenjuju pretapanjem na
+   4.5s, crtice menjaju sliku na klik. Bez automatike ako korisnik trazi
+   manje pokreta, i dok slajder nije na ekranu.
+   ========================================================================== */
+(function () {
+  document.querySelectorAll('.slajder').forEach(function (s) {
+    var slike = s.querySelectorAll('.slajder__slika');
+    var tacke = s.querySelectorAll('.slajder__tacka');
+    if (slike.length < 2) return;
+
+    var i = 0;
+    var tajmer = null;
+    var vidljiv = false;
+    var mirno = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function prikazi(n) {
+      i = (n + slike.length) % slike.length;
+      slike.forEach(function (el, k) { el.classList.toggle('is-active', k === i); });
+      tacke.forEach(function (el, k) {
+        el.classList.toggle('is-active', k === i);
+        el.setAttribute('aria-current', k === i ? 'true' : 'false');
+      });
+    }
+
+    function kreni() {
+      if (mirno || tajmer || !vidljiv) return;
+      tajmer = window.setInterval(function () { prikazi(i + 1); }, 4500);
+    }
+    function stani() {
+      window.clearInterval(tajmer);
+      tajmer = null;
+    }
+
+    tacke.forEach(function (t, k) {
+      t.addEventListener('click', function () { stani(); prikazi(k); kreni(); });
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (u) {
+        vidljiv = u[0].isIntersecting;
+        if (vidljiv) kreni(); else stani();
+      }).observe(s);
+    } else {
+      vidljiv = true;
+      kreni();
+    }
+  });
+})();
