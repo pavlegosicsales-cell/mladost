@@ -3332,27 +3332,164 @@ a { text-decoration: none; color: inherit; }
 .khero__ik svg { width: 22px; height: 22px; }
 
 /* ==========================================================================
-   KONTAKT, FORMA NA VRHU
-   Tamna sekcija (nav je beo i stoji preko nje), naslov, pa isti blok
-   .kontakt__inner kao na pocetnoj: kartice levo, wizard desno.
+   KONTAKT, FORMA NA VRHU (raspored kao dekopro.rs/kontakt)
+   Mreza 2:1. Tamna traka je element u prvom redu preko cele sirine, sa
+   negativnom donjom marginom = preklop, pa ide iza vrha kartice forme.
+   Podaci desno pocinju preklop + 24px nize, posle linije.
    ========================================================================== */
 .kforma {
-  padding: 170px 90px 120px;
-  background: linear-gradient(180deg, #0d2b24 0%, #10342b 55%, var(--forest) 100%);
+  --preklop: clamp(72px, 56px + 3vw, 112px);
+  position: relative;
+  padding: 0 90px 120px;
+  overflow-x: clip;
+  background: var(--white);
 }
-.kforma .veliki-naslov { color: var(--white); }
+.kforma__mreza {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  column-gap: clamp(32px, 16px + 4vw, 80px);
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+.kforma__tamno {
+  grid-column: 1 / -1;
+  grid-row: 1;
+  margin: 0 calc(50% - 50vw) calc(-1 * var(--preklop));
+  background: linear-gradient(180deg, #0d2b24 0%, #10342b 70%, var(--forest) 100%);
+}
+
+.kforma__head {
+  position: relative;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: subgrid;
+  align-items: end;
+  padding: 170px 0 clamp(32px, 24px + 2vw, 56px);
+  color: var(--white);
+}
+.kforma__naslovi { grid-column: 1; }
 .kforma .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
 .kforma .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
-.kforma__inner { width: 100%; max-width: 1720px; margin: 0 auto; }
-.kforma__head {
+.kforma .veliki-naslov {
+  margin-top: 20px;
+  font-size: clamp(52px, 4.8vw, 92px);
+  color: var(--white);
+}
+.kforma__lead {
+  grid-column: 2;
+  max-width: 460px;
+  font-size: clamp(19px, 16.8px + 0.6vw, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.86);
+}
+
+.kforma__kartica { position: relative; grid-column: 1; grid-row: 2; align-self: start; }
+
+.kforma__podaci {
+  position: relative;
+  grid-column: 2;
+  grid-row: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 64px;
+  gap: 36px;
+  margin-top: calc(var(--preklop) + 24px);
+  font-style: normal;
 }
-/* na tamnoj podlozi uvodni tekst i ivice kartica moraju da budu svetli */
-.kforma .kontakt__lead { color: rgba(255, 255, 255, 0.78); }
-.kforma .info-card { border-color: rgba(255, 255, 255, 0.14); }
+.kpodatak {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  column-gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(26, 67, 57, 0.22);
+}
+.kpodatak > :not(.kpodatak__ik) { grid-column: 2; }
+.kpodatak__ik {
+  grid-row: 1 / 5;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--lime);
+  color: var(--forest);
+}
+.kpodatak__ik svg { width: 20px; height: 20px; }
+.kpodatak__natpis {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(26, 67, 57, 0.68);
+}
+.kpodatak__broj {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: clamp(44px, 3.4vw, 60px);
+  line-height: 1;
+  letter-spacing: -0.5px;
+  color: var(--forest);
+}
+.kpodatak__broj:hover { color: #2c6b5b; }
+.kpodatak__link {
+  margin-top: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--forest);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.kpodatak__link:hover { text-decoration-thickness: 2px; }
+.kpodatak__jako { font-size: 17px; font-weight: 700; color: var(--forest); }
+.kpodatak__tekst {
+  margin-top: 6px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.66);
+}
+
+/* --------------------------------------------------------------------------
+   Wizard, svetla varijanta (bela kartica kao na dekopro.rs/kontakt)
+   -------------------------------------------------------------------------- */
+/* .forma.forma--svetla: jaci selektor, jer bela varijanta (.forma--bela) stoji
+   kasnije u fajlu i inace gazi ivicu i senku opcija */
+.forma--svetla {
+  border-radius: 20px;
+  border: 1px solid rgba(26, 67, 57, 0.14);
+  background: var(--white);
+  background-image: none;
+  color: var(--forest);
+  box-shadow: 0 30px 60px -36px rgba(13, 43, 36, 0.45);
+}
+.forma--svetla .forma__veil,
+.forma--svetla .forma__grain { display: none; }
+.forma--svetla .forma__in { padding: clamp(20px, 16px + 1vw, 32px); }
+.forma--svetla .forma__dots span { background: rgba(26, 67, 57, 0.12); }
+.forma--svetla .forma__dots span.is-done { background: var(--lime); box-shadow: none; }
+.forma--svetla .korak__num { color: rgba(26, 67, 57, 0.7); }
+.forma--svetla .korak__q { color: var(--forest); }
+.forma.forma--svetla .choice {
+  border-color: rgba(26, 67, 57, 0.18);
+  box-shadow: none;
+}
+.forma.forma--svetla .choice:hover { border-color: rgba(26, 67, 57, 0.5); }
+.forma.forma--svetla .choice.is-picked { border-color: var(--lime); }
+.forma.forma--svetla .polje label { color: rgba(26, 67, 57, 0.72); }
+.forma.forma--svetla .polje input,
+.forma.forma--svetla .polje textarea { border-color: rgba(26, 67, 57, 0.2); }
+.forma.forma--svetla .polje input:focus,
+.forma.forma--svetla .polje textarea:focus { border-color: var(--forest); }
+.forma--svetla .btn-back { border-color: rgba(26, 67, 57, 0.28); color: var(--forest); }
+.forma--svetla .btn-back:hover { background: rgba(26, 67, 57, 0.06); border-color: var(--forest); color: var(--forest); }
+.forma--svetla .forma__msg.is-ok,
+.forma--svetla .forma__msg.is-err { color: var(--forest); }
+.forma--svetla .forma__msg.is-err { border-color: rgba(26, 67, 57, 0.22); background: rgba(26, 67, 57, 0.05); }
 
 /* ==========================================================================
    KONTAKT, CESTA PITANJA
@@ -3446,7 +3583,6 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 1199px) {
   .khero { padding: 80px 40px; min-height: 640px; }
   .khero__kartica { gap: 60px; }
-  .kforma { padding: 140px 40px 90px; }
   .faq { padding: 90px 40px; }
 }
 
@@ -3465,8 +3601,6 @@ a { text-decoration: none; color: inherit; }
   .khero__h1 { font-size: 52px; }
   .khero__tekst, .khero__red { font-size: 16px; }
 
-  .kforma { padding: 116px 20px 72px; }
-  .kforma__head { margin-bottom: 40px; }
 
   .faq { padding: 72px 20px; }
   .faq__head { margin-bottom: 36px; }
@@ -4403,4 +4537,21 @@ a { text-decoration: none; color: inherit; }
 
 @media (prefers-reduced-motion: reduce) {
   .js-pojava [data-pojava] { opacity: 1; translate: none; transition: none; }
+}
+
+/* kontakt vrh, tablet i telefon: jedna kolona, podaci ispod forme */
+@media (max-width: 1199px) {
+  .kforma { padding: 0 40px 90px; }
+  .kforma__mreza { grid-template-columns: minmax(0, 1fr); }
+  .kforma__head { grid-template-columns: minmax(0, 1fr); row-gap: 20px; padding-top: 140px; }
+  .kforma__naslovi, .kforma__lead { grid-column: 1; }
+  .kforma__kartica, .kforma__podaci { grid-column: 1; }
+  .kforma__podaci { grid-row: 3; margin-top: 56px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+}
+@media (max-width: 767px) {
+  .kforma { padding: 0 20px 72px; }
+  .kforma__head { padding-top: 116px; }
+  .kforma .veliki-naslov { font-size: clamp(40px, 11vw, 56px); }
+  .kforma__lead { font-size: 17px; }
+  .kforma__podaci { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 44px; }
 }

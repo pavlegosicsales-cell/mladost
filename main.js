@@ -431,8 +431,8 @@ document.addEventListener('DOMContentLoaded', function () {
   var HERO_REDOM = [
     ['.hero .tag, .ohero__kicker, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka', 0.9],
     ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov', 1.0],
-    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna', 1.1],
-    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci', 1.2]
+    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead', 1.1],
+    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci', 1.2]
   ];
   /* [selektor, pomeraj u px]; natpisi 12, kartice 24, velike povrsine 40 */
   var SKROL = [
