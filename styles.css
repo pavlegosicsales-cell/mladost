@@ -4255,3 +4255,99 @@ a { text-decoration: none; color: inherit; }
   .put__kondicija-ik { width: 42px; height: 42px; padding: 10px; }
   .put__slika { aspect-ratio: 4 / 5; }
 }
+
+
+/* ==========================================================================
+   SKOLA TENISA, TRENERI
+   Dve grupe po tri kartice. Tamna kartica, krug sa inicijalima u lime
+   (isti kao u kartici Strucni treneri na O nama) dok ne stignu portreti,
+   ime u Bebasu, uloga u lime. Glavni trener ima lime kartu.
+   ========================================================================== */
+.treneri { padding: 0 90px 120px; background: var(--white); }
+.treneri__okvir {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+.treneri__glava .veliki-naslov { margin-top: 20px; }
+
+.treneri__grupa { display: flex; flex-direction: column; gap: 18px; }
+.treneri__grupa-naslov {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(26, 67, 57, 0.7);
+}
+
+.treneri__mreza {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trener {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 132px;
+  padding: 26px 28px;
+  border-radius: 20px;
+  background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%);
+  color: var(--white);
+}
+.trener__inicijali {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  padding-top: 3px;
+  border-radius: 50%;
+  background: var(--lime);
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--forest);
+}
+.trener__tekst { min-width: 0; }
+.trener__ime {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.3px;
+}
+.trener__uloga {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--lime);
+}
+
+/* glavni trener: lime kartica, tamni krug */
+.trener--glavni { background: var(--lime); color: var(--forest); }
+.trener--glavni .trener__inicijali { background: var(--forest); color: var(--lime); }
+.trener--glavni .trener__uloga { color: var(--forest); }
+
+@media (max-width: 1199px) {
+  .treneri { padding: 0 40px 90px; }
+  .treneri__mreza { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767px) {
+  .treneri { padding: 0 20px 72px; }
+  .treneri__okvir { gap: 36px; }
+  .treneri__mreza { grid-template-columns: 1fr; gap: 10px; }
+  .trener { min-height: 0; padding: 18px 20px; gap: 16px; }
+  .trener__inicijali { width: 56px; height: 56px; font-size: 24px; }
+  .trener__ime { font-size: 28px; }
+  .trener__uloga { font-size: 13px; }
+}
