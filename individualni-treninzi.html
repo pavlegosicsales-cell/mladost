@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Individualni treninzi | Teniski Klub Mladost Banovo Brdo</title>
+<meta name="description" content="Individualni treninzi tenisa na Banovom Brdu, na svim nivoima. Plan i program za svakog igrača, licencirani treneri TSS, tereni do 23h i zimi pod balonom.">
+<link rel="icon" href="images/logo.png" type="image/png">
+
+<!-- Fontovi sa originala: Bebas Neue za naslove, Urbanist za tekst.
+     Oba imaju latin-ext subset, dakle č ć ž š đ rade. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Urbanist:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- Lenis smooth scroll, ista biblioteka i iste postavke kao na tennislove.webflow.io.
+     Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
+<link rel="stylesheet" href="vendor/lenis.css">
+
+<link rel="stylesheet" href="styles.css?v=83">
+</head>
+<body>
+
+<main>
+
+  <!-- ================= NAVBAR =================
+       Efekat preuzet sa qutenza.framer.website: plutajuca traka koja uleti
+       odozgo, linija ispod linka raste na hover, hamburger se sklopi u X.
+       Font i dugme su nasi. -->
+  <nav class="nav" data-name="Navigation" aria-label="Glavna navigacija">
+    <div class="nav__inner">
+
+      <div class="nav__main">
+        <div class="nav__row">
+          <a class="nav__logo" href="index.html" aria-label="Teniski Klub Mladost, pocetna">
+            <img src="images/logo.png" alt="" width="44" height="44" aria-hidden="true">
+            <span class="nav__logo-text">Mladost</span>
+          </a>
+
+          <button class="nav__burger" type="button" id="nav-burger"
+                  aria-label="Otvori meni" aria-expanded="false" aria-controls="nav-links">
+            <span class="nav__burger-line nav__burger-line--top"></span>
+            <span class="nav__burger-line nav__burger-line--bottom"></span>
+          </button>
+        </div>
+
+        <div class="nav__links" id="nav-links">
+          <a class="nav__link t-btn" href="index.html">Početna</a>
+          <a class="nav__link t-btn" href="o-nama.html">O nama</a>
+          <a class="nav__link t-btn" href="skola-tenisa.html">Škola tenisa</a>
+          <a class="nav__link t-btn" href="individualni-treninzi.html" aria-current="page">Individualni treninzi</a>
+          <a class="nav__link t-btn" href="rekreativci.html">Rekreativci</a>
+          <a class="nav__link t-btn" href="blog.html">Blog</a>
+          <a class="nav__link t-btn" href="galerija.html">Galerija</a>
+          <a class="nav__link t-btn" href="kontakt.html">Kontakt</a>
+        </div>
+      </div>
+
+      <div class="nav__cta">
+        <a class="btn btn--ghost" href="tel:+381615005051" data-name="Secondary">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon" data-name="Button">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- ================= INDIVIDUALNI TRENINZI, HERO =================
+       Fotka linija servis polja preko celog ekrana (tehnika, preciznost),
+       tekst levo, desno tamna staklena kartica "Plan treninga".
+       Tekst iz dokumenta O klubu: individualni rad na svim nivoima, plan i
+       program za svakog igraca, licencirani treneri TSS, kondicioni treninzi.
+       Cena i trajanje treninga nisu potvrdjeni i ne pominju se. -->
+  <section class="ihero" data-name="Individualni Hero">
+    <picture class="ihero__bg">
+      <source media="(max-width: 767px)" srcset="images/individualni-hero-m.webp">
+      <img src="images/individualni-hero.webp" alt="Linije servis polja na šljaci izbliza" width="1920" height="1230">
+    </picture>
+    <div class="ihero__veo" aria-hidden="true"></div>
+    <div class="hero__grain" aria-hidden="true"></div>
+
+    <div class="ihero__inner">
+      <div class="ihero__tekst">
+        <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Individualni treninzi</p>
+        <h1 class="veliki-naslov">Jedan trener.<br><mark class="veliki-naslov__akcenat">Tvoj plan.</mark></h1>
+        <p class="ihero__sub">Individualni rad sa trenerom na svim nivoima, od prvog reketa do takmičara. Svaki igrač dobija svoj plan i program, a trening ide tvojim tempom.</p>
+        <div class="ihero__dugmad">
+          <a class="btn" href="tel:+381615005051">
+            <span class="btn__label t-btn">Zakaži trening</span>
+            <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+          </a>
+          <a class="btn btn--ghost" href="kontakt.html">
+            <span class="btn__label t-btn">Pošalji upit</span>
+            <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+
+      <aside class="ihero__plan" aria-label="Šta dobijaš na individualnom treningu">
+        <p class="ihero__plan-naslov">Plan treninga</p>
+        <ol class="ihero__lista">
+          <li>
+            <span class="ihero__br">01</span>
+            <span><strong>Svi nivoi</strong>Od početnika do takmičara</span>
+          </li>
+          <li>
+            <span class="ihero__br">02</span>
+            <span><strong>Plan i program</strong>Pravi se za svakog igrača posebno</span>
+          </li>
+          <li>
+            <span class="ihero__br">03</span>
+            <span><strong>Licencirani treneri</strong>Teniskog saveza Srbije</span>
+          </li>
+          <li>
+            <span class="ihero__br">04</span>
+            <span><strong>Kondicija</strong>Kondicioni treninzi kao dopuna</span>
+          </li>
+        </ol>
+        <p class="ihero__plan-dno">Tereni rade svaki dan do 23h, zimi pod balonom.</p>
+      </aside>
+    </div>
+  </section>
+
+</main>
+
+<!-- ================= FOOTER, raspored po teniskom terenu ================= -->
+<footer class="footer">
+  <div class="footer__inner">
+
+    <div class="court">
+      <div class="court__frame" aria-hidden="true"></div>
+      <div class="court__net" aria-hidden="true"></div>
+      <div class="court__center" aria-hidden="true"></div>
+
+      <!-- gornji koridor, levo -->
+      <div class="court__cell court__cell--contact-l">
+        <p class="court__label">Adresa</p>
+        <address class="court__text">Lješka 82, Banovo Brdo<br>11030 Beograd</address>
+      </div>
+
+      <!-- gornji koridor, desno -->
+      <div class="court__cell court__cell--contact-r">
+        <p class="court__label">Kontakt</p>
+        <p class="court__text">
+          <a href="tel:+381615005051">061 500 50 51</a><br>
+          <a href="mailto:mladost.tenis@gmail.com">mladost.tenis@gmail.com</a>
+        </p>
+      </div>
+
+      <!-- levo zadnje polje, logo -->
+      <div class="court__cell court__cell--logo">
+        <img src="images/logo.png" alt="Grb Teniskog kluba Mladost Banovo Brdo" width="190" height="190">
+      </div>
+
+      <!-- gornja servis polja, prazna po maketi -->
+      <div class="court__cell court__cell--void-a" aria-hidden="true"></div>
+      <div class="court__cell court__cell--void-b" aria-hidden="true"></div>
+
+      <!-- donja servis polja, dugmad -->
+      <div class="court__cell court__cell--btn-a">
+        <a class="btn" href="tel:+381615005051">
+          <span class="btn__label t-btn">Rezerviši teren</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <div class="court__cell court__cell--btn-b">
+        <a class="btn btn--ghost" href="skola-tenisa.html">
+          <span class="btn__label t-btn">Upiši dete u školu</span>
+          <span class="btn__icon">
+            <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
+          </span>
+        </a>
+      </div>
+
+      <!-- desno zadnje polje, site map -->
+      <nav class="court__cell court__cell--sitemap" aria-label="Mapa sajta">
+        <p class="court__label">Mapa sajta</p>
+        <ul class="sitemap">
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="o-nama.html">O nama</a></li>
+          <li><a href="skola-tenisa.html">Škola tenisa</a></li>
+          <li><a href="individualni-treninzi.html">Individualni treninzi</a></li>
+          <li><a href="rekreativci.html">Rekreativci</a></li>
+          <li><a href="treneri.html">Treneri</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <!-- donji koridor, levo -->
+      <div class="court__cell court__cell--copy">
+        <p class="court__text court__text--small">
+          &copy; 2026 Teniski Klub Mladost.
+          <span class="court__sep">·</span>
+          Izrada: <a href="https://www.patoadcreatives.com/sr" target="_blank" rel="noopener">PATO</a>
+        </p>
+      </div>
+
+      <!-- donji koridor, desno -->
+      <div class="court__cell court__cell--social">
+        <ul class="socials">
+          <li>
+            <a href="https://www.instagram.com/teniskiklub.mladost/" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/people/Teniski-Klub-Mladost/61586981363101/" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H16.7V3.6c-.3 0-1.3-.1-2.45-.1-2.4 0-4.05 1.5-4.05 4.2v2.2H7.5V13h2.7v8z"/></svg>
+            </a>
+          </li>
+          <li>
+            <a href="https://wa.me/381615005051" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 2a8 8 0 0 1 0 16 8 8 0 0 1-4.1-1.1l-.3-.2-2.6.7.7-2.5-.2-.3A8 8 0 0 1 12 4m-3.2 4c-.2 0-.5.1-.7.3-.3.3-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.6 4 3.5 1.9.7 2.3.6 2.7.6.5 0 1.4-.5 1.6-1.1.2-.6.2-1 .1-1.1l-.5-.3-1.4-.7c-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.5.2-.4v-.4l-.7-1.6c-.2-.4-.4-.4-.5-.4z"/></svg>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- veliki natpis ispod terena, presecen dnom -->
+    <div class="footer__wordmark" aria-hidden="true"><span>MLADOST</span></div>
+
+  </div>
+</footer>
+
+<script src="vendor/lenis.min.js"></script>
+<script src="main.js?v=34"></script>
+</body>
+</html>

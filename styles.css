@@ -4553,3 +4553,157 @@ a { text-decoration: none; color: inherit; }
   .kforma__lead { font-size: 17px; }
   .kforma__podaci { grid-template-columns: minmax(0, 1fr); gap: 28px; margin-top: 44px; }
 }
+
+
+/* ==========================================================================
+   INDIVIDUALNI TRENINZI, HERO
+   Fotka preko celog ekrana sa tamnim velom (jaci levo, gde je tekst),
+   tekst levo dole, desno tamna staklena kartica sa planom u 4 stavke.
+   Kartica je tamno staklo, ne belo (beli providni slojevi preko svetle
+   podloge izgledaju sivo).
+   ========================================================================== */
+.ihero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: 170px 90px 90px;
+  overflow: hidden;
+  background: #0d2b24;
+  color: var(--white);
+}
+.ihero__bg { position: absolute; inset: 0; }
+.ihero__bg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+.ihero__veo {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(8, 28, 23, 0.86) 0%, rgba(8, 28, 23, 0.55) 45%, rgba(8, 28, 23, 0.2) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.55) 100%);
+}
+.ihero .hero__grain { opacity: 0.12; }
+
+.ihero__inner {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  gap: 80px;
+  align-items: end;
+  width: 100%;
+  max-width: 1720px;
+  margin: 0 auto;
+}
+
+.ihero .oznaka { border-color: rgba(255, 255, 255, 0.25); color: var(--white); }
+.ihero .oznaka__ikona { background: rgba(255, 255, 255, 0.12); }
+.ihero .veliki-naslov {
+  margin-top: 22px;
+  font-size: clamp(64px, 6.6vw, 124px);
+  color: var(--white);
+}
+.ihero__sub {
+  max-width: 600px;
+  margin-top: 26px;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+}
+.ihero__dugmad {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.ihero__plan {
+  padding: 32px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(5, 24, 20, 0.6);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.ihero__plan-naslov {
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.3px;
+}
+.ihero__lista {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ihero__lista li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+.ihero__br {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding-top: 2px;
+  border-radius: 50%;
+  background: var(--lime);
+  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--forest);
+}
+.ihero__lista span:last-child {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.72);
+}
+.ihero__lista strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--white);
+}
+.ihero__plan-dno {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--lime);
+}
+
+@media (max-width: 1199px) {
+  .ihero { padding: 140px 40px 64px; min-height: 0; }
+  .ihero__inner { grid-template-columns: minmax(0, 1fr); gap: 48px; }
+  .ihero__plan { max-width: 620px; }
+}
+
+@media (max-width: 767px) {
+  .ihero { padding: 116px 20px 40px; }
+  .ihero__bg img { object-position: center; }
+  .ihero__veo { background: linear-gradient(180deg, rgba(8, 28, 23, 0.7) 0%, rgba(8, 28, 23, 0.55) 45%, rgba(8, 28, 23, 0.85) 100%); }
+  .ihero .veliki-naslov { font-size: clamp(52px, 15vw, 72px); }
+  .ihero__sub { font-size: 16px; }
+  .ihero__plan {
+    padding: 22px;
+    border-radius: 20px;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(5, 24, 20, 0.78);
+  }
+  .ihero__plan-naslov { font-size: 28px; }
+}
