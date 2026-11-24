@@ -259,13 +259,18 @@ document.addEventListener('DOMContentLoaded', function () {
 
     dugme.disabled = true;
 
-    fetch(ENDPOINT, {
-      method: 'POST',
-      body: JSON.stringify(podaci),
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' }
+    /* GET sa parametrima: Apps Script POST preusmerava i gubi telo.
+       no-cors znaci da odgovor ne mozemo da procitamo, pa je svaki
+       zavrseni zahtev uspeh; catch hvata samo pad mreze. */
+    var upit = Object.keys(podaci).map(function (k) {
+      return encodeURIComponent(k) + '=' + encodeURIComponent(podaci[k]);
+    }).join('&');
+
+    fetch(ENDPOINT + (ENDPOINT.indexOf('?') === -1 ? '?' : '&') + upit, {
+      method: 'GET',
+      mode: 'no-cors'
     })
-      .then(function (r) {
-        if (!r.ok) throw new Error('Neuspesno slanje');
+      .then(function () {
         koraci.forEach(function (k) { k.classList.remove('is-active'); });
         tackice.forEach(function (t) { t.classList.add('is-done'); });
         poruku('Hvala, upit je stigao. Javljamo se na telefon koji si ostavio, najčešće isti dan.', true);
