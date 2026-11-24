@@ -429,7 +429,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var HERO = '.hero, .ohero, .shero, .mhero, .kforma__head, .ihero';
   /* [selektor, kasnjenje u sekundama], iz appear JSON-a: 0.9, 1.0, 1.1, 1.2 */
   var HERO_REDOM = [
-    ['.hero .tag, .ohero__kicker, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka', 0.9],
+    ['.hero .oznaka, .ohero .oznaka, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka', 0.9],
     ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov, .ihero .veliki-naslov', 1.0],
     ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead, .ihero__sub, .ihero__plan', 1.1],
     ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci, .ihero__dugmad', 1.2]

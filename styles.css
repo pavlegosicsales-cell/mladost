@@ -2916,7 +2916,8 @@ a { text-decoration: none; color: inherit; }
 .veliki-naslov__akcenat {
   display: inline-block;
   line-height: 0.9;
-  padding: 0.06em 0.16em 0;
+  /* gore vise mesta: kvacice na S, C, Z u Bebasu izlaze iznad velikih slova */
+  padding: 0.17em 0.16em 0.02em;
   border-radius: 0.1em;
   background: var(--lime);
   color: var(--forest);
@@ -3371,8 +3372,6 @@ a { text-decoration: none; color: inherit; }
   color: var(--white);
 }
 .kforma__naslovi { grid-column: 1; }
-.kforma .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
-.kforma .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
 .kforma .veliki-naslov {
   margin-top: 20px;
   font-size: clamp(52px, 4.8vw, 92px);
@@ -3686,8 +3685,6 @@ a { text-decoration: none; color: inherit; }
   align-items: flex-start;
   pointer-events: none;
 }
-.mhero .oznaka { border-color: rgba(255, 255, 255, 0.25); color: var(--white); }
-.mhero .oznaka__ikona { background: rgba(255, 255, 255, 0.12); }
 .mhero .veliki-naslov {
   margin-top: 18px;
   font-size: clamp(64px, 6.6vw, 124px);
@@ -3999,8 +3996,6 @@ a { text-decoration: none; color: inherit; }
   margin: 0 auto;
 }
 
-.shero .oznaka { border-color: rgba(255, 255, 255, 0.2); color: var(--white); }
-.shero .oznaka__ikona { background: rgba(255, 255, 255, 0.1); }
 .shero .veliki-naslov {
   margin-top: 22px;
   font-size: clamp(60px, 5.4vw, 104px);
@@ -4603,8 +4598,6 @@ a { text-decoration: none; color: inherit; }
   margin: 0 auto;
 }
 
-.ihero .oznaka { border-color: rgba(255, 255, 255, 0.25); color: var(--white); }
-.ihero .oznaka__ikona { background: rgba(255, 255, 255, 0.12); }
 .ihero .veliki-naslov {
   margin-top: 22px;
   font-size: clamp(64px, 6.6vw, 124px);
@@ -4830,4 +4823,48 @@ a { text-decoration: none; color: inherit; }
   .zakoga__foto { aspect-ratio: 16 / 10; }
   .zakoga__naslov { font-size: 30px; }
   .zakoga__tekst { padding: 16px 12px 12px; }
+}
+
+/* ==========================================================================
+   OZNAKA (pill iznad naslova), jedna ista na celom sajtu
+   Na beloj podlozi: tanka forest ivica, forest kvadrat sa lopticom.
+   Na tamnoj podlozi, videu i fotkama (svi hero-i i tamne sekcije):
+   bela ivica 22%, tamno staklo 28% sa zamucenjem 10px da se cita i preko
+   slike, kvadrat bela 12%. Na telefonu bez zamucenja (lose se iscrtava),
+   pa je podloga malo tamnija.
+   ========================================================================== */
+.hero .oznaka,
+.ohero .oznaka,
+.shero .oznaka,
+.mhero .oznaka,
+.ihero .oznaka,
+.kforma .oznaka {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(5, 24, 20, 0.28);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+}
+.hero .oznaka__ikona,
+.ohero .oznaka__ikona,
+.shero .oznaka__ikona,
+.mhero .oznaka__ikona,
+.ihero .oznaka__ikona,
+.kforma .oznaka__ikona { background: rgba(255, 255, 255, 0.12); }
+
+/* u heroju na pocetnoj stoji tamo gde je bila stara pilula */
+.hero .oznaka { align-self: flex-start; }
+
+@media (max-width: 767px) {
+  .hero .oznaka,
+  .ohero .oznaka,
+  .shero .oznaka,
+  .mhero .oznaka,
+  .ihero .oznaka,
+  .kforma .oznaka {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(5, 24, 20, 0.45);
+  }
+  .oznaka { font-size: 14px; }
 }
