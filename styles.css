@@ -4503,8 +4503,8 @@ a { text-decoration: none; color: inherit; }
    Izvadjeno iz njihovog modula stranice (__framer__enter / __framer__animate)
    i appear JSON-a: element krece providan i nizi, spring stiffness 150,
    damping 40, mass 1 (bez odskoka, do 99% za 1.13s), jednom, kad se vidi
-   20% elementa. U grupi redom na 0.15s. Hero pri ucitavanju: 0.9 / 1.0 /
-   1.1 / 1.2s iz 20px. main.js stavlja data-pojava, --p-y i --p-delay.
+   20% elementa. U grupi redom na 0.15s. Hero pri ucitavanju: 0.25 / 0.33 /
+   0.41 / 0.49s iz 20px, trajanje 0.85s (ranije 0.9-1.2 i 1.13s, sporo). main.js stavlja data-pojava, --p-y i --p-delay.
    Pomeraj ide kroz svojstvo translate, ne transform, pa hover podizanja
    i ostale transformacije ostaju netaknute.
    ========================================================================== */
@@ -4524,8 +4524,8 @@ a { text-decoration: none; color: inherit; }
   opacity: 1;
   translate: 0 0;
   transition:
-    opacity var(--spring-trajanje) var(--spring-150) var(--p-delay, 0s),
-    translate var(--spring-trajanje) var(--spring-150) var(--p-delay, 0s);
+    opacity var(--p-trajanje, var(--spring-trajanje)) var(--spring-150) var(--p-delay, 0s),
+    translate var(--p-trajanje, var(--spring-trajanje)) var(--spring-150) var(--p-delay, 0s);
 }
 
 @media (prefers-reduced-motion: reduce) {

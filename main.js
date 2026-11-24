@@ -434,10 +434,10 @@ document.addEventListener('DOMContentLoaded', function () {
   var HERO = '.hero, .ohero, .shero, .mhero, .kforma__head, .ihero, .rhero, .thero, .bhero, .chero';
   /* [selektor, kasnjenje u sekundama], iz appear JSON-a: 0.9, 1.0, 1.1, 1.2 */
   var HERO_REDOM = [
-    ['.hero .oznaka, .ohero .oznaka, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka, .rhero .oznaka, .thero .oznaka, .bhero .oznaka, .chero .oznaka, .chero__nazad', 0.9],
-    ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov, .ihero .veliki-naslov, .rhero .veliki-naslov, .thero .veliki-naslov, .bhero .veliki-naslov, .chero .veliki-naslov', 1.0],
-    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead, .ihero__sub, .ihero__plan, .rhero__sub, .thero__sub, .thero__foto, .bhero__sub, .chero__meta', 1.1],
-    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci, .ihero__dugmad, .rhero__dugmad, .rhero__brojke, .thero__dugmad, .thero__cinjenice', 1.2]
+    ['.hero .oznaka, .ohero .oznaka, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka, .rhero .oznaka, .thero .oznaka, .bhero .oznaka, .chero .oznaka, .chero__nazad', 0.25],
+    ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov, .ihero .veliki-naslov, .rhero .veliki-naslov, .thero .veliki-naslov, .bhero .veliki-naslov, .chero .veliki-naslov', 0.33],
+    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead, .ihero__sub, .ihero__plan, .rhero__sub, .thero__sub, .thero__foto, .bhero__sub, .chero__meta', 0.41],
+    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci, .ihero__dugmad, .rhero__dugmad, .rhero__brojke, .thero__dugmad, .thero__cinjenice', 0.49]
   ];
   /* [selektor, pomeraj u px]; natpisi 12, kartice 24, velike povrsine 40 */
   var SKROL = [
@@ -455,6 +455,8 @@ document.addEventListener('DOMContentLoaded', function () {
       el.setAttribute('data-pojava', 'hero');
       el.style.setProperty('--p-y', '20px');
       el.style.setProperty('--p-delay', par[1] + 's');
+      /* hero brze od skrol pojavljivanja (24.11: 1.13s je delovalo sporo) */
+      el.style.setProperty('--p-trajanje', '0.85s');
       heroEl.push(el);
     });
   });
