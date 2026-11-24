@@ -426,18 +426,18 @@ document.addEventListener('DOMContentLoaded', function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   if (!('IntersectionObserver' in window)) return;
 
-  var HERO = '.hero, .ohero, .shero, .mhero, .kforma__head, .ihero, .rhero';
+  var HERO = '.hero, .ohero, .shero, .mhero, .kforma__head, .ihero, .rhero, .thero';
   /* [selektor, kasnjenje u sekundama], iz appear JSON-a: 0.9, 1.0, 1.1, 1.2 */
   var HERO_REDOM = [
-    ['.hero .oznaka, .ohero .oznaka, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka, .rhero .oznaka', 0.9],
-    ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov, .ihero .veliki-naslov, .rhero .veliki-naslov', 1.0],
-    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead, .ihero__sub, .ihero__plan, .rhero__sub', 1.1],
-    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci, .ihero__dugmad, .rhero__dugmad, .rhero__brojke', 1.2]
+    ['.hero .oznaka, .ohero .oznaka, .shero .oznaka, .mhero .oznaka, .kforma__head .oznaka, .ihero .oznaka, .rhero .oznaka, .thero .oznaka', 0.9],
+    ['.hero__h1, .ohero__h1, .shero .veliki-naslov, .mhero .veliki-naslov, .kforma__head .veliki-naslov, .ihero .veliki-naslov, .rhero .veliki-naslov, .thero .veliki-naslov', 1.0],
+    ['.hero__sub, .ohero__sub, .shero__sub, .shero__glavna, .kforma__lead, .ihero__sub, .ihero__plan, .rhero__sub, .thero__sub, .thero__foto', 1.1],
+    ['.hero .btn, .ohero__content .btn, .shero__dugmad, .shero__cinjenice, .shero__mala, .ohero__stat, .ohero__member, .mhero__palci, .kforma__kartica, .kforma__podaci, .ihero__dugmad, .rhero__dugmad, .rhero__brojke, .thero__dugmad, .thero__cinjenice', 1.2]
   ];
   /* [selektor, pomeraj u px]; natpisi 12, kartice 24, velike povrsine 40 */
   var SKROL = [
     ['.oznaka, .sekcija__naslov, .veliki-naslov, .kontakt__lead, .treneri__uvod, .faq__sub, .poziv__uvod, .cene__uvod', 12],
-    ['.zakoga__k, .zakoga__uvod, .zakoga__dno, .poziv__dugmad, .poziv__podaci, .cene__karta, .cene__info, .broj, .bento__k, .obnova__k, .trener, .gal__item, .faq__k, .info-card, .put__stavka, .put__kondicija, .kforma .kontakt__inner, [data-reveal]', 24],
+    ['.zakoga__k, .zakoga__uvod, .zakoga__dno, .poziv__dugmad, .poziv__podaci, .timovi__glava, .cene__karta, .cene__info, .broj, .bento__k, .obnova__k, .trener, .gal__item, .faq__k, .info-card, .put__stavka, .put__kondicija, .kforma .kontakt__inner, [data-reveal]', 24],
     ['.prica__foto, .slajder, .obnova__foto, .tim__kartica, .forma, .khero__kartica, .poziv__foto', 40]
   ];
 
