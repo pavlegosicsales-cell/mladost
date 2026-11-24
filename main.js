@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
    ========================================================================== */
 
 /* Ovde se lepi Apps Script URL posle Skila 03 (Form Backend Setup) */
-const ENDPOINT = '';
+const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzDhg2UQRXmxbQF0luPiiyG646_wybVK7HjHnM1RV80heem8tGU4tgw22c-7RhlR5jk/exec';
 
 document.addEventListener('DOMContentLoaded', function () {
   var forma = document.getElementById('forma');
