@@ -174,8 +174,8 @@ a { text-decoration: none; color: inherit; }
   max-width: 1720px;
   height: min-content;
   padding: 0;
-  border-radius: var(--radius-container);
-  overflow: hidden;
+  /* bez overflow hidden i zaobljenja: kontejner nema pozadinu, a zaobljeni
+     isecak od 24px je secao ugao oznake "Upis u skolu je u toku" */
 }
 
 /* .framer-87orlp */
