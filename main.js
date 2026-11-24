@@ -436,9 +436,9 @@ document.addEventListener('DOMContentLoaded', function () {
   ];
   /* [selektor, pomeraj u px]; natpisi 12, kartice 24, velike povrsine 40 */
   var SKROL = [
-    ['.oznaka, .sekcija__naslov, .veliki-naslov, .kontakt__lead, .treneri__uvod, .faq__sub', 12],
-    ['.zakoga__k, .zakoga__uvod, .zakoga__dno, .broj, .bento__k, .obnova__k, .trener, .gal__item, .faq__k, .info-card, .put__stavka, .put__kondicija, .kforma .kontakt__inner, [data-reveal]', 24],
-    ['.prica__foto, .slajder, .obnova__foto, .tim__kartica, .forma, .khero__kartica', 40]
+    ['.oznaka, .sekcija__naslov, .veliki-naslov, .kontakt__lead, .treneri__uvod, .faq__sub, .poziv__uvod', 12],
+    ['.zakoga__k, .zakoga__uvod, .zakoga__dno, .poziv__dugmad, .poziv__podaci, .broj, .bento__k, .obnova__k, .trener, .gal__item, .faq__k, .info-card, .put__stavka, .put__kondicija, .kforma .kontakt__inner, [data-reveal]', 24],
+    ['.prica__foto, .slajder, .obnova__foto, .tim__kartica, .forma, .khero__kartica, .poziv__foto', 40]
   ];
 
   document.documentElement.classList.add('js-pojava');
