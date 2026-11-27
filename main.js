@@ -1143,43 +1143,19 @@ document.addEventListener('DOMContentLoaded', function () {
 })();
 
 /* ==========================================================================
-   CENOVNIK (Rekreativci): linija "Sada" na traci dana
-   Vreme u Beogradu bez obzira na zonu posetioca. Vikend = subota i nedelja.
-   Polozaj linije je --sada (0 = 07h, 1 = 23h), termin koji vazi dobija
-   klasu is-sada. Osvezava se svakog minuta.
+   DIKIDI PROZOR (Rekreativci, rezervacija)
+   DIKIDI widget kaci svoj prozor na body (klasa dikidi-<broj>-modal) i
+   zakljuca body overflow, ali Lenis to ne postuje i stranica iza prozora
+   se skroluje (izmereno 27.11). Dok je prozor u DOM-u, Lenis stoji.
    ========================================================================== */
 (function () {
-  var karta = document.querySelector('.cene__karta');
-  if (!karta) return;
-  var linija = karta.querySelector('.cene__sada');
-  var natpis = linija.querySelector('span');
-
-  function dvocif(n) { return (n < 10 ? '0' : '') + n; }
-
-  function osvezi() {
-    var d;
-    try { d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Belgrade' })); }
-    catch (e) { d = new Date(); }
-    var h = d.getHours() + d.getMinutes() / 60;
-    var vikend = d.getDay() === 0 || d.getDay() === 6;
-
-    karta.querySelectorAll('.is-sada').forEach(function (el) { el.classList.remove('is-sada'); });
-    var traka = karta.querySelector('.cene__traka[data-dani="' + (vikend ? 'vikend' : 'radni') + '"]');
-    traka.classList.add('is-sada');
-    if (traka.previousElementSibling) traka.previousElementSibling.classList.add('is-sada');
-    traka.querySelectorAll('.cene__seg').forEach(function (seg) {
-      if (h >= +seg.getAttribute('data-od') && h < +seg.getAttribute('data-do')) seg.classList.add('is-sada');
-    });
-
-    if (h >= 7 && h < 23) {
-      karta.style.setProperty('--sada', ((h - 7) / 16).toFixed(4));
-      natpis.textContent = 'Sada ' + dvocif(d.getHours()) + ':' + dvocif(d.getMinutes());
-      linija.hidden = false;
-    } else {
-      linija.hidden = true;
-    }
+  if (!('MutationObserver' in window)) return;
+  var otvoren = false;
+  function proveri() {
+    var ima = !!document.querySelector('body > [class^="dikidi-"][class$="-modal"]');
+    if (ima === otvoren || !window.lenis) return;
+    otvoren = ima;
+    if (ima) window.lenis.stop(); else window.lenis.start();
   }
-
-  osvezi();
-  setInterval(osvezi, 60000);
+  new MutationObserver(proveri).observe(document.body, { childList: true });
 })();

@@ -5164,7 +5164,9 @@ a { text-decoration: none; color: inherit; }
 
 
 /* ==========================================================================
-   REKREATIVCI, CENOVNIK
+   REKREATIVCI, CENOVNIK -> REZERVACIJA (osnova sekcije)
+   Od 27.11. traka dana sa tri cene je izbacena (cena je ista ceo dan);
+   ostaju okvir sekcije, glava i tri info kartice. Stari opis:
    Karta na sage podlozi, mreza 2 kolone: natpis dana levo, traka desno.
    Traka ima 16 kolona (sati od 07 do 23), termin zauzima svoje sate preko
    --od / --do. Skala sa satima iznad. Linija "Sada" je u drugoj koloni
@@ -5193,127 +5195,6 @@ a { text-decoration: none; color: inherit; }
   font-weight: 500;
   line-height: 1.6;
   color: rgba(0, 0, 0, 0.66);
-}
-
-.cene__karta {
-  --sada: 0;
-  display: grid;
-  grid-template-columns: 210px minmax(0, 1fr);
-  grid-template-rows: auto auto auto;
-  column-gap: 28px;
-  row-gap: 12px;
-  align-items: center;
-  padding: 36px 40px 64px;
-  border-radius: 28px;
-  background: #eef2eb;
-}
-/* svaki deo ima tacno mesto: linija Sada je eksplicitno smestena,
-   pa bi automatsko slaganje ostalo pogurala */
-.cene__prazno { grid-area: 1 / 1; }
-.cene__skala { grid-area: 1 / 2; }
-.cene__karta > p:nth-of-type(1) { grid-area: 2 / 1; }
-.cene__karta > ul:nth-of-type(1) { grid-area: 2 / 2; }
-.cene__karta > p:nth-of-type(2) { grid-area: 3 / 1; }
-.cene__karta > ul:nth-of-type(2) { grid-area: 3 / 2; }
-.cene__skala {
-  position: relative;
-  height: 28px;
-}
-.cene__skala span {
-  position: absolute;
-  top: 0;
-  left: calc(var(--i) / 16 * 100%);
-  transform: translateX(-50%);
-  font-size: 13px;
-  font-weight: 600;
-  color: rgba(26, 67, 57, 0.55);
-}
-.cene__skala span::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 20px;
-  width: 1px;
-  height: 8px;
-  background: rgba(26, 67, 57, 0.25);
-}
-.cene__dan {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
-  font-size: 34px;
-  line-height: 1;
-  color: var(--forest);
-}
-.cene__dan span {
-  font-family: "Urbanist", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(26, 67, 57, 0.6);
-}
-.cene__traka {
-  display: grid;
-  grid-template-columns: repeat(16, minmax(0, 1fr));
-  gap: 6px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.cene__seg {
-  grid-column: var(--od) / var(--do);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 14px;
-  min-height: 128px;
-  padding: 18px 16px 16px;
-  border-radius: 16px;
-  transition: box-shadow 0.3s ease;
-}
-.cene__seg--a { background: var(--white); color: var(--forest); }
-.cene__seg--b { background: var(--lime); color: var(--forest); }
-.cene__seg--c { background: linear-gradient(160deg, #1f5044 0%, #0d2b24 100%); color: var(--white); }
-.cene__vreme { font-size: 15px; font-weight: 700; }
-.cene__cena {
-  font-family: "Bebas Neue", "Bebas Neue Placeholder", sans-serif;
-  font-size: clamp(34px, 2.5vw, 48px);
-  line-height: 0.9;
-  white-space: nowrap;
-}
-.cene__cena small { font-size: 0.45em; letter-spacing: 0.02em; }
-.cene__seg.is-sada { box-shadow: 0 0 0 3px #eef2eb, 0 0 0 5px var(--forest); }
-.cene__seg--c.is-sada { box-shadow: 0 0 0 3px #eef2eb, 0 0 0 5px var(--lime); }
-
-.cene__sada {
-  position: relative;
-  grid-column: 2;
-  grid-row: 1 / -1;
-  align-self: stretch;
-  pointer-events: none;
-}
-.cene__sada i {
-  position: absolute;
-  top: 26px;
-  bottom: -14px;
-  left: calc(var(--sada) * 100%);
-  width: 2px;
-  margin-left: -1px;
-  background: var(--forest);
-  box-shadow: 0 0 0 1px rgba(238, 242, 235, 0.8);
-}
-.cene__sada span {
-  position: absolute;
-  bottom: -46px;
-  left: calc(var(--sada) * 100%);
-  transform: translateX(-50%);
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: var(--forest);
-  font-size: 13px;
-  font-weight: 700;
-  white-space: nowrap;
-  color: var(--lime);
 }
 
 .cene__info {
@@ -5360,12 +5241,6 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 1199px) {
   .cene { padding: 90px 40px; }
   .cene__glava { grid-template-columns: minmax(0, 1fr); gap: 20px; }
-  .cene__karta { grid-template-columns: 150px minmax(0, 1fr); column-gap: 20px; padding: 30px 28px 60px; }
-  .cene__dan { font-size: 28px; }
-  .cene__skala span:nth-child(even) { visibility: hidden; }
-  .cene__seg { padding: 14px 12px 12px; min-height: 112px; }
-  .cene__cena { font-size: clamp(28px, 3.2vw, 38px); }
-  .cene__vreme { font-size: 14px; }
   .cene__info { grid-template-columns: minmax(0, 1fr); gap: 12px; }
 }
 
@@ -5373,31 +5248,6 @@ a { text-decoration: none; color: inherit; }
   .cene { padding: 72px 20px; }
   .cene__okvir { gap: 36px; }
   .cene__uvod { font-size: 16px; }
-  .cene__karta { display: block; padding: 22px 16px; border-radius: 22px; }
-  .cene__prazno, .cene__skala, .cene__sada { display: none; }
-  .cene__dan { flex-direction: row; align-items: baseline; justify-content: space-between; margin: 0 4px 12px; font-size: 28px; }
-  .cene__traka { grid-template-columns: minmax(0, 1fr); gap: 8px; }
-  .cene__traka + .cene__dan { margin-top: 26px; }
-  .cene__seg {
-    grid-column: auto;
-    flex-direction: row;
-    align-items: center;
-    min-height: 0;
-    padding: 16px 18px;
-    border-radius: 14px;
-  }
-  .cene__cena { font-size: 34px; }
-  .cene__vreme { font-size: 15px; }
-  .cene__seg.is-sada .cene__vreme::after {
-    content: "Sada";
-    margin-left: 10px;
-    padding: 3px 8px;
-    border-radius: 999px;
-    background: var(--forest);
-    font-size: 12px;
-    color: var(--lime);
-  }
-  .cene__seg--c.is-sada .cene__vreme::after { background: var(--lime); color: var(--forest); }
   .cene__info li { padding: 18px; gap: 14px; }
   .cene__info strong { font-size: 24px; }
   .cene__ik { width: 42px; height: 42px; padding: 10px; }
@@ -6068,4 +5918,35 @@ a { text-decoration: none; color: inherit; }
   .rez__opis { font-size: 16px; }
   .rez__dugmad { margin-top: 26px; }
   .rez__tel { font-size: 16px; }
+}
+
+/* rezervacija: natpis iznad dugmadi, da je jasno sta se bira */
+.rez__kada {
+  margin-top: 32px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+.rez__kada + .rez__dugmad { margin-top: 12px; }
+
+/* wizard, prvi korak: uputstvo da se teren rezervise online */
+.korak__savet {
+  margin: -12px 0 20px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+.korak__savet a {
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--lime);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 3px;
+}
+@media (max-width: 767px) {
+  .rez__kada { margin-top: 24px; }
 }
