@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rekreativci, iznajmljivanje terena | Teniski Klub Mladost Banovo Brdo</title>
-<meta name="description" content="Iznajmljivanje teniskih terena na Banovom Brdu: tri šljakasta terena, reflektori do 23h, zimi pod balonom. Od 1.000 dinara po satu za ceo teren, bez članarine.">
+<meta name="description" content="Iznajmljivanje teniskih terena na Banovom Brdu: tri šljakasta terena, reflektori do 23h, zimi pod balonom. 3.000 dinara po satu za ceo teren, bez članarine, rezervacija online.">
 <link rel="icon" href="images/logo.png" type="image/png">
 
 <!-- Fontovi sa originala: Bebas Neue za naslove, Urbanist za tekst.
@@ -17,7 +17,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=95">
+<link rel="stylesheet" href="styles.css?v=97">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
       </div>
 
       <div class="nav__cta">
-        <a class="btn btn--ghost" href="tel:+381615005051" data-name="Secondary">
+        <a class="btn btn--ghost" href="#rezervacija" data-name="Secondary">
           <span class="btn__label t-btn">Rezerviši teren</span>
           <span class="btn__icon" data-name="Button">
             <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
@@ -71,7 +71,7 @@
   <!-- ================= REKREATIVCI, HERO =================
        Fotka praznog terena po danu preko celog ekrana, tekst levo dole,
        ispod staklena traka sa cetiri brojke. Sve brojke iz cenovnika i
-       dokumenta O klubu: 3 terena, do 23h, 12 meseci (balon), od 1.000 RSD. -->
+       dokumenta O klubu: 3 terena, do 23h, 12 meseci (balon), 3.000 RSD sat (DIKIDI). -->
   <section class="rhero" data-name="Rekreativci Hero">
     <div class="rhero__bg">
       <img src="images/gal-21.webp" alt="Prazan šljakasti teren kluba po danu" width="1800" height="1350">
@@ -85,12 +85,12 @@
         <h1 class="veliki-naslov">Rezervišeš teren.<br><mark class="veliki-naslov__akcenat">Igraš.</mark></h1>
         <p class="rhero__sub">Tri šljakasta terena na Banovom Brdu, pod reflektorima do 23h i zimi pod balonom. Bez članarine, plaćaš samo teren.</p>
         <div class="rhero__dugmad">
-          <a class="btn" href="tel:+381615005051">
+          <a class="btn" href="#rezervacija">
             <span class="btn__label t-btn">Rezerviši teren</span>
             <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
           </a>
-          <a class="btn btn--ghost" href="#cene">
-            <span class="btn__label t-btn">Pogledaj cene</span>
+          <a class="btn btn--ghost" href="#rezervacija">
+            <span class="btn__label t-btn">Pogledaj termine</span>
             <span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span>
           </a>
         </div>
@@ -100,65 +100,52 @@
         <li><span class="rhero__br">3</span><span class="rhero__opis">šljakasta terena</span></li>
         <li><span class="rhero__br">23h</span><span class="rhero__opis">svaki dan, pod reflektorima</span></li>
         <li><span class="rhero__br">12</span><span class="rhero__opis">meseci godišnje, zimi pod balonom</span></li>
-        <li><span class="rhero__br">1.000</span><span class="rhero__opis">dinara po satu, najniža cena terena</span></li>
+        <li><span class="rhero__br">3.000</span><span class="rhero__opis">dinara po satu, za ceo teren</span></li>
       </ul>
     </div>
   </section>
 
-  <!-- ================= CENOVNIK =================
-       Dan od 07 do 23h kao vremenska traka: dva reda (radnim danom,
-       vikendom), svaki termin je polje sirine koliko traje. Boja po ceni:
-       bela 1.000, lime 1.200, forest 1.400. Linija "Sada" pokazuje
-       trenutno vreme u Beogradu i istice termin koji vazi (main.js).
-       Na telefonu traka postaje spisak. Cene iz cenovnika kluba. -->
-  <section class="cene" id="cene">
+  <!-- ================= REZERVACIJA (DIKIDI) =================
+       Cene iz DIKIDI-ja (Pavle potvrdio 27.11.): 3.000 RSD sat, 6.000 dva
+       sata, ista cena ceo dan. Dugmad otvaraju DIKIDI widget direktno na
+       tenis usluzi (samo Clay #1-3, bez padela): na kompu prozor preko
+       sajta, na telefonu (<740px) DIKIDI strana sa povratkom. Skripta
+       widget2.js je na dnu strane. ID usluga sa javnog profila:
+       1h 08-17 20252086, 1h 17-23 i vikend 20254019,
+       2h 08-17 20254178, 2h 17-23 i vikend 20254158. -->
+  <section class="cene rez" id="rezervacija">
     <div class="cene__okvir">
 
       <div class="cene__glava">
         <div>
-          <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Cenovnik</p>
-          <h2 class="veliki-naslov">Cena po satu, <mark class="veliki-naslov__akcenat">za ceo teren</mark></h2>
+          <p class="oznaka"><span class="oznaka__ikona"><img src="images/loptica.png" alt="" width="16" height="16"></span>Rezervacija online</p>
+          <h2 class="veliki-naslov">Izaberi termin, <mark class="veliki-naslov__akcenat">teren je tvoj</mark></h2>
         </div>
-        <p class="cene__uvod">Cena zavisi od dana i doba dana. Najpovoljniji termini su radnim danom od 8 do 17h.</p>
+        <p class="cene__uvod">Biraš trajanje i doba dana, a otvara se kalendar sa slobodnim terminima na sva tri terena. Rezervacija ide pravo u kalendar kluba.</p>
       </div>
 
-      <div class="cene__karta">
-        <span class="cene__prazno" aria-hidden="true"></span>
-        <div class="cene__skala" aria-hidden="true">
-          <span style="--i:0">07</span>
-          <span style="--i:1">08</span>
-          <span style="--i:2">09</span>
-          <span style="--i:3">10</span>
-          <span style="--i:4">11</span>
-          <span style="--i:5">12</span>
-          <span style="--i:6">13</span>
-          <span style="--i:7">14</span>
-          <span style="--i:8">15</span>
-          <span style="--i:9">16</span>
-          <span style="--i:10">17</span>
-          <span style="--i:11">18</span>
-          <span style="--i:12">19</span>
-          <span style="--i:13">20</span>
-          <span style="--i:14">21</span>
-          <span style="--i:15">22</span>
-          <span style="--i:16">23</span>
-        </div>
+      <ul class="rez__mreza">
+        <li class="rez__k rez__k--svetla">
+          <p class="rez__trajanje">1 sat</p>
+          <p class="rez__cena">3.000<small> RSD</small></p>
+          <p class="rez__opis">Za ceo teren, ista cena ceo dan.</p>
+          <div class="rez__dugmad">
+            <a class="btn" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20252086" target="_blank" rel="noopener"><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254019" target="_blank" rel="noopener"><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+          </div>
+        </li>
+        <li class="rez__k rez__k--tamna">
+          <p class="rez__trajanje">2 sata</p>
+          <p class="rez__cena">6.000<small> RSD</small></p>
+          <p class="rez__opis">Za ceo teren, za duži meč ili trening sa društvom.</p>
+          <div class="rez__dugmad">
+            <a class="btn" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254178" target="_blank" rel="noopener"><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254158" target="_blank" rel="noopener"><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+          </div>
+        </li>
+      </ul>
 
-        <p class="cene__dan">Radnim danom<span>Ponedeljak – petak</span></p>
-        <ul class="cene__traka" data-dani="radni" aria-label="Cene radnim danom">
-          <li class="cene__seg cene__seg--a" style="--od:2;--do:11" data-od="8" data-do="17"><span class="cene__vreme">08 – 17h</span><span class="cene__cena">1.000<small> RSD</small></span></li>
-          <li class="cene__seg cene__seg--b" style="--od:11;--do:14" data-od="17" data-do="20"><span class="cene__vreme">17 – 20h</span><span class="cene__cena">1.200<small> RSD</small></span></li>
-          <li class="cene__seg cene__seg--c" style="--od:14;--do:17" data-od="20" data-do="23"><span class="cene__vreme">20 – 23h</span><span class="cene__cena">1.400<small> RSD</small></span></li>
-        </ul>
-
-        <p class="cene__dan">Vikendom<span>Subota i nedelja</span></p>
-        <ul class="cene__traka" data-dani="vikend" aria-label="Cene vikendom">
-          <li class="cene__seg cene__seg--b" style="--od:1;--do:14" data-od="7" data-do="20"><span class="cene__vreme">07 – 20h</span><span class="cene__cena">1.200<small> RSD</small></span></li>
-          <li class="cene__seg cene__seg--c" style="--od:14;--do:17" data-od="20" data-do="23"><span class="cene__vreme">20 – 23h</span><span class="cene__cena">1.400<small> RSD</small></span></li>
-        </ul>
-
-        <div class="cene__sada" aria-hidden="true" hidden><i></i><span>Sada</span></div>
-      </div>
+      <p class="rez__tel">Radije telefonom? Pozovi ili piši na WhatsApp i Viber: <a href="tel:+381615005051">061 500 50 51</a></p>
 
       <ul class="cene__info">
         <li>
@@ -171,7 +158,7 @@
         </li>
         <li>
           <span class="cene__ik"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="8" r="2.6"/><circle cx="16" cy="8" r="2.6"/><path d="M3.5 19c.4-3 2.2-5 4.5-5s4.1 2 4.5 5M11.5 19c.4-3 2.2-5 4.5-5s4.1 2 4.5 5"/></svg></span>
-          <span><strong>U dublu od 250 dinara</strong>Po igraču, kad vas je četvoro na terenu od 1.000 dinara.</span>
+          <span><strong>U dublu 750 dinara</strong>Po igraču, kad vas je četvoro na terenu od 3.000 dinara.</span>
         </li>
       </ul>
 
@@ -345,7 +332,7 @@
 
       <!-- donja servis polja, dugmad -->
       <div class="court__cell court__cell--btn-a">
-        <a class="btn" href="tel:+381615005051">
+        <a class="btn" href="#rezervacija">
           <span class="btn__label t-btn">Rezerviši teren</span>
           <span class="btn__icon">
             <img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true">
@@ -416,6 +403,7 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=45"></script>
+<script src="main.js?v=47"></script>
+<script src="https://dikidi.net/assets/js/widget_record/widget2.js" defer></script>
 </body>
 </html>
