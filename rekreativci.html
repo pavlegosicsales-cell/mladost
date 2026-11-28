@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rekreativci, iznajmljivanje terena | Teniski Klub Mladost Banovo Brdo</title>
+<link rel="preconnect" href="https://dikidi.net" crossorigin>
+<link rel="dns-prefetch" href="https://dikidi.net">
 <meta name="description" content="Iznajmljivanje teniskih terena na Banovom Brdu: tri šljakasta terena, reflektori do 23h, zimi pod balonom. 3.000 dinara po satu za ceo teren, bez članarine, rezervacija online.">
 <link rel="icon" href="images/logo.png" type="image/png">
 
@@ -17,7 +19,7 @@
      Fajlovi su lokalni, bez zavisnosti od CDN-a. -->
 <link rel="stylesheet" href="vendor/lenis.css">
 
-<link rel="stylesheet" href="styles.css?v=99">
+<link rel="stylesheet" href="styles.css?v=100">
 </head>
 <body>
 
@@ -109,8 +111,8 @@
        Cene iz DIKIDI-ja (Pavle potvrdio 27.11.): 3.000 RSD sat, 6.000 dva
        sata, ista cena ceo dan. Dugmad otvaraju DIKIDI widget direktno na
        tenis usluzi (samo Clay #1-3, bez padela): na kompu prozor preko
-       sajta, na telefonu (<740px) DIKIDI strana sa povratkom. Skripta
-       widget2.js je na dnu strane. ID usluga sa javnog profila:
+       sajta, na telefonu (<740px) direktno DIKIDI strana sa povratkom
+       (nas handler u main.js, bez DIKIDI identify upita). ID usluga sa javnog profila:
        1h 08-17 20252086, 1h 17-23 i vikend 20254019,
        2h 08-17 20254178, 2h 17-23 i vikend 20254158. -->
   <section class="cene rez" id="rezervacija">
@@ -131,8 +133,8 @@
           <p class="rez__opis">Za ceo teren, ista cena ceo dan.</p>
           <p class="rez__kada">Kada igraš?</p>
           <div class="rez__dugmad">
-            <a class="btn" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20252086" target="_blank" rel="noopener"><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
-            <a class="btn btn--ghost" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254019" target="_blank" rel="noopener"><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn" href="https://dikidi.net/record/1892616?st_m=2&amp;ss_s=20252086" data-dikidi><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="https://dikidi.net/record/1892616?st_m=2&amp;ss_s=20254019" data-dikidi><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
           </div>
         </li>
         <li class="rez__k rez__k--tamna">
@@ -141,8 +143,8 @@
           <p class="rez__opis">Za ceo teren, za duži meč ili trening sa društvom.</p>
           <p class="rez__kada">Kada igraš?</p>
           <div class="rez__dugmad">
-            <a class="btn" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254178" target="_blank" rel="noopener"><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
-            <a class="btn btn--ghost" href="https://dikidi.net/profile/mladost_teniski_klub_1892616/#create-record-service-20254158" target="_blank" rel="noopener"><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn" href="https://dikidi.net/record/1892616?st_m=2&amp;ss_s=20254178" data-dikidi><span class="btn__label t-btn">Radnim danom do 17h</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
+            <a class="btn btn--ghost" href="https://dikidi.net/record/1892616?st_m=2&amp;ss_s=20254158" data-dikidi><span class="btn__label t-btn">Posle 17h i vikendom</span><span class="btn__icon"><img src="images/loptica.png" alt="" width="18" height="18" aria-hidden="true"></span></a>
           </div>
         </li>
       </ul>
@@ -405,7 +407,7 @@
 </footer>
 
 <script src="vendor/lenis.min.js"></script>
-<script src="main.js?v=49"></script>
+<script src="main.js?v=50"></script>
 <script src="https://dikidi.net/assets/js/widget_record/widget2.js" defer></script>
 </body>
 </html>

@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
         o.classList.toggle('is-picked', o === opcija);
       });
 
-      window.setTimeout(function () { prikazi(trenutni + 1); }, 420);
+      window.setTimeout(function () { prikazi(trenutni + 1); }, 280);
     });
   });
 
@@ -1158,4 +1158,33 @@ document.addEventListener('DOMContentLoaded', function () {
     if (ima) window.lenis.stop(); else window.lenis.start();
   }
   new MutationObserver(proveri).observe(document.body, { childList: true });
+})();
+
+/* ==========================================================================
+   DIKIDI DUGMAD (Rekreativci): brz put
+   Njihova skripta na klik prvo salje JSONP upit (identify), pa tek onda
+   otvara prozor ili stranu; na telefonu to se oseca kao kasnjenje.
+   Ovde: telefon (uzi od 740px) ide odmah na DIKIDI stranu za rezervaciju
+   u istom tabu, sa povratkom na sajt; komp otvara DIKIDI prozor odmah
+   (start 1, bez upita). Bez skripte link sam vodi na istu DIKIDI stranu.
+   ========================================================================== */
+(function () {
+  function skini() {
+    document.querySelectorAll('a[data-dikidi].is-ucitava').forEach(function (a) { a.classList.remove('is-ucitava'); });
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[data-dikidi]') : null;
+    if (!a || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    e.preventDefault();
+    a.classList.add('is-ucitava');
+    var url = a.href;
+    if (window.innerWidth < 740 || !(window.dikidi && window.dikidi.openModal)) {
+      window.location.href = url + '&mode=frontend&backurl=' + encodeURIComponent(window.location.href);
+      return;
+    }
+    window.dikidi.openModal(url, { start: '1', mode: 'website', home: '0', backdrop: '1' });
+    setTimeout(skini, 1200);
+  }, true);
+  /* povratak dugmetom Nazad (bfcache): loptica ne sme da ostane da se vrti */
+  window.addEventListener('pageshow', skini);
 })();

@@ -330,14 +330,20 @@ a { text-decoration: none; color: inherit; }
 
 /* hover: tekst i pilula klize jedno pored drugog i zamene mesta,
    kao .framer-v-4sgii2.hover na originalu */
-.btn:hover,
 .btn:focus-visible { padding: 4px 22px 4px 4px; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { padding: 4px 22px 4px 4px; }
+}
 
-.btn:hover .btn__label,
 .btn:focus-visible .btn__label { transform: translateX(var(--swap-label, 0px)); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .btn__label { transform: translateX(var(--swap-label, 0px)); }
+}
 
-.btn:hover .btn__icon,
 .btn:focus-visible .btn__icon { transform: translateX(var(--swap-icon, 0px)); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover .btn__icon { transform: translateX(var(--swap-icon, 0px)); }
+}
 
 .btn:focus-visible {
   outline: 2px solid var(--white);
@@ -790,7 +796,9 @@ a { text-decoration: none; color: inherit; }
   overflow: hidden;
   transition: width 0.5s ease;
 }
-.gallery__item:hover { width: 100%; }
+@media (hover: hover) and (pointer: fine) {
+  .gallery__item:hover { width: 100%; }
+}
 
 .gallery__item img {
   width: 100%;
@@ -828,7 +836,9 @@ a { text-decoration: none; color: inherit; }
     flex-grow: 0;
     transition: none;
   }
+  @media (hover: hover) and (pointer: fine) {
   .gallery__item:hover { width: 100%; }
+}
 
   .gallery__item img {
     height: auto;
@@ -928,10 +938,12 @@ a { text-decoration: none; color: inherit; }
               border-color 0.45s ease, box-shadow 0.45s ease;
 }
 
-.info-card:hover {
+@media (hover: hover) and (pointer: fine) {
+  .info-card:hover {
   transform: translateY(-3px);
   border-color: var(--lime);
   box-shadow: 0 22px 44px -24px rgba(26, 67, 57, 0.8);
+}
 }
 
 /* meko svetlo koje se pali na hover */
@@ -947,7 +959,9 @@ a { text-decoration: none; color: inherit; }
   transition: opacity 0.5s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.3, 1);
   pointer-events: none;
 }
-.info-card:hover .info-card__glow { opacity: 1; transform: scale(1); }
+@media (hover: hover) and (pointer: fine) {
+  .info-card:hover .info-card__glow { opacity: 1; transform: scale(1); }
+}
 
 .info-card__icon {
   position: relative;
@@ -964,11 +978,13 @@ a { text-decoration: none; color: inherit; }
 }
 .info-card__icon svg { width: 24px; height: 24px; }
 
-.info-card:hover .info-card__icon {
+@media (hover: hover) and (pointer: fine) {
+  .info-card:hover .info-card__icon {
   transform: rotate(-6deg) scale(1.06);
   background-image: linear-gradient(145deg, var(--lime), #cdf03f);
   border-color: var(--lime);
   color: var(--forest);
+}
 }
 
 .info-card__body {
@@ -1117,10 +1133,12 @@ a { text-decoration: none; color: inherit; }
   transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.3, 1),
               border-color 0.4s ease, background-color 0.4s ease, color 0.4s ease;
 }
-.choice:hover {
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover {
   transform: translateY(-2px);
   border-color: var(--lime);
   background-image: linear-gradient(140deg, rgba(5, 24, 20, 0.9), rgba(5, 24, 20, 0.7));
+}
 }
 
 /* loptica umesto kvacice */
@@ -1212,10 +1230,12 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer;
   transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
-.btn-back:hover {
+@media (hover: hover) and (pointer: fine) {
+  .btn-back:hover {
   background: rgba(255, 255, 255, 0.12);
   border-color: rgba(255, 255, 255, 0.5);
   color: var(--white);
+}
 }
 
 #posalji[disabled] { opacity: 0.55; pointer-events: none; }
@@ -1282,7 +1302,9 @@ a { text-decoration: none; color: inherit; }
 }
 .choice__icon svg { width: 20px; height: 20px; display: block; }
 
-.choice:hover .choice__icon { transform: rotate(-6deg) scale(1.06); }
+@media (hover: hover) and (pointer: fine) {
+  .choice:hover .choice__icon { transform: rotate(-6deg) scale(1.06); }
+}
 
 .choice.is-picked .choice__icon {
   background: rgba(26, 67, 57, 0.14);
@@ -1497,7 +1519,9 @@ a { text-decoration: none; color: inherit; }
 }
 .court__text--small { font-size: 14px; }
 .court__text a { color: rgba(255, 255, 255, 0.78); transition: color 0.2s; }
-.court__text a:hover { color: var(--lime); }
+@media (hover: hover) and (pointer: fine) {
+  .court__text a:hover { color: var(--lime); }
+}
 .court__sep { opacity: 0.4; padding: 0 4px; }
 
 .sitemap {
@@ -1517,7 +1541,9 @@ a { text-decoration: none; color: inherit; }
   color: rgba(255, 255, 255, 0.78);
   transition: color 0.2s;
 }
-.sitemap a:hover { color: var(--lime); }
+@media (hover: hover) and (pointer: fine) {
+  .sitemap a:hover { color: var(--lime); }
+}
 
 .socials {
   display: flex;
@@ -1537,10 +1563,12 @@ a { text-decoration: none; color: inherit; }
   color: var(--white);
   transition: background-color 0.25s, color 0.25s, border-color 0.25s;
 }
-.socials a:hover {
+@media (hover: hover) and (pointer: fine) {
+  .socials a:hover {
   background-color: var(--lime);
   border-color: var(--lime);
   color: var(--black);
+}
 }
 .socials svg { width: 19px; height: 19px; }
 
@@ -1551,7 +1579,9 @@ a { text-decoration: none; color: inherit; }
 }
 .btn--ghost .btn__label { color: var(--white); }
 .btn--ghost .btn__icon { background-color: rgba(255, 255, 255, 0.14); }
-.btn--ghost:hover { background-color: rgba(255, 255, 255, 0.08); }
+@media (hover: hover) and (pointer: fine) {
+  .btn--ghost:hover { background-color: rgba(255, 255, 255, 0.08); }
+}
 
 /* --------------------------------------------------------------------------
    Veliki natpis ispod terena, presecen dnom stranice
@@ -1728,8 +1758,10 @@ a { text-decoration: none; color: inherit; }
     padding-left: 20px;
   }
   /* padding se ne obrce, jer je razmak vec u meri koju racuna main.js */
+  @media (hover: hover) and (pointer: fine) {
   .court__cell--btn-a .btn:hover,
   .court__cell--btn-b .btn:hover { padding: 4px 4px 4px 20px; }
+}
 }
 .btn--ghost .btn__icon { background-color: var(--black); }
 
@@ -2063,8 +2095,10 @@ a { text-decoration: none; color: inherit; }
   transition: width 0.35s cubic-bezier(0.44, 0, 0.56, 1);
 }
 
-.nav__link:hover::after,
 .nav__link:focus-visible::after { width: 100%; }
+@media (hover: hover) and (pointer: fine) {
+  .nav__link:hover::after { width: 100%; }
+}
 
 .nav__link:focus-visible {
   outline: 2px solid var(--lime);
@@ -3318,8 +3352,10 @@ a { text-decoration: none; color: inherit; }
   color: var(--white);
 }
 .khero__red > span:last-child { padding-top: 7px; }
-.khero__red:hover > span:last-child,
 .khero__red:focus-visible > span:last-child { text-decoration: underline; text-underline-offset: 4px; }
+@media (hover: hover) and (pointer: fine) {
+  .khero__red:hover > span:last-child { text-decoration: underline; text-underline-offset: 4px; }
+}
 .khero__ik {
   flex: none;
   display: grid;
@@ -3432,7 +3468,9 @@ a { text-decoration: none; color: inherit; }
   letter-spacing: -0.5px;
   color: var(--forest);
 }
-.kpodatak__broj:hover { color: #2c6b5b; }
+@media (hover: hover) and (pointer: fine) {
+  .kpodatak__broj:hover { color: #2c6b5b; }
+}
 .kpodatak__link {
   margin-top: 10px;
   font-size: 17px;
@@ -3443,7 +3481,9 @@ a { text-decoration: none; color: inherit; }
   text-underline-offset: 4px;
   overflow-wrap: anywhere;
 }
-.kpodatak__link:hover { text-decoration-thickness: 2px; }
+@media (hover: hover) and (pointer: fine) {
+  .kpodatak__link:hover { text-decoration-thickness: 2px; }
+}
 .kpodatak__jako { font-size: 17px; font-weight: 700; color: var(--forest); }
 .kpodatak__tekst {
   margin-top: 6px;
@@ -3477,7 +3517,9 @@ a { text-decoration: none; color: inherit; }
   border-color: rgba(26, 67, 57, 0.18);
   box-shadow: none;
 }
-.forma.forma--svetla .choice:hover { border-color: rgba(26, 67, 57, 0.5); }
+@media (hover: hover) and (pointer: fine) {
+  .forma.forma--svetla .choice:hover { border-color: rgba(26, 67, 57, 0.5); }
+}
 .forma.forma--svetla .choice.is-picked { border-color: var(--lime); }
 .forma.forma--svetla .polje label { color: rgba(26, 67, 57, 0.72); }
 .forma.forma--svetla .polje input,
@@ -3485,7 +3527,9 @@ a { text-decoration: none; color: inherit; }
 .forma.forma--svetla .polje input:focus,
 .forma.forma--svetla .polje textarea:focus { border-color: var(--forest); }
 .forma--svetla .btn-back { border-color: rgba(26, 67, 57, 0.28); color: var(--forest); }
-.forma--svetla .btn-back:hover { background: rgba(26, 67, 57, 0.06); border-color: var(--forest); color: var(--forest); }
+@media (hover: hover) and (pointer: fine) {
+  .forma--svetla .btn-back:hover { background: rgba(26, 67, 57, 0.06); border-color: var(--forest); color: var(--forest); }
+}
 .forma--svetla .forma__msg.is-ok,
 .forma--svetla .forma__msg.is-err { color: var(--forest); }
 .forma--svetla .forma__msg.is-err { border-color: rgba(26, 67, 57, 0.22); background: rgba(26, 67, 57, 0.05); }
@@ -3710,7 +3754,9 @@ a { text-decoration: none; color: inherit; }
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
 .mhero__strelica svg { width: 20px; height: 20px; }
-.mhero__strelica:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+@media (hover: hover) and (pointer: fine) {
+  .mhero__strelica:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+}
 .mhero__strelica:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
 .mhero__strelica--levo { left: 32px; }
 .mhero__strelica--desno { right: 32px; }
@@ -3741,7 +3787,9 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer;
   transition: opacity 0.25s ease, border-color 0.25s ease;
 }
-.mhero__palac:hover { opacity: 0.85; }
+@media (hover: hover) and (pointer: fine) {
+  .mhero__palac:hover { opacity: 0.85; }
+}
 .mhero__palac.is-active { border-color: var(--lime); opacity: 1; }
 .mhero__palac:focus-visible { outline: 2px solid var(--white); outline-offset: 2px; }
 .mhero__palac img { display: block; width: 80px; height: 50px; max-width: none; object-fit: cover; }
@@ -3874,7 +3922,9 @@ a { text-decoration: none; color: inherit; }
   cursor: pointer;
   transition: background-color 0.25s ease, border-color 0.25s ease;
 }
-.lb__dugme:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+@media (hover: hover) and (pointer: fine) {
+  .lb__dugme:hover { background: var(--lime); border-color: var(--lime); color: var(--forest); }
+}
 .lb__dugme:focus-visible { outline: 2px solid var(--lime); outline-offset: 3px; }
 .lb__dugme svg { width: 22px; height: 22px; }
 .lb__nazad { grid-column: 1; justify-self: center; }
@@ -3938,10 +3988,12 @@ a { text-decoration: none; color: inherit; }
   color: var(--forest);
   box-shadow: 0 10px 24px -14px rgba(0, 0, 0, 0.55);
 }
-.forma--bela .choice:hover {
+@media (hover: hover) and (pointer: fine) {
+  .forma--bela .choice:hover {
   border-color: var(--lime);
   background-image: none;
   background-color: var(--white);
+}
 }
 .forma--bela .choice__icon {
   border-color: rgba(26, 67, 57, 0.16);
@@ -4966,7 +5018,9 @@ a { text-decoration: none; color: inherit; }
   color: rgba(255, 255, 255, 0.55);
 }
 .poziv__podaci a { color: var(--white); text-decoration: none; }
-.poziv__podaci a:hover { color: var(--lime); }
+@media (hover: hover) and (pointer: fine) {
+  .poziv__podaci a:hover { color: var(--lime); }
+}
 .poziv__sitno {
   font-size: 15px;
   font-weight: 500;
@@ -5675,7 +5729,9 @@ a { text-decoration: none; color: inherit; }
 }
 .chero__nazad span { display: flex; transform: rotate(180deg); }
 .chero__nazad svg { width: 18px; height: 18px; }
-.chero__nazad:hover { color: var(--lime); }
+@media (hover: hover) and (pointer: fine) {
+  .chero__nazad:hover { color: var(--lime); }
+}
 .chero .veliki-naslov {
   margin-top: 22px;
   font-size: clamp(56px, 5.4vw, 96px);
@@ -5744,7 +5800,9 @@ a { text-decoration: none; color: inherit; }
   text-decoration-thickness: 3px;
   text-underline-offset: 3px;
 }
-.clanak__telo a:hover { background: var(--lime); }
+@media (hover: hover) and (pointer: fine) {
+  .clanak__telo a:hover { background: var(--lime); }
+}
 .clanak__telo strong { color: var(--forest); font-weight: 700; }
 .clanak__telo ul { margin-left: 0; padding: 0; list-style: none; }
 .clanak__telo ul li { position: relative; padding-left: 28px; }
@@ -5899,7 +5957,9 @@ a { text-decoration: none; color: inherit; }
 /* ivica ghost dugmeta je inset senka, ne border */
 .rez__k--svetla .btn--ghost { box-shadow: inset 0 0 0 1px rgba(26, 67, 57, 0.35); }
 .rez__k--svetla .btn--ghost .btn__label { color: var(--forest); }
-.rez__k--svetla .btn--ghost:hover { background-color: rgba(26, 67, 57, 0.06); }
+@media (hover: hover) and (pointer: fine) {
+  .rez__k--svetla .btn--ghost:hover { background-color: rgba(26, 67, 57, 0.06); }
+}
 .rez__k--svetla .btn--ghost .btn__icon { background-color: var(--black); }
 .rez__tel {
   font-size: 17px;
@@ -5950,3 +6010,19 @@ a { text-decoration: none; color: inherit; }
 @media (max-width: 767px) {
   .rez__kada { margin-top: 24px; }
 }
+
+/* ==========================================================================
+   DODIR (telefon), 28.11.
+   Hover efekti vaze samo za mis (iznad su svi pod @media (hover: hover)),
+   jer na iPhone-u hover koji menja raspored trazi dva dodira ili kasni.
+   Dodir dobija trenutni odziv: dugme se blago stisne. touch-action gasi
+   cekanje na dupli dodir (zum).
+   ========================================================================== */
+a, button, .choice, .faq__q { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.btn { transition: padding var(--btn-swap-dur) var(--btn-swap-ease), scale 0.12s ease; }
+.btn:active { scale: 0.96; }
+.choice:active, .faq__q:active { opacity: 0.85; }
+
+/* DIKIDI dugme dok se rezervacija ucitava: loptica se vrti */
+@keyframes loptica-vrti { to { rotate: 360deg; } }
+.btn.is-ucitava .btn__icon img { animation: loptica-vrti 0.7s linear infinite; }
